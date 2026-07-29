@@ -8,7 +8,7 @@ export default function ServicesPage() {
     <>
       <PageBanner
         title="Our Services"
-        subtitle="Comprehensive medical services across 15+ specialities, all under one roof."
+        subtitle="Comprehensive medical services across 5 specialities with in-house Laboratory, IPD, OPD, and Pharmacy."
         breadcrumbs={[{ label: 'Services' }]}
         bgImage={pageBannerImages.services}
       />

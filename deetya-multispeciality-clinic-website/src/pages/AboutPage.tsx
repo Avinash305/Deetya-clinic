@@ -48,8 +48,8 @@ export default function AboutPage() {
                     <FaMedal className="w-4 h-4 xs:w-4.5 xs:h-4.5 sm:w-5 sm:h-5 text-white" />
                   </div>
                   <div>
-                    <p className="text-lg xs:text-xl sm:text-2xl font-bold text-primary-950">15+</p>
-                    <p className="text-[10px] xs:text-[11px] sm:text-xs text-gray-500 font-medium leading-tight">Years of Trust</p>
+                  <p className="text-lg xs:text-xl sm:text-2xl font-bold text-primary-950">10+</p>
+                  <p className="text-[10px] xs:text-[11px] sm:text-xs text-gray-500 font-medium leading-tight">Years of Trust</p>
                   </div>
                 </div>
               </div>
@@ -77,23 +77,23 @@ export default function AboutPage() {
                 Founded in {clinicInfo.established}, {clinicInfo.fullName} began with a powerful
                 mission — to provide world-class healthcare that is accessible, affordable, and
                 deeply compassionate. What started as a small practice has grown into one of
-                Gurugram's most trusted multispeciality clinics.
+                Bangalore's most trusted multispeciality clinics.
               </p>
 
               <p className="text-sm xs:text-base text-gray-500 leading-relaxed mb-6 xs:mb-8">
-                Today we are home to <strong className="text-primary-950">25+ specialist doctors</strong>,{' '}
-                <strong className="text-primary-950">15+ departments</strong>, and state-of-the-art
-                diagnostic facilities — all under one roof. Over{' '}
-                <strong className="text-primary-950">50,000 patients</strong> have trusted us with
+                Today we are home to <strong className="text-primary-950">5+ specialist doctors</strong>,{' '}
+                <strong className="text-primary-950">5 specialties</strong>, and complete
+                diagnostic & pharmacy facilities — all under one roof. Over{' '}
+                <strong className="text-primary-950">10,000 patients</strong> have trusted us with
                 their health, and we continue to raise the bar with every consultation.
               </p>
 
               {/* Mini stats row */}
               <div className="grid grid-cols-3 gap-2 xs:gap-3 sm:gap-4 mb-6 xs:mb-8">
                 {[
-                  { num: '50K+', label: 'Patients Served', color: 'text-primary-600' },
-                  { num: '25+', label: 'Specialists', color: 'text-accent-600' },
-                  { num: '15+', label: 'Departments', color: 'text-warm-600' },
+                  { num: '10K+', label: 'Patients Served', color: 'text-primary-600' },
+                  { num: '5+', label: 'Specialists', color: 'text-accent-600' },
+                  { num: '5+', label: 'Specialties', color: 'text-warm-600' },
                 ].map((s, i) => (
                   <div key={i} className="text-center p-2 xs:p-2.5 sm:p-3 rounded-lg xs:rounded-xl bg-gray-50 border border-gray-100">
                     <p className={`text-base xs:text-lg sm:text-2xl font-bold ${s.color}`}>{s.num}</p>
@@ -261,10 +261,10 @@ export default function AboutPage() {
 
           <div className={`grid xs:grid-cols-2 lg:grid-cols-3 gap-3 xs:gap-4 sm:gap-5 ${whyVis ? 'animate-fade-in-up' : 'opacity-0'}`}>
             {[
-              { icon: <FaAward className="w-5 h-5 xs:w-6 xs:h-6" />, title: 'NABH Accredited', desc: 'Our systems and processes meet national quality benchmarks for patient safety.' },
-              { icon: <FiActivity className="w-5 h-5 xs:w-6 xs:h-6" />, title: 'Advanced Diagnostics', desc: 'In-house pathology lab, imaging center, and rapid testing for precise diagnosis.' },
-              { icon: <FaUserMd className="w-5 h-5 xs:w-6 xs:h-6" />, title: 'Multi-Specialty Expertise', desc: '25+ specialists across 15+ departments — comprehensive care under one roof.' },
-              { icon: <FiHeart className="w-5 h-5 xs:w-6 xs:h-6" />, title: 'Patient-First Approach', desc: 'Personalized treatment plans, transparent billing, and continuous follow-up care.' },
+              { icon: <FaAward className="w-5 h-5 xs:w-6 xs:h-6" />, title: 'Trusted Clinic', desc: 'Serving the JP Nagar community for over 10 years with reliable, honest medical care.' },
+              { icon: <FiActivity className="w-5 h-5 xs:w-6 xs:h-6" />, title: 'Advanced Diagnostics', desc: 'In-house pathology lab for quick, accurate test results and timely treatment.' },
+              { icon: <FaUserMd className="w-5 h-5 xs:w-6 xs:h-6" />, title: 'Multi-Specialty Expertise', desc: '5+ specialists across General Medicine, Gynecology, Orthopedics, Pediatrics & ENT — under one roof.' },
+              { icon: <FiHeart className="w-5 h-5 xs:w-6 xs:h-6" />, title: 'Patient-First Approach', desc: 'Personalized treatment plans, compassionate care, and continuous follow-up for every patient.' },
               { icon: <FiShield className="w-5 h-5 xs:w-6 xs:h-6" />, title: 'Cashless Insurance', desc: 'Seamless cashless processing for all major insurance providers at our dedicated desk.' },
               { icon: <FiStar className="w-5 h-5 xs:w-6 xs:h-6" />, title: '98% Satisfaction', desc: 'Our patients rate us among the top clinics for care quality and staff behaviour.' },
             ].map((item, i) => (
