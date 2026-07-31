@@ -1,56 +1,46 @@
 import { FiPhone, FiMail, FiClock, FiMapPin } from 'react-icons/fi';
 import { clinicInfo, socialLinks } from '../../data/siteData';
 
-export default function TopBar() {
+export default function TopBar({ hidden }: { hidden: boolean }) {
   return (
-    <>
-      {/* Mobile top bar - always visible on small screens */}
-      <div className="lg:hidden bg-gradient-to-r from-primary-800 to-primary-900 text-white text-[10px] xs:text-xs py-1.5 px-3 xs:px-4">
-        <div className="flex items-center justify-center gap-2 xs:gap-4">
-          <a href={`tel:${clinicInfo.phone.replace(/\s/g, '')}`} className="flex items-center gap-1 xs:gap-1.5 hover:text-accent-300 transition-colors">
-            <FiPhone className="w-2.5 h-2.5 xs:w-3 xs:h-3" />
-            <span className="font-medium whitespace-nowrap">{clinicInfo.phone}</span>
+    <div
+      className={`fixed top-0 inset-x-0 z-[61] bg-primary-950 text-white transition-transform duration-300 ${
+        hidden ? '-translate-y-full' : 'translate-y-0'
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-8 sm:h-10">
+          {/* Left: Phone always */}
+          <a href={`tel:${clinicInfo.phone.replace(/\s/g, '')}`} className="flex items-center gap-1.5 hover:text-accent-300 transition-colors shrink-0">
+            <FiPhone className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+            <span className="text-[11px] sm:text-sm font-medium whitespace-nowrap">{clinicInfo.phone}</span>
           </a>
-          <div className="items-center gap-1 xs:gap-1.5 text-primary-300 hidden xs:flex">
-            <FiClock className="w-2.5 h-2.5 xs:w-3 xs:h-3" />
-            <span className="whitespace-nowrap">Mon-Sat 8AM-9PM</span>
-          </div>
-        </div>
-      </div>
 
-      {/* Desktop top bar */}
-      <div className="hidden lg:block bg-gradient-to-r from-primary-900 via-primary-950 to-primary-900 text-white text-sm">
-        <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-10">
-          <div className="flex items-center gap-6">
-            <a href={`tel:${clinicInfo.phone.replace(/\s/g, '')}`} className="flex items-center gap-2 hover:text-accent-300 transition-colors duration-200">
-              <FiPhone className="w-3.5 h-3.5" />
-              <span>{clinicInfo.phone}</span>
-            </a>
-            <a href={`mailto:${clinicInfo.email}`} className="flex items-center gap-2 hover:text-accent-300 transition-colors duration-200">
+          {/* Right: Timing always */}
+          <div className="flex items-center gap-2 sm:gap-4">
+            <div className="flex items-center gap-1.5 text-primary-200">
+              <FiClock className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+              <span className="text-[11px] sm:text-sm whitespace-nowrap">Mon-Sat 7AM-11PM</span>
+            </div>
+            {/* Desktop extras */}
+            <a href={`mailto:${clinicInfo.email}`} className="hidden sm:flex items-center gap-1.5 hover:text-accent-300 transition-colors">
               <FiMail className="w-3.5 h-3.5" />
-              <span>{clinicInfo.email}</span>
+              <span className="text-sm">{clinicInfo.email}</span>
             </a>
-            <div className="flex items-center gap-2 text-primary-200">
-              <FiClock className="w-3.5 h-3.5" />
-              <span>{clinicInfo.workingHours.weekday}</span>
-            </div>
-          </div>
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-1.5 mr-3 text-primary-200">
+            <div className="hidden sm:flex items-center gap-1.5 ml-2 text-primary-200">
               <FiMapPin className="w-3.5 h-3.5" />
-              <span>{clinicInfo.shortAddress}</span>
+              <span className="text-sm">{clinicInfo.shortAddress}</span>
             </div>
-            <div className="h-4 w-px bg-primary-700" />
-            <div className="flex items-center gap-3 ml-1">
+            <div className="hidden sm:flex items-center gap-2 ml-2">
               {socialLinks.map((s, i) => (
-                <a key={i} href={s.href} aria-label={s.label} className="hover:text-accent-300 transition-colors duration-200">
-                  {s.icon}
+                <a key={i} href={s.href} aria-label={s.label} className="hover:text-accent-300 transition-colors">
+                  <span className="text-xs">{s.icon}</span>
                 </a>
               ))}
             </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

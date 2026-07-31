@@ -53,7 +53,7 @@ export default function WelcomeBanner() {
             </div>
             <div className="min-w-0">
               <p className="text-[10px] xs:text-xs text-white/50 font-medium mb-0.5">Working Hours</p>
-              <p className="font-bold text-xs xs:text-sm">Mon-Sat 8AM-9PM</p>
+              <p className="font-bold text-xs xs:text-sm">Mon-Sat 7AM-11PM</p>
             </div>
           </div>
         </div>

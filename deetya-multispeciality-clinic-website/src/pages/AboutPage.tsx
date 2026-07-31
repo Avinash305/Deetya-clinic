@@ -1,21 +1,34 @@
 import { Link } from 'react-router-dom';
-import PageBanner from '../components/PageBanner/PageBanner';
 import Stats from '../components/Stats/Stats';
 import Doctors from '../components/Doctors/Doctors';
 import Testimonials from '../components/Testimonials/Testimonials';
 import CTABanner from '../components/CTABanner/CTABanner';
+import SEO from '../components/SEO/SEO';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import { FiArrowRight, FiTarget, FiEye, FiCheck, FiHeart, FiShield, FiStar, FiActivity } from 'react-icons/fi';
 import { FaMedal, FaUserMd, FaHandHoldingMedical, FaAward } from 'react-icons/fa';
-import { coreValues, timelineData, clinicInfo, pageBannerImages, aboutFeatures } from '../data/siteData';
+import { coreValues, timelineData, clinicInfo, aboutFeatures } from '../data/siteData';
 
 const aboutImages = {
-  story: 'https://images.pexels.com/photos/6129507/pexels-photo-6129507.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=700&w=900',
-  mission: 'https://images.pexels.com/photos/7659869/pexels-photo-7659869.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=700&w=900',
-  surgery: 'https://images.pexels.com/photos/7583367/pexels-photo-7583367.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=900',
+  story: '/images/about-story.webp',
+  mission: '/images/ent-2.webp',
+  surgery: '/images/about-surgery.webp',
 };
 
 export default function AboutPage() {
+  return (
+    <>
+      <SEO
+        title="About Us"
+        description="Learn about DEETYA Multispeciality Clinic in JP Nagar, Bangalore. Our story of providing compassionate, affordable healthcare since 2026 with 5+ expert doctors and in-house facilities."
+        canonical="https://deetyaclinic.com/#/about"
+      />
+      <AboutContent />
+    </>
+  );
+}
+
+function AboutContent() {
   const { ref: storyRef, isVisible: storyVis } = useScrollAnimation();
   const { ref: missionRef, isVisible: missionVis } = useScrollAnimation();
   const { ref: valRef, isVisible: valVis } = useScrollAnimation();
@@ -24,21 +37,14 @@ export default function AboutPage() {
 
   return (
     <>
-      <PageBanner
-        title="About Us"
-        subtitle="Discover the story, mission, and values behind DEETYA Multispeciality Clinic."
-        breadcrumbs={[{ label: 'About Us' }]}
-        bgImage={pageBannerImages.about}
-      />
-
       {/* ───── OUR STORY ───── */}
-      <section ref={storyRef} className="py-20 lg:py-28 bg-white">
+      <section ref={storyRef} className="pb-20 lg:pb-28 pt-0 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             {/* Image */}
             <div className={`relative ${storyVis ? 'animate-fade-in-left' : 'opacity-0'}`}>
               <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-primary-900/10">
-                <img src={aboutImages.story} alt="Doctor consulting patient" className="w-full aspect-[4/3] object-cover" loading="lazy" />
+                <img src={aboutImages.story} alt="Doctor consulting patient" className="w-full aspect-[4/3] object-cover object-[center_30%]" loading="lazy" />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary-900/30 to-transparent" />
               </div>
               {/* Floating badge — reduced size */}
@@ -48,15 +54,13 @@ export default function AboutPage() {
                     <FaMedal className="w-4 h-4 xs:w-4.5 xs:h-4.5 sm:w-5 sm:h-5 text-white" />
                   </div>
                   <div>
-                  <p className="text-lg xs:text-xl sm:text-2xl font-bold text-primary-950">10+</p>
-                  <p className="text-[10px] xs:text-[11px] sm:text-xs text-gray-500 font-medium leading-tight">Years of Trust</p>
+                  <p className="text-lg xs:text-xl sm:text-2xl font-bold text-primary-950">500+</p>
+                  <p className="text-[10px] xs:text-[11px] sm:text-xs text-gray-500 font-medium leading-tight">Happy Patients</p>
                   </div>
                 </div>
               </div>
               {/* Decorative border */}
               <div className="absolute -top-3 -left-3 xs:-top-4 xs:-left-4 w-full h-full border-2 border-primary-200/50 rounded-2xl xs:rounded-3xl -z-10" />
-              {/* Accent dot */}
-              <div className="absolute top-4 xs:top-6 -left-2 w-4 xs:w-5 h-4 xs:h-5 bg-accent-400 rounded-full shadow-lg shadow-accent-400/40 hidden lg:block" />
             </div>
 
             {/* Content */}
@@ -84,14 +88,14 @@ export default function AboutPage() {
                 Today we are home to <strong className="text-primary-950">5+ specialist doctors</strong>,{' '}
                 <strong className="text-primary-950">5 specialties</strong>, and complete
                 diagnostic & pharmacy facilities — all under one roof. Over{' '}
-                <strong className="text-primary-950">10,000 patients</strong> have trusted us with
+                <strong className="text-primary-950">500+ patients</strong> have trusted us with
                 their health, and we continue to raise the bar with every consultation.
               </p>
 
               {/* Mini stats row */}
               <div className="grid grid-cols-3 gap-2 xs:gap-3 sm:gap-4 mb-6 xs:mb-8">
                 {[
-                  { num: '10K+', label: 'Patients Served', color: 'text-primary-600' },
+                  { num: '500+', label: 'Patients Served', color: 'text-primary-600' },
                   { num: '5+', label: 'Specialists', color: 'text-accent-600' },
                   { num: '5+', label: 'Specialties', color: 'text-warm-600' },
                 ].map((s, i) => (
@@ -104,10 +108,10 @@ export default function AboutPage() {
 
               <Link
                 to="/services"
-                className="group inline-flex items-center gap-2 px-6 py-3 bg-primary-700 text-white font-semibold rounded-xl hover:bg-primary-800 shadow-lg shadow-primary-700/25 transition-all hover:-translate-y-0.5"
+                className="group inline-flex items-center justify-center gap-2 px-5 xs:px-6 py-3 bg-primary-700 text-white font-semibold rounded-lg xs:rounded-xl hover:bg-primary-800 shadow-lg shadow-primary-700/25 transition-all hover:-translate-y-0.5 text-xs xs:text-sm"
               >
                 Explore Our Services
-                <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <FiArrowRight className="w-3.5 xs:w-4 h-3.5 xs:h-4 group-hover:translate-x-1 transition-transform shrink-0" />
               </Link>
             </div>
           </div>
@@ -144,21 +148,21 @@ export default function AboutPage() {
               {/* Mission & Vision cards */}
               <div className="grid xs:grid-cols-2 gap-3 xs:gap-4 mb-6 xs:mb-8">
                 <div className="p-4 xs:p-5 rounded-xl xs:rounded-2xl bg-white border border-primary-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                  <div className="w-11 h-11 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center mb-3">
-                    <FiTarget className="w-5 h-5 text-white" />
+                  <div className="w-10 xs:w-11 h-10 xs:h-11 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg xs:rounded-xl flex items-center justify-center mb-2 xs:mb-3">
+                    <FiTarget className="w-4 xs:w-5 h-4 xs:h-5 text-white" />
                   </div>
-                  <h4 className="font-bold text-primary-950 mb-1.5">Our Mission</h4>
-                  <p className="text-sm text-gray-500 leading-relaxed">
+                  <h4 className="font-bold text-primary-950 mb-1 xs:mb-1.5 text-sm xs:text-base">Our Mission</h4>
+                  <p className="text-[11px] xs:text-sm text-gray-500 leading-relaxed">
                     To deliver accessible, affordable, and exceptional healthcare backed by advanced
                     technology and a patient-first philosophy.
                   </p>
                 </div>
-                <div className="p-5 rounded-2xl bg-white border border-accent-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                  <div className="w-11 h-11 bg-gradient-to-br from-accent-500 to-accent-700 rounded-xl flex items-center justify-center mb-3">
-                    <FiEye className="w-5 h-5 text-white" />
+                <div className="p-4 xs:p-5 rounded-xl xs:rounded-2xl bg-white border border-accent-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                  <div className="w-10 xs:w-11 h-10 xs:h-11 bg-gradient-to-br from-accent-500 to-accent-700 rounded-lg xs:rounded-xl flex items-center justify-center mb-2 xs:mb-3">
+                    <FiEye className="w-4 xs:w-5 h-4 xs:h-5 text-white" />
                   </div>
-                  <h4 className="font-bold text-primary-950 mb-1.5">Our Vision</h4>
-                  <p className="text-sm text-gray-500 leading-relaxed">
+                  <h4 className="font-bold text-primary-950 mb-1 xs:mb-1.5 text-sm xs:text-base">Our Vision</h4>
+                  <p className="text-[11px] xs:text-sm text-gray-500 leading-relaxed">
                     To be the most trusted healthcare partner in every community we serve — recognized
                     for clinical excellence and genuine compassion.
                   </p>
@@ -172,7 +176,7 @@ export default function AboutPage() {
                     <div className="mt-0.5 w-5 h-5 rounded-full bg-accent-100 flex items-center justify-center shrink-0">
                       <FiCheck className="w-3 h-3 text-accent-600" />
                     </div>
-                    <span className="text-sm text-gray-600">{f}</span>
+                    <span className="text-xs xs:text-sm text-gray-600">{f}</span>
                   </div>
                 ))}
               </div>
@@ -182,7 +186,7 @@ export default function AboutPage() {
             <div className={`order-1 lg:order-2 ${missionVis ? 'animate-fade-in-right' : 'opacity-0'}`}>
               <div className="relative">
                 <div className="rounded-2xl xs:rounded-3xl overflow-hidden shadow-2xl shadow-primary-900/10">
-                  <img src={aboutImages.mission} alt="Doctor and patient consultation" className="w-full aspect-[4/3] object-cover" loading="lazy" />
+                  <img src={aboutImages.mission} alt="Doctor and patient consultation" className="w-full aspect-[4/3] object-cover object-[center_30%]" loading="lazy" />
                 </div>
                 {/* Floating badge — reduced */}
                 <div className="absolute -bottom-3 -left-2 xs:-bottom-4 xs:-left-3 sm:-left-6 bg-white rounded-xl xs:rounded-2xl shadow-lg xs:shadow-xl p-2.5 xs:p-3 sm:p-4 border border-gray-100 z-10">
@@ -209,7 +213,7 @@ export default function AboutPage() {
           <div className={`text-center max-w-2xl mx-auto mb-14 ${valVis ? 'animate-fade-in-up' : 'opacity-0'}`}>
             <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-warm-50 border border-warm-200 rounded-full mb-4">
               <span className="w-2 h-2 bg-warm-500 rounded-full" />
-              <span className="text-sm font-semibold text-warm-700">Core Values</span>
+              <span className="text-xs sm:text-sm font-semibold text-warm-700">Core Values</span>
             </div>
             <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-950 mb-4">
               What We{' '}
@@ -250,7 +254,7 @@ export default function AboutPage() {
           <div className={`text-center max-w-2xl mx-auto mb-14 ${whyVis ? 'animate-fade-in-up' : 'opacity-0'}`}>
             <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 border border-white/20 rounded-full mb-4">
               <span className="w-2 h-2 bg-accent-400 rounded-full" />
-              <span className="text-sm font-semibold text-accent-300">Why Choose DEETYA</span>
+              <span className="text-xs sm:text-sm font-semibold text-accent-300">Why Choose DEETYA</span>
             </div>
             <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
               The DEETYA{' '}
@@ -261,7 +265,7 @@ export default function AboutPage() {
 
           <div className={`grid xs:grid-cols-2 lg:grid-cols-3 gap-3 xs:gap-4 sm:gap-5 ${whyVis ? 'animate-fade-in-up' : 'opacity-0'}`}>
             {[
-              { icon: <FaAward className="w-5 h-5 xs:w-6 xs:h-6" />, title: 'Trusted Clinic', desc: 'Serving the JP Nagar community for over 10 years with reliable, honest medical care.' },
+              { icon: <FaAward className="w-5 h-5 xs:w-6 xs:h-6" />, title: 'Trusted Clinic', desc: 'Serving the JP Nagar community with reliable, honest medical care and a patient-first approach.' },
               { icon: <FiActivity className="w-5 h-5 xs:w-6 xs:h-6" />, title: 'Advanced Diagnostics', desc: 'In-house pathology lab for quick, accurate test results and timely treatment.' },
               { icon: <FaUserMd className="w-5 h-5 xs:w-6 xs:h-6" />, title: 'Multi-Specialty Expertise', desc: '5+ specialists across General Medicine, Gynecology, Orthopedics, Pediatrics & ENT — under one roof.' },
               { icon: <FiHeart className="w-5 h-5 xs:w-6 xs:h-6" />, title: 'Patient-First Approach', desc: 'Personalized treatment plans, compassionate care, and continuous follow-up for every patient.' },
@@ -285,12 +289,12 @@ export default function AboutPage() {
 
       {/* ───── FULL-WIDTH IMAGE BREAK ───── */}
       <section className="relative h-64 sm:h-80 lg:h-96 overflow-hidden">
-        <img src={aboutImages.surgery} alt="Medical team in operation theater" className="w-full h-full object-cover" loading="lazy" />
+        <img src={aboutImages.surgery} alt="Medical team in operation theater" className="w-full h-full object-cover object-[center_35%]" loading="lazy" />
         <div className="absolute inset-0 bg-gradient-to-r from-primary-950/70 via-primary-950/40 to-primary-950/70" />
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center text-white px-4">
-            <p className="text-2xl sm:text-3xl lg:text-5xl font-bold mb-2 sm:mb-3 drop-shadow-lg px-4">Excellence in Every Procedure</p>
-            <p className="text-white/70 text-xs sm:text-sm lg:text-base max-w-lg mx-auto drop-shadow px-4">Our surgical teams operate with precision, using the latest minimally invasive techniques for faster recovery.</p>
+            <p className="text-lg xs:text-xl sm:text-3xl lg:text-5xl font-bold mb-2 sm:mb-3 drop-shadow-lg px-4">Excellence in Every Procedure</p>
+            <p className="text-white/70 text-[11px] xs:text-xs sm:text-sm lg:text-base max-w-lg mx-auto drop-shadow px-4">Our surgical teams operate with precision, using the latest minimally invasive techniques for faster recovery.</p>
           </div>
         </div>
       </section>
@@ -301,7 +305,7 @@ export default function AboutPage() {
           <div className={`text-center mb-12 xs:mb-14 sm:mb-16 ${timeVis ? 'animate-fade-in-up' : 'opacity-0'}`}>
             <div className="inline-flex items-center gap-2 px-3 xs:px-4 py-1.5 bg-primary-50 border border-primary-200 rounded-full mb-4">
               <span className="w-2 h-2 bg-primary-500 rounded-full" />
-              <span className="text-sm font-semibold text-primary-700">Our Journey</span>
+              <span className="text-xs sm:text-sm font-semibold text-primary-700">Our Journey</span>
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-950 mb-4">
               Milestones of{' '}
@@ -339,7 +343,7 @@ export default function AboutPage() {
                     <div className="flex-1 lg:hidden pt-0.5">
                       <span className="inline-block px-2 xs:px-3 py-0.5 xs:py-1 bg-primary-50 text-primary-600 text-[10px] xs:text-xs font-bold rounded-full mb-1 xs:mb-2">{item.year}</span>
                       <h4 className="text-xs xs:text-sm sm:text-base lg:text-lg font-bold text-primary-950 mb-0.5 xs:mb-1">{item.title}</h4>
-                      <p className="text-[11px] xs:text-xs sm:text-sm text-gray-500 leading-relaxed">{item.desc}</p>
+                      <p className="text-xs xs:text-sm sm:text-sm text-gray-500 leading-relaxed">{item.desc}</p>
                     </div>
 
                     {/* Desktop empty side */}

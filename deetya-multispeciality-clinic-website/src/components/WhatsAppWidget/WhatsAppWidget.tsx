@@ -34,13 +34,15 @@ export default function WhatsAppWidget() {
     }
   };
 
+  // Keep the fixed wrapper from blocking taps behind it (e.g. FAQ items on mobile);
+  // only the floating button and open popup re-enable pointer events.
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-4">
+    <div className="fixed bottom-4 right-4 xs:bottom-5 xs:right-5 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end gap-3 xs:gap-4 pointer-events-none">
       {/* Chat Popup */}
       <div
         className={`transition-all duration-300 origin-bottom-right ${
           isOpen
-            ? 'opacity-100 scale-100 translate-y-0'
+            ? 'opacity-100 scale-100 translate-y-0 pointer-events-auto'
             : 'opacity-0 scale-90 translate-y-4 pointer-events-none'
         }`}
       >
@@ -52,7 +54,7 @@ export default function WhatsAppWidget() {
                 <FaWhatsapp className="w-6 h-6 text-white" />
               </div>
               <div>
-                <p className="text-white font-bold text-sm">{clinicInfo.fullName}</p>
+                <p className="text-white font-bold text-xs xs:text-sm">{clinicInfo.fullName}</p>
                 <div className="flex items-center gap-1.5">
                   <span className="w-2 h-2 bg-green-300 rounded-full animate-pulse" />
                   <span className="text-green-100 text-xs font-medium">Online now</span>
@@ -76,10 +78,10 @@ export default function WhatsAppWidget() {
                 <FaWhatsapp className="w-4 h-4 text-white" />
               </div>
               <div className="bg-white rounded-2xl rounded-tl-md px-4 py-3 shadow-sm max-w-[260px]">
-                <p className="text-gray-800 text-sm leading-relaxed">
+                <p className="text-gray-800 text-xs xs:text-sm leading-relaxed">
                   👋 Hello! Welcome to <span className="font-semibold">{clinicInfo.fullName}</span>.
                 </p>
-                <p className="text-gray-600 text-sm leading-relaxed mt-1.5">
+                <p className="text-gray-600 text-xs xs:text-sm leading-relaxed mt-1.5">
                   How can we help you today? Type your message below and we'll respond on WhatsApp.
                 </p>
                 <p className="text-xs text-gray-400 mt-2 text-right">just now</p>
@@ -98,7 +100,7 @@ export default function WhatsAppWidget() {
                   onKeyDown={handleKeyDown}
                   rows={2}
                   placeholder="Type your message..."
-                  className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-2xl text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-400 resize-none leading-relaxed"
+                  className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-2xl text-xs xs:text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-400 resize-none leading-relaxed"
                 />
               </div>
               <button
@@ -118,11 +120,11 @@ export default function WhatsAppWidget() {
       </div>
 
       {/* Floating Button */}
-      <div className="relative">
+      <div className="relative pointer-events-auto">
         {/* Auto-tooltip */}
         <div
-          className={`absolute bottom-full right-0 mb-3 transition-all duration-500 ${
-            !isOpen && showPulse ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 pointer-events-none'
+          className={`pointer-events-none absolute bottom-full right-0 mb-3 transition-all duration-500 ${
+            !isOpen && showPulse ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
           }`}
         >
           <div className="bg-white px-4 py-2.5 rounded-xl shadow-xl border border-gray-100 whitespace-nowrap flex items-center gap-2">
@@ -134,7 +136,7 @@ export default function WhatsAppWidget() {
 
         <button
           onClick={() => { setIsOpen(!isOpen); setShowPulse(false); }}
-          className={`group w-16 h-16 rounded-full flex items-center justify-center shadow-xl transition-all duration-300 ${
+          className={`group w-12 h-12 xs:w-13 xs:h-13 sm:w-14 sm:h-14 lg:w-15 lg:h-15 rounded-full flex items-center justify-center shadow-xl transition-all duration-300 ${
             isOpen
               ? 'bg-gray-600 hover:bg-gray-700 shadow-gray-600/30 rotate-0'
               : 'bg-green-500 hover:bg-green-600 shadow-green-500/30 hover:shadow-green-500/50 hover:-translate-y-1 hover:scale-105'
@@ -142,12 +144,12 @@ export default function WhatsAppWidget() {
           aria-label={isOpen ? 'Close chat' : 'Open WhatsApp chat'}
         >
           <FaWhatsapp
-            className={`w-8 h-8 text-white absolute transition-all duration-300 ${
+            className={`w-6 h-6 xs:w-6.5 xs:h-6.5 sm:w-7 sm:h-7 lg:w-7.5 lg:h-7.5 text-white absolute transition-all duration-300 ${
               isOpen ? 'opacity-0 rotate-90 scale-50' : 'opacity-100 rotate-0 scale-100'
             }`}
           />
           <FiX
-            className={`w-7 h-7 text-white absolute transition-all duration-300 ${
+            className={`w-5 h-5 xs:w-5.5 xs:h-5.5 sm:w-6 sm:h-6 lg:w-6.5 lg:h-6.5 text-white absolute transition-all duration-300 ${
               isOpen ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-90 scale-50'
             }`}
           />

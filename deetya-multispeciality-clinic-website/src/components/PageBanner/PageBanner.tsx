@@ -15,7 +15,7 @@ export default function PageBanner({ title, subtitle, breadcrumbs, bgImage }: Pa
       {bgImage ? (
         <div className="relative w-full min-h-[240px] xs:min-h-[280px] sm:min-h-[320px] md:min-h-[380px] lg:min-h-[420px] xl:min-h-[480px] overflow-hidden">
           <div className="absolute inset-0 w-full h-full animate-kenburns">
-            <img src={bgImage} alt="" className="w-full h-full object-cover" loading="eager" />
+            <img src={bgImage} alt="" className="w-full h-full object-cover object-[center_10%]" loading="eager" />
           </div>
           <div className="absolute inset-0 bg-primary-950/60" />
           <div className="absolute inset-0 bg-gradient-to-t from-primary-950/80 via-primary-950/20 to-transparent" />

@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Outlet } from 'react-router-dom';
 import TopBar from '../Navbar/TopBar';
 import Navbar from '../Navbar/Navbar';
@@ -10,18 +10,50 @@ import WhatsAppWidget from '../WhatsAppWidget/WhatsAppWidget';
 export default function Layout() {
   const location = useLocation();
   const [pageKey, setPageKey] = useState(0);
+  const [topBarHidden, setTopBarHidden] = useState(false);
+  const lastScrollRef = useRef(window.scrollY);
 
   useEffect(() => {
     // Trigger re-mount animation when route changes
     setPageKey((k) => k + 1);
   }, [location.pathname]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScroll = window.scrollY;
+      const isScrollingDown = currentScroll > lastScrollRef.current;
+      let newHidden: boolean | undefined;
+      // Hide TopBar when scrolling down past a small threshold
+      if (isScrollingDown && currentScroll > 80) {
+        newHidden = true;
+      } else if (!isScrollingDown) {
+        // Show TopBar when scrolling up
+        newHidden = false;
+      }
+      if (newHidden !== undefined) {
+        setTopBarHidden(newHidden);
+        document.documentElement.dataset.topbarHidden = newHidden ? 'true' : 'false';
+      }
+      lastScrollRef.current = currentScroll;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div className="min-h-screen bg-white antialiased">
       <ScrollToTop />
-      <TopBar />
-      <Navbar />
-      <main key={pageKey} className="animate-fade-in">
+      <TopBar hidden={topBarHidden} />
+      <Navbar topBarHidden={topBarHidden} />
+      <main
+        key={pageKey}
+        className={`animate-fade-in transition-all duration-300 ${
+          topBarHidden
+            ? 'pt-14 sm:pt-16 lg:pt-20'
+            : 'pt-[88px] sm:pt-[104px] lg:pt-[120px]'
+        }`}
+      >
         <Outlet />
       </main>
       <Footer />

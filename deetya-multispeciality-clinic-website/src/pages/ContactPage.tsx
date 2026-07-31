@@ -2,11 +2,17 @@ import PageBanner from '../components/PageBanner/PageBanner';
 import Contact from '../components/Contact/Contact';
 import AppointmentSection from '../components/Appointment/Appointment';
 import FAQ from '../components/FAQ/FAQ';
+import SEO from '../components/SEO/SEO';
 import { pageBannerImages } from '../data/siteData';
 
 export default function ContactPage() {
   return (
     <>
+      <SEO
+        title="Contact Us"
+        description="Get in touch with DEETYA Multispeciality Clinic in JP Nagar, Bangalore. Call +91 80504 54140, email deetya.clinic@gmail.com, or visit Navya Disha, 60 Feet Main Road, Avalahalli."
+        canonical="https://deetyaclinic.com/#/contact"
+      />
       <PageBanner
         title="Contact Us"
         subtitle="Get in touch with us for appointments, queries, or emergency assistance."

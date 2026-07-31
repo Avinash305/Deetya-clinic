@@ -19,4 +19,20 @@ export default defineConfig({
   server: {
     allowedHosts: ['.monkeycode-ai.live'],
   },
+  build: {
+    // Modern browsers only - smaller bundle
+    target: 'es2020',
+    // Minify with terser-equivalent esbuild
+    minify: 'esbuild',
+    cssMinify: true,
+    // Reduce CSS duplication
+    cssCodeSplit: false,
+    // Rollup optimizations
+    rollupOptions: {
+      output: {
+        // Reduce chunk count
+        manualChunks: undefined,
+      },
+    },
+  },
 });
