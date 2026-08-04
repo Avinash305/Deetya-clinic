@@ -33,9 +33,13 @@ export default function TopBar({ hidden }: { hidden: boolean }) {
             </div>
             <div className="hidden sm:flex items-center gap-2 ml-2">
               {socialLinks.map((s, i) => (
-                <a key={i} href={s.href} aria-label={s.label} className="hover:text-accent-300 transition-colors">
+                /* Social profiles not live yet — rendered as non-clickable
+                   placeholders so no dead links ship to production. Replace
+                   `href` in siteData.socialLinks with real profile URLs to
+                   activate them. */
+                <span key={i} aria-label={s.label} className="text-primary-300 cursor-default" title={`${s.label} (coming soon)`}>
                   <span className="text-xs">{s.icon}</span>
-                </a>
+                </span>
               ))}
             </div>
           </div>

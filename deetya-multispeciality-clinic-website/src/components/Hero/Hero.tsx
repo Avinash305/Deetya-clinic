@@ -59,13 +59,15 @@ export default function Hero() {
     setCurrent(next);
   }, []);
 
-  // Auto-slide timer
+  // Auto-slide timer. Restarting on every `current` change keeps the timer in
+  // sync with the progressive indicator fill: tapping a line (or swiping)
+  // starts a fresh 5s cycle, so the bar never desyncs from auto-advance.
   useEffect(() => {
     const interval = setInterval(() => {
       goTo(currentRef.current + 1);
     }, SLIDE_DURATION);
     return () => clearInterval(interval);
-  }, [goTo]);
+  }, [goTo, current]);
 
   useEffect(() => {
     const el = sectionRef.current;
@@ -161,7 +163,7 @@ export default function Hero() {
         <DecorativeShapes />
 
         {/* Content */}
-        <div className="absolute inset-0 z-10 flex items-center pt-10 sm:pt-0">
+        <div className="absolute inset-0 z-10 flex items-center pt-10 sm:pt-0 pb-14 xs:pb-16 sm:pb-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
             <div className="max-w-xl xs:max-w-2xl lg:max-w-3xl" key={current}>
               <div className="animate-fade-in-left">
@@ -206,7 +208,54 @@ export default function Hero() {
           </div>
         </div>
 
-
+        {/* Progressive slide indicator — horizontal row of lines at the
+            bottom. The active line is larger and fills from 0% to 100% over
+            the slide duration; visited lines stay filled, upcoming lines stay
+            small and empty. Tapping a line jumps to that slide. The key
+            remount restarts the fill animation whenever the active slide
+            changes. */}
+        <div className="absolute inset-x-0 bottom-4 xs:bottom-5 sm:bottom-6 z-20 flex items-center justify-center gap-2 xs:gap-2.5 sm:gap-3 px-4">
+          {slides.map((_, i) => {
+            const isActive = i === current;
+            const isPast = i < current;
+            return (
+              <button
+                key={i}
+                type="button"
+                onClick={() => goTo(i)}
+                aria-label={`Go to slide ${i + 1}`}
+                aria-current={isActive ? 'true' : undefined}
+                className={`group flex items-center cursor-pointer rounded-full py-2 xs:py-2.5 transition-all duration-500 ${
+                  isActive ? 'w-16 xs:w-20 sm:w-24 lg:w-28' : 'w-7 xs:w-8 sm:w-10 lg:w-12'
+                }`}
+              >
+                <span
+                  className={`relative w-full rounded-full overflow-hidden bg-white/20 transition-colors duration-300 group-hover:bg-white/40 ${
+                    isActive ? 'h-2.5 xs:h-3' : 'h-1.5 xs:h-2'
+                  }`}
+                >
+                  <span
+                    key={isActive ? `active-${current}` : `inactive-${i}`}
+                    className={`absolute inset-y-0 left-0 rounded-full ${
+                      isActive
+                        ? 'bg-gradient-to-r from-accent-400 to-accent-500'
+                        : isPast
+                          ? 'bg-white/70'
+                          : 'bg-white/0'
+                    }`}
+                    style={
+                      isActive
+                        ? { animation: `slideProgress ${SLIDE_DURATION}ms linear forwards` }
+                        : isPast
+                          ? { width: '100%' }
+                          : { width: '0%' }
+                    }
+                  />
+                </span>
+              </button>
+            );
+          })}
+        </div>
 
       </div>
     </section>

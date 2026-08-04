@@ -67,7 +67,11 @@ function StickyNav({ doctorColor }: { doctorColor: string }) {
   const clickLockRef = useRef(false);
   const visibleRef = useRef(false);
   const scrollEndTimerRef = useRef<ReturnType<typeof setTimeout>>(undefined);
-  const [top, setTop] = useState<number>(() => getScrollOffsetForPosition());
+  // Initial value is set to 0; the effect below computes the correct pinned
+  // position on mount and on every scroll/resize (the helper functions are
+  // declared below, so referencing them in a useState initializer would hit
+  // the temporal dead zone and crash the page).
+  const [top, setTop] = useState<number>(0);
 
   const getTopBarHeight = () => {
     // Check data attribute set by Layout when TopBar hides on scroll
@@ -1308,19 +1312,17 @@ export default function DoctorDetailPage() {
               <Link
                 key={i}
                 to={`/doctors/${doc.slug}`}
-                className="group bg-white rounded-xl sm:rounded-2xl border border-gray-100 hover:border-primary-200 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden"
+                className="group bg-white rounded-xl sm:rounded-2xl border border-gray-100 hover:border-primary-200 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden flex flex-col"
               >
-                {/* Image */}
-                <div className="relative h-44 xs:h-48 sm:h-52 overflow-hidden bg-primary-50">
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent z-10" />
-                  <div
-                    className="absolute inset-0 group-hover:scale-110 transition-transform duration-700 ease-out"
-                    style={{
-                      backgroundImage: `url(${doc.image})`,
-                      backgroundSize: 'cover',
-                      backgroundPosition: 'center 20%',
-                    }}
+                {/* Doctor photo — displayed in full (natural aspect ratio) */}
+                <div className="relative overflow-hidden bg-primary-50">
+                  <img
+                    src={doc.image}
+                    alt={doc.name}
+                    className="w-full h-auto group-hover:scale-105 transition-transform duration-700 ease-out"
+                    loading="lazy"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent z-10 pointer-events-none" />
                   {/* Experience badge */}
                   <div className="absolute bottom-3 left-3 z-20 flex items-center gap-1.5 px-2.5 py-1.5 bg-white/90 backdrop-blur-sm rounded-full shadow-md">
                     <FiAward className="w-3 h-3 text-warm-500" />
@@ -1330,10 +1332,10 @@ export default function DoctorDetailPage() {
                   </div>
                 </div>
 
-                {/* Content */}
-                <div className="p-4 sm:p-5">
+                {/* Content — flex column so cards in a row stretch to equal height */}
+                <div className="flex-1 flex flex-col p-4 sm:p-5">
                   <div
-                    className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-gradient-to-r ${doc.color} text-white text-[10px] font-semibold mb-2 shadow-sm`}
+                    className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-gradient-to-r ${doc.color} text-white text-[10px] font-semibold mb-2 shadow-sm w-fit`}
                   >
                     <FaStar className="w-2.5 h-2.5" />
                     {doc.specialization}
@@ -1341,11 +1343,11 @@ export default function DoctorDetailPage() {
                   <h3 className="font-bold text-primary-950 text-sm sm:text-base lg:text-lg mb-1 group-hover:text-primary-700 transition-colors">
                     {doc.name}
                   </h3>
-                  <p className="text-xs sm:text-sm text-gray-500 leading-relaxed line-clamp-2">
+                  <p className="text-xs sm:text-sm text-gray-500 leading-relaxed line-clamp-2 flex-1">
                     {doc.bio.slice(0, 100)}...
                   </p>
 
-                  {/* View profile CTA */}
+                  {/* View profile CTA — pinned to bottom so all cards align */}
                   <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-gray-100 flex items-center justify-end">
                     <span className="text-[10px] sm:text-xs font-semibold text-primary-600 group-hover:text-primary-800 group-hover:gap-2 transition-all inline-flex items-center gap-1">
                       View Profile

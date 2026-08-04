@@ -176,17 +176,15 @@ export default function ServiceDetailPage() {
                 to={`/services/${s.slug}`}
                 className="group bg-white rounded-xl xs:rounded-2xl border border-gray-100 hover:border-primary-200 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 overflow-hidden"
               >
-                <div className="relative h-32 xs:h-36 sm:h-40 overflow-hidden">
+                {/* Service Image — displayed in full (natural aspect ratio) */}
+                <div className="relative overflow-hidden">
                   <img
                     src={s.image}
                     alt={s.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-auto group-hover:scale-105 transition-transform duration-700 ease-out"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                  <div className={`absolute top-3 left-3 w-9 h-9 rounded-lg bg-gradient-to-br ${s.gradient} flex items-center justify-center text-white shadow-lg`}>
-                    {s.icon}
-                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent pointer-events-none" />
                 </div>
                 <div className="p-4">
                   <h3 className="font-bold text-primary-950 text-sm sm:text-base mb-1">{s.title}</h3>

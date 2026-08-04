@@ -42,17 +42,17 @@ export default function Services({ limit, showHeader = true, showViewAll = false
                 }`}
                 style={{ animationDelay: `${i * 0.08}s` }}
               >
-                {/* Service Image with gradient overlay */}
-                <div className="relative h-36 xs:h-44 sm:h-52 overflow-hidden">
+                {/* Service Image — displayed in full (natural aspect ratio) */}
+                <div className="relative overflow-hidden">
                   <img
                     src={s.image}
                     alt={s.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                    className="w-full h-auto group-hover:scale-105 transition-transform duration-700 ease-out"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent pointer-events-none" />
                   {/* Hover gradient overlay */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${s.gradient} opacity-0 group-hover:opacity-20 transition-opacity duration-500`} />
+                  <div className={`absolute inset-0 bg-gradient-to-br ${s.gradient} opacity-0 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none`} />
                 </div>
                 {/* Content */}
                 <div className="p-4 xs:p-5 sm:p-6 flex flex-col">
