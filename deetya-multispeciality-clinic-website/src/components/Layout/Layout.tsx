@@ -1,7 +1,8 @@
 import { useLocation } from 'react-router-dom';
-import { useEffect, useState, useRef } from 'react';
+import { Suspense, useEffect, useState, useRef } from 'react';
 import { Outlet } from 'react-router-dom';
 import TopBar from '../Navbar/TopBar';
+import PageLoader from '../PageLoader/PageLoader';
 import Navbar from '../Navbar/Navbar';
 import Footer from '../Footer/Footer';
 import ScrollToTop from '../ScrollToTop';
@@ -54,7 +55,11 @@ export default function Layout() {
             : 'pt-[88px] sm:pt-[104px] lg:pt-[120px]'
         }`}
       >
-        <Outlet />
+        {/* Suspense sits around the page content (not the whole shell) so the
+            navbar/footer stay visible while a lazy page chunk loads. */}
+        <Suspense fallback={<PageLoader />}>
+          <Outlet />
+        </Suspense>
       </main>
       <Footer />
       <WhatsAppWidget />

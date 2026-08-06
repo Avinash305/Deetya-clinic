@@ -1,3 +1,8 @@
+# DEETYA Multispeciality Clinic — robots.txt
+# The site is a fully public single-page app served from /. There are no
+# private or admin paths to block. All pages (including detail pages) are
+# listed in the sitemap.
+
 User-agent: *
 Allow: /
 

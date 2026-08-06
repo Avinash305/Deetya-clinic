@@ -3,14 +3,13 @@ import { fileURLToPath } from "url";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
-import { viteSingleFile } from "vite-plugin-singlefile";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss(), viteSingleFile()],
+  plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src"),
@@ -22,16 +21,33 @@ export default defineConfig({
   build: {
     // Modern browsers only - smaller bundle
     target: 'es2020',
-    // Minify with terser-equivalent esbuild
+    // Minify with esbuild
     minify: 'esbuild',
     cssMinify: true,
     // Reduce CSS duplication
     cssCodeSplit: false,
-    // Rollup optimizations
     rollupOptions: {
       output: {
-        // Reduce chunk count
-        manualChunks: undefined,
+        // Stable vendor chunks so the big framework/library files are
+        // downloaded once and cached forever (hashed filenames + immutable
+        // Cache-Control on Netlify). Route/page chunks change per deploy.
+        manualChunks(id) {
+          // Order matters: check the more specific 'react-*' packages first so
+          // the substring 'node_modules/react' doesn't swallow them.
+          if (id.includes('node_modules/react-router')) {
+            return 'vendor-router';
+          }
+          if (id.includes('node_modules/react-icons')) {
+            return 'vendor-icons';
+          }
+          if (
+            id.includes('node_modules/react/') ||
+            id.includes('node_modules/react-dom/') ||
+            id.includes('node_modules/scheduler/')
+          ) {
+            return 'vendor-react';
+          }
+        },
       },
     },
   },

@@ -15,7 +15,9 @@ import {
 } from 'react-icons/fa';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import { useCountUp } from '../hooks/useCountUp';
-import { doctorsData, clinicInfo, testimonialsData } from '../data/siteData';
+import { doctorsData } from '../data/doctorsData';
+import { testimonialsData } from '../data/testimonialsData';
+import { clinicInfo } from '../data/siteData';
 import CTABanner from '../components/CTABanner/CTABanner';
 import AppointmentSection from '../components/Appointment/Appointment';
 

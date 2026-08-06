@@ -1,111 +1,166 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Core pages -->
   <url>
     <loc>https://deetyaclinic.com/</loc>
-    <lastmod>2026-07-31</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://deetyaclinic.com/#/about</loc>
-    <lastmod>2026-07-31</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://deetyaclinic.com/#/services</loc>
-    <lastmod>2026-07-31</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://deetyaclinic.com/#/contact</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Service detail pages -->
+  <url>
     <loc>https://deetyaclinic.com/#/services/general-medicine</loc>
-    <lastmod>2026-07-31</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://deetyaclinic.com/#/services/gynecology</loc>
-    <lastmod>2026-07-31</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://deetyaclinic.com/#/services/orthopedics</loc>
-    <lastmod>2026-07-31</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://deetyaclinic.com/#/services/pediatrics</loc>
-    <lastmod>2026-07-31</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://deetyaclinic.com/#/services/ent</loc>
-    <lastmod>2026-07-31</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://deetyaclinic.com/#/services/laboratory</loc>
-    <lastmod>2026-07-31</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://deetyaclinic.com/#/services/ipd</loc>
-    <lastmod>2026-07-31</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://deetyaclinic.com/#/services/pharmacy</loc>
-    <lastmod>2026-07-31</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+
+  <!-- Health checkup package pages -->
+  <url>
+    <loc>https://deetyaclinic.com/#/packages/full-body-checkup-essential</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://deetyaclinic.com/#/packages/full-body-checkup-complete</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://deetyaclinic.com/#/packages/ultra-full-body-checkup-male</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://deetyaclinic.com/#/packages/ultra-full-body-checkup-female</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://deetyaclinic.com/#/packages/full-body-checkup-advanced</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://deetyaclinic.com/#/packages/full-body-checkup-comprehensive</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://deetyaclinic.com/#/packages/full-body-checkup-basic</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://deetyaclinic.com/#/packages/childrens-checkup-essential</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Doctor detail pages -->
   <url>
     <loc>https://deetyaclinic.com/#/doctors/dr-deepak-l</loc>
-    <lastmod>2026-07-31</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://deetyaclinic.com/#/doctors/dr-uthra</loc>
-    <lastmod>2026-07-31</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://deetyaclinic.com/#/doctors/dr-karthik</loc>
-    <lastmod>2026-07-31</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://deetyaclinic.com/#/doctors/dr-manvanthar</loc>
-    <lastmod>2026-07-31</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://deetyaclinic.com/#/doctors/dr-manjunath-l</loc>
-    <lastmod>2026-07-31</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://deetyaclinic.com/#/doctors/dr-shweta</loc>
-    <lastmod>2026-07-31</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://deetyaclinic.com/#/contact</loc>
-    <lastmod>2026-07-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
   </url>
 </urlset>

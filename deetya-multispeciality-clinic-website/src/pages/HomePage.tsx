@@ -1,3 +1,4 @@
+import { lazy } from 'react';
 import ScrollProgressBar from '../components/ScrollProgressBar/ScrollProgressBar';
 import SectionDivider from '../components/SectionDivider/SectionDivider';
 import Hero from '../components/Hero/Hero';
@@ -5,17 +6,24 @@ import Stats from '../components/Stats/Stats';
 import PartnerLogoCarousel from '../components/PartnerLogoCarousel/PartnerLogoCarousel';
 import WelcomeBanner from '../components/WelcomeBanner/WelcomeBanner';
 import About from '../components/About/About';
-import WhyChooseUs from '../components/WhyChooseUs/WhyChooseUs';
-import Services from '../components/Services/Services';
-import Doctors from '../components/Doctors/Doctors';
-import Facilities from '../components/Facilities/Facilities';
-import AppointmentSection from '../components/Appointment/Appointment';
-import Testimonials from '../components/Testimonials/Testimonials';
-import CTABanner from '../components/CTABanner/CTABanner';
-import FAQ from '../components/FAQ/FAQ';
-import Contact from '../components/Contact/Contact';
+import LazyLoad from '../components/LazyLoad/LazyLoad';
 import SEO from '../components/SEO/SEO';
 import { clinicInfo } from '../data/siteData';
+
+// Below-the-fold sections are code-split: their JS chunk only downloads when
+// the visitor scrolls near them, keeping first load fast. The shell above
+// (hero, stats, partner logos, about) stays in the main bundle.
+const Services = lazy(() => import('../components/Services/Services'));
+const WhyChoosePackages = lazy(() => import('../components/WhyChoosePackages/WhyChoosePackages'));
+const CheckupPackages = lazy(() => import('../components/CheckupPackages/CheckupPackages'));
+const WhyChooseUs = lazy(() => import('../components/WhyChooseUs/WhyChooseUs'));
+const Doctors = lazy(() => import('../components/Doctors/Doctors'));
+const Facilities = lazy(() => import('../components/Facilities/Facilities'));
+const AppointmentSection = lazy(() => import('../components/Appointment/Appointment'));
+const Testimonials = lazy(() => import('../components/Testimonials/Testimonials'));
+const CTABanner = lazy(() => import('../components/CTABanner/CTABanner'));
+const FAQ = lazy(() => import('../components/FAQ/FAQ'));
+const Contact = lazy(() => import('../components/Contact/Contact'));
 
 export default function HomePage() {
   return (
@@ -47,35 +55,63 @@ export default function HomePage() {
       <SectionDivider variant="curve" color="light" flipped />
 
       {/* 6 — Our Services */}
-      <Services limit={6} showViewAll showImages />
+      <LazyLoad>
+        <Services limit={6} showViewAll showImages />
+      </LazyLoad>
       <SectionDivider variant="wave" color="light" />
 
+      {/* 6.5 — Why Choose Packages */}
+      <LazyLoad>
+        <WhyChoosePackages />
+      </LazyLoad>
+
+      {/* 6.6 — Checkup Packages */}
+      <LazyLoad>
+        <CheckupPackages />
+      </LazyLoad>
+      <SectionDivider variant="curve" color="light" flipped />
+
       {/* 7 — Why Choose Us */}
-      <WhyChooseUs />
+      <LazyLoad>
+        <WhyChooseUs />
+      </LazyLoad>
 
       {/* 8 — Our Doctors preview */}
-      <Doctors limit={3} showViewAll />
+      <LazyLoad>
+        <Doctors limit={3} showViewAll />
+      </LazyLoad>
       <SectionDivider variant="wave" color="light" flipped />
 
       {/* 9 — World-class Facilities */}
-      <Facilities />
+      <LazyLoad>
+        <Facilities />
+      </LazyLoad>
 
       {/* 10 — Appointment Process */}
-      <AppointmentSection />
+      <LazyLoad>
+        <AppointmentSection />
+      </LazyLoad>
       <SectionDivider variant="curve" color="light" />
 
       {/* 11 — Patient Testimonials */}
-      <Testimonials />
+      <LazyLoad>
+        <Testimonials />
+      </LazyLoad>
 
       {/* 12 — CTA Banner */}
-      <CTABanner />
+      <LazyLoad>
+        <CTABanner />
+      </LazyLoad>
 
       {/* 13 — FAQ */}
-      <FAQ />
+      <LazyLoad>
+        <FAQ />
+      </LazyLoad>
 
       {/* 14 — Contact Form */}
-      <Contact />
-
+      <LazyLoad>
+        <Contact />
+      </LazyLoad>
     </>
   );
 }

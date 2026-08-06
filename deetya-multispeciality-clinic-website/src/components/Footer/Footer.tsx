@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { FaFacebookF, FaInstagram, FaWhatsapp } from 'react-icons/fa';
 import { FiArrowUp, FiPhone, FiMail, FiMapPin, FiClock } from 'react-icons/fi';
-import { clinicInfo, footerQuickLinks, servicesData } from '../../data/siteData';
+import { clinicInfo, footerQuickLinks, footerServices } from '../../data/siteData';
 
 export default function Footer() {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -77,11 +77,11 @@ export default function Footer() {
               <span className="absolute -bottom-1 left-0 sm:-bottom-1.5 w-6 sm:w-8 h-0.5 bg-accent-500 rounded-full" />
             </h4>
             <ul className="space-y-0 mt-4 sm:mt-5">
-              {servicesData.slice(0, 8).map((s, i) => (
+              {footerServices.map((s, i) => (
                 <li key={i}>
                   <Link to="/services" className="text-primary-300 hover:text-white text-[11px] xs:text-sm transition-colors flex items-center gap-2 group">
                     <span className="w-1 h-1 rounded-full bg-primary-600 group-hover:bg-accent-400 transition-colors" />
-                    {s.title}
+                    {s}
                   </Link>
                 </li>
               ))}

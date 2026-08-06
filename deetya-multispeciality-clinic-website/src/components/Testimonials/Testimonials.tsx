@@ -2,7 +2,7 @@ import { useState, useRef, useCallback, useEffect } from 'react';
 import { FiChevronLeft, FiChevronRight, FiStar } from 'react-icons/fi';
 import { FaQuoteLeft, FaStar } from 'react-icons/fa';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
-import { testimonialsData } from '../../data/siteData';
+import { testimonialsData } from '../../data/testimonialsData';
 
 interface TestimonialsProps {
   limit?: number;

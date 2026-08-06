@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { FiArrowUpRight } from 'react-icons/fi';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
-import { servicesData } from '../../data/siteData';
+import { servicesData } from '../../data/servicesData';
 
 interface ServicesProps {
   limit?: number;

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { FiPhone, FiAward, FiCalendar, FiArrowUpRight } from 'react-icons/fi';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
-import { doctorsData } from '../../data/siteData';
+import { doctorsData } from '../../data/doctorsData';
 
 interface DoctorsProps {
   limit?: number;

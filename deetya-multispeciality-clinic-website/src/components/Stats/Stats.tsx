@@ -16,9 +16,11 @@ function StatCard({ stat, isVisible, index }: { stat: typeof statsData[0]; isVis
       }`}
       style={{ animationDelay: `${index * 0.1}s` }}
     >
-      {/* Background layers */}
-      <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl xs:rounded-2xl`} />
+      {/* Background layers — the gradient must paint ABOVE the white card
+          (z-[1]) or the hover gradient would be hidden behind it, leaving
+          white text invisible on the white card. Content sits at z-10. */}
       <div className="absolute inset-0 bg-white rounded-xl xs:rounded-2xl border border-gray-100 group-hover:border-transparent transition-colors duration-500" />
+      <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl xs:rounded-2xl z-[1]`} />
 
       {/* Decorative corner circle */}
       <div className={`absolute -top-8 -right-8 w-16 h-16 bg-gradient-to-br ${stat.color} rounded-full opacity-0 group-hover:opacity-10 transition-all duration-500 group-hover:scale-[3] pointer-events-none`} />

@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { FiMapPin, FiPhone, FiMail, FiUser, FiMessageSquare } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
-import { contactInfoData, clinicInfo, servicesData } from '../../data/siteData';
+import { contactInfoData, clinicInfo } from '../../data/siteData';
+import { servicesData } from '../../data/servicesData';
 
 export default function Contact() {
   const { ref, isVisible } = useScrollAnimation();

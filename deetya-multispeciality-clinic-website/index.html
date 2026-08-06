@@ -103,15 +103,12 @@
     </script>
 
     <!-- ═══ PERFORMANCE: PRECONNECT ═══ -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="https://wa.me" />
 
-    <!-- ═══ PERFORMANCE: PRELOAD KEY RESOURCES ═══ -->
+    <!-- ═══ PERFORMANCE: PRELOAD KEY RESOURCES ═══
+         Fonts are self-hosted (see src/main.tsx) so there is no external
+         render-blocking stylesheet. The hero image is the LCP element. -->
     <link rel="preload" as="image" href="/images/hero-slide-1.webp" fetchpriority="high" />
-    <!-- ═══ FONTS ═══ -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
     <!-- ═══ FAVICON (brand logo) ═══ -->
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />

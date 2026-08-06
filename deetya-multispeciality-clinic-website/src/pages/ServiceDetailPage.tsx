@@ -2,7 +2,8 @@ import { useParams, Link, Navigate } from 'react-router-dom';
 import { FiArrowLeft, FiCheck, FiPhone, FiCalendar, FiArrowRight } from 'react-icons/fi';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import SEO from '../components/SEO/SEO';
-import { servicesData, clinicInfo } from '../data/siteData';
+import { servicesData } from '../data/servicesData';
+import { clinicInfo } from '../data/siteData';
 import CTABanner from '../components/CTABanner/CTABanner';
 import AppointmentSection from '../components/Appointment/Appointment';
 
