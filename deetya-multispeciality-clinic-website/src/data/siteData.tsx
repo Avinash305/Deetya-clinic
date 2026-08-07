@@ -38,6 +38,7 @@ export const navLinks = [
   { label: 'Home', path: '/' },
   { label: 'About', path: '/about' },
   { label: 'Services', path: '/services' },
+  { label: 'Health Packages', path: '/health-packages' },
   { label: 'Contact', path: '/contact' },
 ];
 
@@ -45,6 +46,7 @@ export const footerQuickLinks = [
   { label: 'Home', path: '/' },
   { label: 'About Us', path: '/about' },
   { label: 'Our Services', path: '/services' },
+  { label: 'Health Packages', path: '/health-packages' },
   { label: 'Our Doctors', path: '/about' },
   { label: 'Contact Us', path: '/contact' },
 ];
@@ -76,6 +78,7 @@ export const socialLinks = [
 export const heroSlides = [
   {
     image: '/images/hero-slide-1.webp',
+    width: 1584,
     badge: 'In-House Pharmacy & Lab',
     heading: 'Complete',
     headingGradient: 'Healthcare',
@@ -85,6 +88,7 @@ export const heroSlides = [
   },
   {
     image: '/images/hero-slide-2.webp',
+    width: 1408,
     badge: '5+ Expert Specialists',
     heading: 'Trusted',
     headingGradient: 'Medical',
@@ -94,6 +98,7 @@ export const heroSlides = [
   },
   {
     image: '/images/hero-slide-3.webp',
+    width: 1408,
     badge: 'Located in JP Nagar 9th Phase',
     heading: 'Your',
     headingGradient: 'Family',
@@ -157,6 +162,7 @@ export const pageBannerImages = {
   services: '/images/banner-services.webp',
   contact: '/images/banner-contact.webp',
   doctors: '/images/hero-slide-2.webp',
+  packages: '/images/laboratory-1.webp',
 };
 
 // ─────────────────────────────────────────

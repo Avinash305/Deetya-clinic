@@ -1,4 +1,4 @@
-# Netlify headers — caching & security
+# Netlify headers — caching, security & performance
 # Hashed build assets get immutable (1-year) caching: repeat visitors
 # download almost nothing. index.html revalidates so deploys go live
 # instantly. Images/favicons have static filenames, so they get a bounded
@@ -22,8 +22,14 @@
 /sitemap.xml
   Cache-Control: public, max-age=3600
 
+/sw.js
+  Cache-Control: public, max-age=0, must-revalidate
+
 /*
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  X-XSS-Protection: 1; mode=block
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https://wa.me; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; worker-src 'self'; upgrade-insecure-requests

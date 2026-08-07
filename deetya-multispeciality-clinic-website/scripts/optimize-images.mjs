@@ -3,7 +3,7 @@
 // and downscales to the max width actually needed on screen (2x for retina).
 // Run: node scripts/optimize-images.mjs
 import sharp from "sharp";
-import { readdirSync, writeFileSync, renameSync, unlinkSync, statSync, copyFileSync } from "node:fs";
+import { readdirSync, readFileSync, writeFileSync, unlinkSync, statSync } from "node:fs";
 import path from "node:path";
 
 const dir = path.resolve("public/images");
@@ -34,6 +34,7 @@ const targets = {
   "pharmacy-1": { w: 1000, q: 75 },
   "doctor-": { w: 800, q: 75 },
   "og-image": { w: 1200, q: 75 },
+  "location": { w: 600, q: 92 },
   "logo": { w: null, q: 80 },
 };
 
@@ -52,72 +53,54 @@ for (const f of readdirSync(dir)) {
     if (f.startsWith(key)) { target = t; break; }
   }
 
-  const meta = await sharp(file).metadata();
+  // Read the source into memory first: libvips memory-maps path inputs, and
+  // on Windows that open mmap handle blocks overwriting the same file later.
+  const src = readFileSync(file);
+  const meta = await sharp(src).metadata();
   const opts = {};
   if (target.w && meta.width && meta.width > target.w) {
     opts.width = target.w;
     opts.withoutEnlargement = true;
   }
 
-  const buf = await sharp(file)
+  const buf = await sharp(src)
     .resize(opts)
     .webp({ quality: target.q, effort: 6, smartSubsample: true })
     .toBuffer();
 
   if (buf.length < before) {
-    // Write via a temp file + unlink + rename. On Windows, renaming over a
-    // file the running dev server has open fails with EPERM, so the original
-    // is unlinked first (freeing the path) and the tmp renamed into place,
-    // retried a few times to survive transient locks. If the rename still
-    // fails on the last attempt, fall back to writing the buffer directly to
-    // the now-fresh path. Only if that also fails do we try restoring the
-    // original from the tmp (copy is lock-tolerant where rename is not); if
-    // that fails too the original is untouched, we warn, and move on.
-    const tmp = file + ".tmp";
-    writeFileSync(tmp, buf);
-    let replaced = false;
-    // OneDrive/Defender on the Desktop path can hold short-lived locks, so
-    // retry for a generous window (20 x 500ms ~= 10s) before giving up.
-    for (let attempt = 0; attempt < 20 && !replaced; attempt++) {
+    // Replace in place with a direct write, retried to ride out transient
+    // Windows Defender / filesystem-filter scan locks. The previous
+    // tmp + unlink + rename strategy hung here (MoveFileEx blocked with
+    // EPERM), and even the first plain write can hit a short-lived scan
+    // lock, so keep a generous retry window. Encoding happens fully in
+    // memory and the write itself is fast (~ms), so the non-atomic replace
+    // window is tiny; a retry will even repair a partial write. Only the
+    // transient lock codes below warrant a retry - anything else (disk
+    // full, permissions, read-only) should fail fast.
+    let wrote = false;
+    let reason = "transient lock";
+    for (let attempt = 0; attempt < 20 && !wrote; attempt++) {
       try {
-        try { unlinkSync(file); } catch {} // ENOENT if already removed
-        renameSync(tmp, file);
-        replaced = true;
-      } catch {
-        if (attempt === 19) {
-          // Original was unlinked (path is free) unless the unlink itself
-          // was locked too. Writing directly is the last resort.
-          try {
-            writeFileSync(file, buf);
-            replaced = true;
-          } catch {
-            // Restore the original from tmp if we can; copyFile tolerates
-            // locks that rename refuses. If the original was never unlinked
-            // it stays untouched either way.
-            try {
-              copyFileSync(tmp, file);
-              replaced = true;
-            } catch {
-              try { unlinkSync(tmp); } catch {}
-              skipped += 1;
-              console.warn(`  WARN: ${f} could not be replaced (file locked); kept original`);
-            }
-          }
-          // A successful direct write or copy leaves the tmp behind;
-          // remove it so it never ships to dist/.
-          try { unlinkSync(tmp); } catch {}
-        } else {
-          await new Promise((r) => setTimeout(r, 500));
+        writeFileSync(file, buf);
+        wrote = true;
+      } catch (err) {
+        if (!["EPERM", "UNKNOWN", "EACCES", "EBUSY"].includes(err.code)) {
+          reason = err.code;
+          break;
         }
+        await new Promise((r) => setTimeout(r, 500));
       }
     }
-    if (replaced) {
+    if (wrote) {
       totalAfter += buf.length;
       console.log(
         `${f.padEnd(30)} ${(before / 1024).toFixed(0).padStart(4)}KB -> ${(buf.length / 1024).toFixed(0).padStart(4)}KB  ${(((before - buf.length) / before) * 100).toFixed(0)}%`
       );
     } else {
       totalAfter += before;
+      skipped += 1;
+      console.warn(`  WARN: ${f} could not be written (${reason}); kept original`);
     }
   } else {
     totalAfter += before;
@@ -128,5 +111,5 @@ for (const f of readdirSync(dir)) {
 console.log("\n=======================");
 console.log(`TOTAL: ${(totalBefore / 1024).toFixed(0)}KB -> ${(totalAfter / 1024).toFixed(0)}KB`);
 if (skipped > 0) {
-  console.log(`⚠ ${skipped} image${skipped > 1 ? "s" : ""} skipped due to file locks. Stop the dev server and re-run to finish.`);
+  console.log(`⚠ ${skipped} image${skipped > 1 ? "s" : ""} skipped due to transient file locks; re-run to retry.`);
 }

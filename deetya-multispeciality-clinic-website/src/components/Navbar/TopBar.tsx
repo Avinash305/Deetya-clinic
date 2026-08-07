@@ -22,16 +22,16 @@ export default function TopBar({ hidden }: { hidden: boolean }) {
               <FiClock className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
               <span className="text-[11px] sm:text-sm whitespace-nowrap">Mon-Sat 7AM-11PM</span>
             </div>
-            {/* Desktop extras */}
+            {/* Desktop extras — shown progressively so tablets never overflow */}
             <a href={`mailto:${clinicInfo.email}`} className="hidden sm:flex items-center gap-1.5 hover:text-accent-300 transition-colors">
               <FiMail className="w-3.5 h-3.5" />
-              <span className="text-sm">{clinicInfo.email}</span>
+              <span className="text-[11px] md:text-sm">{clinicInfo.email}</span>
             </a>
-            <div className="hidden sm:flex items-center gap-1.5 ml-2 text-primary-200">
+            <div className="hidden md:flex items-center gap-1.5 ml-2 text-primary-200">
               <FiMapPin className="w-3.5 h-3.5" />
               <span className="text-sm">{clinicInfo.shortAddress}</span>
             </div>
-            <div className="hidden sm:flex items-center gap-2 ml-2">
+            <div className="hidden lg:flex items-center gap-2 ml-2">
               {socialLinks.map((s, i) => (
                 /* Social profiles not live yet — rendered as non-clickable
                    placeholders so no dead links ship to production. Replace

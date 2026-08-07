@@ -84,7 +84,7 @@ export default function ServiceDetailPage() {
                       <img
                         src={img}
                         alt={`${service.title} - Image ${i + 1}`}
-                        className="w-full aspect-[4/3] object-cover hover:scale-105 transition-transform duration-500"
+                        className="w-full aspect-[3/2] object-cover hover:scale-105 transition-transform duration-500"
                         loading="lazy"
                       />
                     </div>

@@ -15,7 +15,7 @@ import { clinicInfo } from '../data/siteData';
 // (hero, stats, partner logos, about) stays in the main bundle.
 const Services = lazy(() => import('../components/Services/Services'));
 const WhyChoosePackages = lazy(() => import('../components/WhyChoosePackages/WhyChoosePackages'));
-const CheckupPackages = lazy(() => import('../components/CheckupPackages/CheckupPackages'));
+const HealthPackages = lazy(() => import('../components/HealthPackages/HealthPackages'));
 const WhyChooseUs = lazy(() => import('../components/WhyChooseUs/WhyChooseUs'));
 const Doctors = lazy(() => import('../components/Doctors/Doctors'));
 const Facilities = lazy(() => import('../components/Facilities/Facilities'));
@@ -65,9 +65,9 @@ export default function HomePage() {
         <WhyChoosePackages />
       </LazyLoad>
 
-      {/* 6.6 — Checkup Packages */}
+      {/* 6.6 — Premium Health Packages */}
       <LazyLoad>
-        <CheckupPackages />
+        <HealthPackages showViewAll limit={3} />
       </LazyLoad>
       <SectionDivider variant="curve" color="light" flipped />
 

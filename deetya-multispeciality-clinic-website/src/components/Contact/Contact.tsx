@@ -34,17 +34,38 @@ export default function Contact() {
                 </div>
               ))}
             </div>
-            {/* Map */}
-            <div className="rounded-lg xs:rounded-xl sm:rounded-2xl overflow-hidden shadow-lg border border-gray-100 h-48 xs:h-56 sm:h-64 bg-gradient-to-br from-primary-50 to-accent-50 flex items-center justify-center relative">
-              <div className="absolute inset-0 opacity-8 pointer-events-none">
+            {/* Map + location QR */}
+            <div className="rounded-lg xs:rounded-xl sm:rounded-2xl overflow-hidden shadow-lg border border-gray-100 bg-gradient-to-br from-primary-50 to-accent-50 flex flex-col sm:flex-row items-stretch relative">
+              <div className="absolute inset-0 opacity-[0.08] pointer-events-none">
                 <div className="w-full h-full" style={{ backgroundImage: 'radial-gradient(circle, rgba(20,39,87,0.1) 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
               </div>
-              <div className="text-center relative z-10 px-2">
-                <div className="w-12 xs:w-14 h-12 xs:h-14 mx-auto mb-2 xs:mb-3 bg-gradient-to-br from-primary-500 to-primary-700 rounded-full flex items-center justify-center animate-bounce">
-                  <FiMapPin className="w-6 xs:w-7 h-6 xs:h-7 text-white" />
+              {/* address */}
+              <div className="flex-1 flex items-center justify-center text-center px-3 py-5 sm:py-6 relative z-10 min-w-0">
+                <div>
+                  <div className="w-10 xs:w-12 h-10 xs:h-12 mx-auto mb-2 xs:mb-3 bg-gradient-to-br from-primary-500 to-primary-700 rounded-full flex items-center justify-center animate-bounce">
+                    <FiMapPin className="w-5 xs:w-6 h-5 xs:h-6 text-white" />
+                  </div>
+                  <p className="font-bold text-primary-900 text-[11px] xs:text-xs sm:text-sm px-2">{clinicInfo.shortAddress}</p>
+                  <a href={clinicInfo.mapsUrl} target="_blank" rel="noopener noreferrer" className="text-[11px] xs:text-xs text-primary-600 hover:text-primary-700 font-medium mt-1 inline-block">Open in Google Maps →</a>
                 </div>
-                <p className="font-bold text-primary-900 text-[11px] xs:text-xs sm:text-sm px-2">{clinicInfo.shortAddress}</p>
-                <a href={clinicInfo.mapsUrl} target="_blank" rel="noopener noreferrer" className="text-[11px] xs:text-xs text-primary-600 hover:text-primary-700 font-medium mt-1 inline-block">Open in Google Maps →</a>
+              </div>
+              {/* location QR code */}
+              <div className="relative z-10 flex items-center justify-center px-4 pb-4 sm:pb-0 sm:pr-4 sm:py-3">
+                <a
+                  href={clinicInfo.mapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group bg-white rounded-xl xs:rounded-2xl shadow-lg ring-1 ring-gray-100 p-1.5 xs:p-2 flex flex-col items-center gap-1 hover:shadow-xl hover:-translate-y-0.5 transition-all"
+                  title="Scan to open the location in Google Maps"
+                >
+                  <img
+                    src="/images/location.webp"
+                    alt="QR code — scan to open DEETYA Clinic location in Google Maps"
+                    className="w-20 xs:w-24 sm:w-28 h-auto rounded-md"
+                    loading="lazy"
+                  />
+                  <span className="text-[8px] xs:text-[9px] text-gray-400 font-bold uppercase tracking-wider">Scan to navigate</span>
+                </a>
               </div>
             </div>
           </div>

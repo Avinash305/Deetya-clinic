@@ -12,6 +12,7 @@ const ContactPage = lazy(() => import('./pages/ContactPage'));
 const ServiceDetailPage = lazy(() => import('./pages/ServiceDetailPage'));
 const DoctorDetailPage = lazy(() => import('./pages/DoctorDetailPage'));
 const PackageDetailPage = lazy(() => import('./pages/PackageDetailPage'));
+const HealthPackagesPage = lazy(() => import('./pages/HealthPackagesPage'));
 
 // The lazy pages render inside <Layout>, which wraps <Outlet /> in its own
 // <Suspense> — so the navbar/footer stay visible while a page chunk loads.
@@ -24,6 +25,7 @@ export default function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/services/:slug" element={<ServiceDetailPage />} />
+          <Route path="/health-packages" element={<HealthPackagesPage />} />
           <Route path="/packages/:slug" element={<PackageDetailPage />} />
           <Route path="/doctors/:slug" element={<DoctorDetailPage />} />
           <Route path="/contact" element={<ContactPage />} />

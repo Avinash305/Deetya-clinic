@@ -145,6 +145,8 @@ export default function Hero() {
           >
             <img
               src={s.image}
+              srcSet={`${s.image.replace(/\.webp$/, '-480.webp')} 480w, ${s.image.replace(/\.webp$/, '-768.webp')} 768w, ${s.image.replace(/\.webp$/, '-1200.webp')} 1200w, ${s.image} ${s.width}w`}
+              sizes="100vw"
               alt={`${s.heading} ${s.headingGradient}`}
               className="w-full h-full object-cover"
               loading={i === 0 ? 'eager' : 'lazy'}

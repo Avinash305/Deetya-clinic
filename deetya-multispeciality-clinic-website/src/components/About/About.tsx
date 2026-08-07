@@ -17,7 +17,7 @@ export default function About() {
           <div className={`relative ${isVisible ? 'animate-fade-in-left' : 'opacity-0'}`}>
             <div className="relative max-w-md mx-auto lg:mx-0">
               <div className="rounded-xl xs:rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl shadow-primary-900/10">
-                <img src={aboutImage} alt="Doctor consulting a patient" className="w-full aspect-[4/3] object-cover" loading="lazy" />
+                <img src={aboutImage} alt="Doctor consulting a patient" className="w-full aspect-[3/2] object-cover" loading="lazy" />
               </div>
 
               <div className="absolute -bottom-1.5 -right-0.5 xs:-bottom-3 xs:-right-2 sm:-right-4 bg-white rounded-lg xs:rounded-xl shadow-md xs:shadow-lg p-1.5 xs:p-2 sm:p-3 border border-gray-100 z-10">

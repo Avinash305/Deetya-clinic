@@ -44,7 +44,7 @@ function AboutContent() {
             {/* Image */}
             <div className={`relative ${storyVis ? 'animate-fade-in-left' : 'opacity-0'}`}>
               <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-primary-900/10">
-                <img src={aboutImages.story} alt="Doctor consulting patient" className="w-full aspect-[4/3] object-cover object-[center_30%]" loading="lazy" />
+                <img src={aboutImages.story} alt="Doctor consulting patient" className="w-full aspect-[3/2] object-cover object-[center_30%]" loading="lazy" />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary-900/30 to-transparent" />
               </div>
               {/* Floating badge — reduced size */}
@@ -186,7 +186,7 @@ function AboutContent() {
             <div className={`order-1 lg:order-2 ${missionVis ? 'animate-fade-in-right' : 'opacity-0'}`}>
               <div className="relative">
                 <div className="rounded-2xl xs:rounded-3xl overflow-hidden shadow-2xl shadow-primary-900/10">
-                  <img src={aboutImages.mission} alt="Doctor and patient consultation" className="w-full aspect-[4/3] object-cover object-[center_30%]" loading="lazy" />
+                  <img src={aboutImages.mission} alt="Doctor and patient consultation" className="w-full aspect-[3/2] object-cover object-[center_30%]" loading="lazy" />
                 </div>
                 {/* Floating badge — reduced */}
                 <div className="absolute -bottom-3 -left-2 xs:-bottom-4 xs:-left-3 sm:-left-6 bg-white rounded-xl xs:rounded-2xl shadow-lg xs:shadow-xl p-2.5 xs:p-3 sm:p-4 border border-gray-100 z-10">

@@ -24,9 +24,9 @@ export default function Footer() {
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 xs:pt-20 sm:pt-24 pb-8">
-        <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 gap-6 xs:gap-8 lg:gap-12 mb-8 xs:mb-10 lg:mb-12">
+        <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-6 xs:gap-8 lg:gap-12 mb-8 xs:mb-10 lg:mb-12">
           {/* About */}
-          <div className="xs:col-span-2 md:col-span-1">
+          <div className="xs:col-span-2 lg:col-span-1">
             <Link to="/" className="flex items-center gap-2.5 mb-4 sm:mb-5 group">
               <div className="w-10 sm:w-12 h-9 sm:h-11 rounded-lg sm:rounded-xl overflow-hidden group-hover:scale-105 transition-transform shadow-lg shadow-primary-600/20 shrink-0 bg-primary-800 flex items-center justify-center p-0.5 sm:p-1">
                 <img src="/images/logo.webp" alt="Deetya Clinic" className="w-full h-full object-contain" />
@@ -89,7 +89,7 @@ export default function Footer() {
           </div>
 
           {/* Contact */}
-          <div>
+          <div className="xs:col-span-2 lg:col-span-1">
             <h4 className="font-bold text-sm sm:text-base mb-3 sm:mb-5 relative inline-block">
               Contact Info
               <span className="absolute -bottom-1 left-0 sm:-bottom-1.5 w-6 sm:w-8 h-0.5 bg-accent-500 rounded-full" />

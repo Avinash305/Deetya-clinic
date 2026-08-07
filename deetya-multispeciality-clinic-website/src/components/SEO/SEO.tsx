@@ -14,7 +14,7 @@ export default function SEO({
   title,
   description,
   canonical,
-  ogImage = '/images/og-image.webp',
+  ogImage = 'https://deetyaclinic.com/images/og-image.webp',
   ogType = 'website',
   keywords,
   jsonLd,

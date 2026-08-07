@@ -36,8 +36,8 @@ export default function Navbar({ topBarHidden }: { topBarHidden: boolean }) {
             </div>
           </Link>
 
-          {/* Desktop nav */}
-          <div className="hidden sm:flex items-center gap-0.5 lg:gap-2">
+          {/* Desktop nav — from md up (tablets get the full bar; small screens get the menu) */}
+          <div className="hidden md:flex items-center gap-0.5 lg:gap-2">
             {navLinks.map((link) => (
               <Link
                 key={link.label}
@@ -69,8 +69,8 @@ export default function Navbar({ topBarHidden }: { topBarHidden: boolean }) {
             </div>
           </div>
 
-          {/* Mobile: Hamburger only */}
-          <div className="flex sm:hidden items-center">
+          {/* Mobile/tablet-small: Hamburger only */}
+          <div className="flex md:hidden items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="p-2 min-w-[44px] min-h-[44px] rounded-lg hover:bg-gray-100 active:bg-gray-200 transition-colors flex items-center justify-center"
@@ -82,8 +82,8 @@ export default function Navbar({ topBarHidden }: { topBarHidden: boolean }) {
         </div>
       </div>
 
-      {/* Mobile dropdown */}
-      <div className={`sm:hidden overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-96' : 'max-h-0'}`}>
+      {/* Mobile/tablet-small dropdown */}
+      <div className={`md:hidden overflow-y-auto overflow-x-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-96' : 'max-h-0'}`}>
         <div className="bg-white border-t border-gray-100 px-4 pb-4 pt-2 space-y-1 shadow-lg">
           {navLinks.map((link) => (
             <Link key={link.label} to={link.path}

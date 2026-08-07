@@ -53,6 +53,11 @@ html {
 
   /* Custom breakpoint for extra small screens */
   --breakpoint-xs: 480px;
+
+  /* Darkened gray-400 (default #9ca3af → #6b7280) so the small gray
+     captions/placeholders pass WCAG AA contrast (4.6:1 on white). Pure
+     accessibility fix — no layout change. */
+  --color-gray-400: #6b7280;
 }
 
 @layer base {
@@ -225,11 +230,6 @@ html {
 @keyframes countUp {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes cardLift {
-  0% { transform: translateY(0); box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-  100% { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.12); }
 }
 
 @keyframes gradientShift {
@@ -433,5 +433,41 @@ html {
   scrollbar-width: none;
   &::-webkit-scrollbar {
     display: none;
+  }
+}
+
+/* ─────────── ACCESSIBILITY: REDUCED MOTION ─────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─────────── PRINT (package detail) ─────────── */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #package-print-area,
+  #package-print-area * {
+    visibility: visible;
+  }
+  #package-print-area {
+    display: block !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: visible;
+    background: #fff;
+    z-index: 9999;
+  }
+  @page {
+    margin: 14mm;
   }
 }
