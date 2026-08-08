@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { useState } from 'react';
 import { FiX, FiUser, FiPhone, FiCalendar, FiClock, FiMessageSquare, FiCheckCircle } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
 import type { HealthPackageEntry } from '../../data/healthPackagesData';
+import Modal from '../ui/Modal';
+import FormField from '../ui/FormField';
 import { bookingWhatsAppMessage, callbackWhatsAppMessage, formatINR, whatsappHref } from './bookingUtils';
 
 interface BookPackageModalProps {
@@ -17,20 +18,6 @@ export default function BookPackageModal({ pkg, mode, onClose }: BookPackageModa
   const [form, setForm] = useState({ name: '', phone: '', date: '', time: '', notes: '' });
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
-
-  useEffect(() => {
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.body.style.overflow = prev;
-    };
-  }, []);
-
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose();
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [onClose]);
 
   const set = (key: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
     setForm((f) => ({ ...f, [key]: e.target.value }));
@@ -51,24 +38,7 @@ export default function BookPackageModal({ pkg, mode, onClose }: BookPackageModa
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.2 }}
-      className="fixed inset-0 z-[85] flex items-end sm:items-center justify-center p-0 sm:p-6"
-      role="dialog"
-      aria-modal="true"
-    >
-      <div className="absolute inset-0 bg-primary-950/60 backdrop-blur-sm" onClick={onClose} />
-
-      <motion.div
-        initial={{ opacity: 0, y: 40, scale: 0.98 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        exit={{ opacity: 0, y: 30, scale: 0.98 }}
-        transition={{ type: 'spring', damping: 26, stiffness: 300 }}
-        className="relative w-full sm:max-w-md bg-white rounded-t-3xl sm:rounded-3xl overflow-hidden shadow-2xl"
-      >
+    <Modal onClose={onClose}>
         {/* header */}
         <div className={`bg-gradient-to-br ${pkg.gradient} px-6 py-5 relative overflow-hidden`}>
           <div className="absolute -top-8 -right-6 w-32 h-32 rounded-full bg-white/10 blur-xl" />
@@ -110,103 +80,79 @@ export default function BookPackageModal({ pkg, mode, onClose }: BookPackageModa
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-3.5">
-              <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1.5">Full Name</label>
-                <div className="relative">
-                  <FiUser className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                  <input
-                    type="text"
-                    required
-                    value={form.name}
-                    onChange={set('name')}
-                    placeholder="Your name"
-                    className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-400 transition-all"
-                  />
-                </div>
-              </div>
+              <FormField
+                label="Full Name"
+                name="name"
+                required
+                value={form.name}
+                onChange={set('name')}
+                placeholder="Your name"
+                icon={<FiUser className="w-4 h-4" />}
+              />
 
-              <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1.5">Phone Number</label>
-                <div className="relative">
-                  <FiPhone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                  <input
-                    type="tel"
-                    required
-                    value={form.phone}
-                    onChange={set('phone')}
-                    placeholder="+91 XXXXX XXXXX"
-                    className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-400 transition-all"
-                  />
-                </div>
-              </div>
+              <FormField
+                type="tel"
+                label="Phone Number"
+                name="phone"
+                required
+                value={form.phone}
+                onChange={set('phone')}
+                placeholder="+91 XXXXX XXXXX"
+                icon={<FiPhone className="w-4 h-4" />}
+              />
 
               {mode === 'book' && (
                 <div className="grid grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-700 mb-1.5">Preferred Date</label>
-                    <div className="relative">
-                      <FiCalendar className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
-                      <input
-                        type="date"
-                        required
-                        min={new Date().toISOString().split('T')[0]}
-                        value={form.date}
-                        onChange={set('date')}
-                        className="w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-400 transition-all"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-700 mb-1.5">Time Slot</label>
-                    <div className="relative">
-                      <FiClock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
-                      <select
-                        required
-                        value={form.time}
-                        onChange={set('time')}
-                        className="w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-400 transition-all appearance-none"
-                      >
-                        <option value="">Select</option>
-                        {timeSlots.map((t) => (
-                          <option key={t} value={t}>{t}</option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
+                  <FormField
+                    type="date"
+                    label="Preferred Date"
+                    name="date"
+                    required
+                    min={new Date().toISOString().split('T')[0]}
+                    value={form.date}
+                    onChange={set('date')}
+                    icon={<FiCalendar className="w-4 h-4" />}
+                    iconClassName="pointer-events-none"
+                  />
+                  <FormField
+                    type="select"
+                    label="Time Slot"
+                    name="time"
+                    required
+                    value={form.time}
+                    onChange={set('time')}
+                    inputClassName="appearance-none"
+                    icon={<FiClock className="w-4 h-4" />}
+                    iconClassName="pointer-events-none"
+                    options={[{ value: '', label: 'Select' }, ...timeSlots.map((t) => ({ value: t, label: t }))]}
+                  />
                 </div>
               )}
 
               {mode === 'callback' && (
-                <div>
-                  <label className="block text-xs font-semibold text-gray-700 mb-1.5">Best Time to Call</label>
-                  <select
-                    required
-                    value={form.time}
-                    onChange={set('time')}
-                    className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-400 transition-all"
-                  >
-                    <option value="">Select a time</option>
-                    {timeSlots.map((t) => (
-                      <option key={t} value={t}>{t}</option>
-                    ))}
-                  </select>
-                </div>
+                <FormField
+                  type="select"
+                  label="Best Time to Call"
+                  name="time"
+                  required
+                  value={form.time}
+                  onChange={set('time')}
+                  options={[{ value: '', label: 'Select a time' }, ...timeSlots.map((t) => ({ value: t, label: t }))]}
+                />
               )}
 
               {mode === 'book' && (
-                <div>
-                  <label className="block text-xs font-semibold text-gray-700 mb-1.5">Notes (optional)</label>
-                  <div className="relative">
-                    <FiMessageSquare className="absolute left-3.5 top-3.5 w-4 h-4 text-gray-400" />
-                    <textarea
-                      rows={2}
-                      value={form.notes}
-                      onChange={set('notes')}
-                      placeholder="Any specific concern…"
-                      className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-400 transition-all resize-none"
-                    />
-                  </div>
-                </div>
+                <FormField
+                  type="textarea"
+                  label="Notes (optional)"
+                  name="notes"
+                  rows={2}
+                  value={form.notes}
+                  onChange={set('notes')}
+                  placeholder="Any specific concern…"
+                  inputClassName="resize-none"
+                  icon={<FiMessageSquare className="w-4 h-4" />}
+                />
               )}
 
               {error && <p className="text-xs font-semibold text-red-500">{error}</p>}
@@ -224,7 +170,6 @@ export default function BookPackageModal({ pkg, mode, onClose }: BookPackageModa
             </form>
           )}
         </div>
-      </motion.div>
-    </motion.div>
+    </Modal>
   );
 }

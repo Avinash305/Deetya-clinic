@@ -2,170 +2,248 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Core pages -->
   <url>
-    <loc>https://deetyaclinic.com/</loc>
-    <lastmod>2026-08-05</lastmod>
+    <loc>https://deetyahealthcare.com/</loc>
+    <lastmod>2026-08-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://deetyaclinic.com/#/about</loc>
-    <lastmod>2026-08-05</lastmod>
+    <loc>https://deetyahealthcare.com/#/about</loc>
+    <lastmod>2026-08-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://deetyaclinic.com/#/services</loc>
-    <lastmod>2026-08-05</lastmod>
+    <loc>https://deetyahealthcare.com/#/services</loc>
+    <lastmod>2026-08-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://deetyaclinic.com/#/contact</loc>
-    <lastmod>2026-08-05</lastmod>
+    <loc>https://deetyahealthcare.com/#/health-packages</loc>
+    <lastmod>2026-08-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://deetyahealthcare.com/#/contact</loc>
+    <lastmod>2026-08-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://deetyaclinic.com/#/health-packages</loc>
-    <lastmod>2026-08-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
   </url>
 
   <!-- Service detail pages -->
   <url>
-    <loc>https://deetyaclinic.com/#/services/general-medicine</loc>
-    <lastmod>2026-08-05</lastmod>
+    <loc>https://deetyahealthcare.com/#/services/general-medicine</loc>
+    <lastmod>2026-08-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://deetyaclinic.com/#/services/gynecology</loc>
-    <lastmod>2026-08-05</lastmod>
+    <loc>https://deetyahealthcare.com/#/services/gynecology</loc>
+    <lastmod>2026-08-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://deetyaclinic.com/#/services/orthopedics</loc>
-    <lastmod>2026-08-05</lastmod>
+    <loc>https://deetyahealthcare.com/#/services/orthopedics</loc>
+    <lastmod>2026-08-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://deetyaclinic.com/#/services/pediatrics</loc>
-    <lastmod>2026-08-05</lastmod>
+    <loc>https://deetyahealthcare.com/#/services/pediatrics</loc>
+    <lastmod>2026-08-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://deetyaclinic.com/#/services/ent</loc>
-    <lastmod>2026-08-05</lastmod>
+    <loc>https://deetyahealthcare.com/#/services/ent</loc>
+    <lastmod>2026-08-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://deetyaclinic.com/#/services/laboratory</loc>
-    <lastmod>2026-08-05</lastmod>
+    <loc>https://deetyahealthcare.com/#/services/laboratory</loc>
+    <lastmod>2026-08-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://deetyaclinic.com/#/services/ipd</loc>
-    <lastmod>2026-08-05</lastmod>
+    <loc>https://deetyahealthcare.com/#/services/ipd</loc>
+    <lastmod>2026-08-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://deetyaclinic.com/#/services/pharmacy</loc>
-    <lastmod>2026-08-05</lastmod>
+    <loc>https://deetyahealthcare.com/#/services/pharmacy</loc>
+    <lastmod>2026-08-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <!-- Health checkup package pages -->
   <url>
-    <loc>https://deetyaclinic.com/#/packages/full-body-checkup-essential</loc>
-    <lastmod>2026-08-05</lastmod>
+    <loc>https://deetyahealthcare.com/#/packages/master-health-package</loc>
+    <lastmod>2026-08-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://deetyaclinic.com/#/packages/full-body-checkup-complete</loc>
-    <lastmod>2026-08-05</lastmod>
+    <loc>https://deetyahealthcare.com/#/packages/executive-health-package</loc>
+    <lastmod>2026-08-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://deetyaclinic.com/#/packages/ultra-full-body-checkup-male</loc>
-    <lastmod>2026-08-05</lastmod>
+    <loc>https://deetyahealthcare.com/#/packages/super-executive-health-package</loc>
+    <lastmod>2026-08-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://deetyaclinic.com/#/packages/ultra-full-body-checkup-female</loc>
-    <lastmod>2026-08-05</lastmod>
+    <loc>https://deetyahealthcare.com/#/packages/senior-citizen-package</loc>
+    <lastmod>2026-08-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://deetyaclinic.com/#/packages/full-body-checkup-advanced</loc>
-    <lastmod>2026-08-05</lastmod>
+    <loc>https://deetyahealthcare.com/#/packages/well-women-package</loc>
+    <lastmod>2026-08-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://deetyaclinic.com/#/packages/full-body-checkup-comprehensive</loc>
-    <lastmod>2026-08-05</lastmod>
+    <loc>https://deetyahealthcare.com/#/packages/diabetic-health-package</loc>
+    <lastmod>2026-08-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://deetyaclinic.com/#/packages/full-body-checkup-basic</loc>
-    <lastmod>2026-08-05</lastmod>
+    <loc>https://deetyahealthcare.com/#/packages/cardiac-risk-package</loc>
+    <lastmod>2026-08-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://deetyaclinic.com/#/packages/childrens-checkup-essential</loc>
-    <lastmod>2026-08-05</lastmod>
+    <loc>https://deetyahealthcare.com/#/packages/pre-employment-health-package</loc>
+    <lastmod>2026-08-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://deetyahealthcare.com/#/packages/essential-cancer-screening-package</loc>
+    <lastmod>2026-08-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://deetyahealthcare.com/#/packages/pre-operative-package</loc>
+    <lastmod>2026-08-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://deetyahealthcare.com/#/packages/basic-health-profile</loc>
+    <lastmod>2026-08-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://deetyahealthcare.com/#/packages/standard-health-profile</loc>
+    <lastmod>2026-08-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://deetyahealthcare.com/#/packages/diabetic-profile</loc>
+    <lastmod>2026-08-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://deetyahealthcare.com/#/packages/male-fertility-profile</loc>
+    <lastmod>2026-08-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://deetyahealthcare.com/#/packages/female-fertility-profile</loc>
+    <lastmod>2026-08-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://deetyahealthcare.com/#/packages/pcod-profile</loc>
+    <lastmod>2026-08-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://deetyahealthcare.com/#/packages/kidney-profile</loc>
+    <lastmod>2026-08-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://deetyahealthcare.com/#/packages/hypertension-profile</loc>
+    <lastmod>2026-08-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://deetyahealthcare.com/#/packages/coagulation-screening-profile</loc>
+    <lastmod>2026-08-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://deetyahealthcare.com/#/packages/anemia-profile</loc>
+    <lastmod>2026-08-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://deetyahealthcare.com/#/packages/rheumatoid-arthritis-profile</loc>
+    <lastmod>2026-08-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <!-- Doctor detail pages -->
   <url>
-    <loc>https://deetyaclinic.com/#/doctors/dr-deepak-l</loc>
-    <lastmod>2026-08-05</lastmod>
+    <loc>https://deetyahealthcare.com/#/doctors/dr-deepak-l</loc>
+    <lastmod>2026-08-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://deetyaclinic.com/#/doctors/dr-uthra</loc>
-    <lastmod>2026-08-05</lastmod>
+    <loc>https://deetyahealthcare.com/#/doctors/dr-uthra</loc>
+    <lastmod>2026-08-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://deetyaclinic.com/#/doctors/dr-karthik</loc>
-    <lastmod>2026-08-05</lastmod>
+    <loc>https://deetyahealthcare.com/#/doctors/dr-karthik</loc>
+    <lastmod>2026-08-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://deetyaclinic.com/#/doctors/dr-manvanthar</loc>
-    <lastmod>2026-08-05</lastmod>
+    <loc>https://deetyahealthcare.com/#/doctors/dr-manvanthar</loc>
+    <lastmod>2026-08-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://deetyaclinic.com/#/doctors/dr-manjunath-l</loc>
-    <lastmod>2026-08-05</lastmod>
+    <loc>https://deetyahealthcare.com/#/doctors/dr-manjunath-l</loc>
+    <lastmod>2026-08-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://deetyaclinic.com/#/doctors/dr-shweta</loc>
-    <lastmod>2026-08-05</lastmod>
+    <loc>https://deetyahealthcare.com/#/doctors/dr-shweta</loc>
+    <lastmod>2026-08-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

@@ -249,7 +249,7 @@ export const doctorsData: DoctorDetail[] = [
       { q: 'Is allergy testing and management available?', a: 'Yes, advanced allergy evaluation and long-term allergy management are available at the clinic.' },
       { q: 'Does she perform thyroid or neck surgeries?', a: 'Yes, she performs thyroid surgery, salivary gland procedures, and neck mass excisions using minimally invasive techniques.' },
       { q: 'Are minimally invasive ENT surgeries available?', a: 'Yes, most procedures are performed using endoscopic or microsurgical techniques for minimal discomfort and faster recovery.' },
-      { q: 'How do I schedule an appointment?', a: 'You can schedule an appointment by calling +91 9665760018, sending a WhatsApp message, or visiting the clinic directly at Navya Disha, 60 Feet Main Road, Avalahali.' },
+      { q: 'How do I schedule an appointment?', a: 'You can schedule an appointment by calling +91 9665760018, sending a WhatsApp message, or visiting the clinic directly at #23 60 Feet Main Road, Avalahali - BDA Layout Road, Srinivas Reddy Layout, Avalahalli, Anjanapura Post, JP Nagar 9th Phase, Bangalore - 560108.' },
     ],
   },
 ];

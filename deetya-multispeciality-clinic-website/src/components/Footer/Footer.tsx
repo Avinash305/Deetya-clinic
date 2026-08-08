@@ -2,18 +2,21 @@ import { Link } from 'react-router-dom';
 import { FaFacebookF, FaInstagram, FaWhatsapp } from 'react-icons/fa';
 import { FiArrowUp, FiPhone, FiMail, FiMapPin, FiClock } from 'react-icons/fi';
 import { clinicInfo, footerQuickLinks, footerServices } from '../../data/siteData';
+import { telHref, mailHref } from '../../utils/links';
 
 export default function Footer() {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
   return (
-    <footer className="bg-primary-950 text-white relative overflow-hidden">
+    <footer className="bg-primary-950 text-white relative z-10">
       {/* Background decoration */}
-      <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary-800/20 rounded-full blur-3xl" />
-      <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-accent-500/5 rounded-full blur-3xl" />
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary-800/20 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-accent-500/5 rounded-full blur-3xl" />
+      </div>
 
       {/* Back to top button */}
-      <div className="absolute -top-6 left-1/2 -translate-x-1/2 z-10">
+      <div className="absolute -top-6 left-1/2 -translate-x-1/2 z-20">
         <button
           onClick={scrollToTop}
           className="w-12 h-12 bg-gradient-to-r from-primary-600 to-accent-500 rounded-full flex items-center justify-center shadow-xl shadow-primary-600/30 hover:-translate-y-1 hover:shadow-primary-600/50 transition-all duration-300"
@@ -109,15 +112,15 @@ export default function Footer() {
                   <FiPhone className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-accent-400" />
                 </div>
                 <div className="min-w-0 space-y-0">
-                  <a href={`tel:${clinicInfo.phone.replace(/\s/g, '')}`} className="text-primary-300 hover:text-white text-xs sm:text-sm transition-colors block truncate">{clinicInfo.phone}</a>
-                  <a href={`tel:${clinicInfo.phoneAlt.replace(/\s/g, '')}`} className="text-primary-300 hover:text-white text-xs sm:text-sm transition-colors block truncate">{clinicInfo.phoneAlt}</a>
+                  <a href={telHref()} className="text-primary-300 hover:text-white text-xs sm:text-sm transition-colors block truncate">{clinicInfo.phone}</a>
+                  <a href={telHref(clinicInfo.phoneAlt)} className="text-primary-300 hover:text-white text-xs sm:text-sm transition-colors block truncate">{clinicInfo.phoneAlt}</a>
                 </div>
               </div>
               <div className="flex items-start gap-2 sm:gap-3">
                 <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-accent-500/15 flex items-center justify-center shrink-0">
                   <FiMail className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-accent-400" />
                 </div>
-                <a href={`mailto:${clinicInfo.email}`} className="text-primary-300 hover:text-white text-xs sm:text-sm transition-colors truncate">{clinicInfo.email}</a>
+                <a href={mailHref()} className="text-primary-300 hover:text-white text-xs sm:text-sm transition-colors truncate">{clinicInfo.email}</a>
               </div>
               <div className="flex items-start gap-2 sm:gap-3">
                 <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-accent-500/15 flex items-center justify-center shrink-0">
@@ -136,8 +139,8 @@ export default function Footer() {
                 EMERGENCY
               </p>
               <div className="space-y-0.5">
-                <a href={`tel:${clinicInfo.phone.replace(/\s/g, '')}`} className="block text-base sm:text-lg font-bold text-red-400 hover:text-red-300 transition-colors">{clinicInfo.phone}</a>
-                <a href={`tel:${clinicInfo.phoneAlt.replace(/\s/g, '')}`} className="block text-base sm:text-lg font-bold text-red-400 hover:text-red-300 transition-colors">{clinicInfo.phoneAlt}</a>
+                <a href={telHref()} className="block text-base sm:text-lg font-bold text-red-400 hover:text-red-300 transition-colors">{clinicInfo.phone}</a>
+                <a href={telHref(clinicInfo.phoneAlt)} className="block text-base sm:text-lg font-bold text-red-400 hover:text-red-300 transition-colors">{clinicInfo.phoneAlt}</a>
               </div>
             </div>
           </div>

@@ -2,7 +2,6 @@ import { useParams, Navigate, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import {
   FiArrowLeft,
-  FiCheck,
   FiPhone,
   FiCalendar,
   FiArrowRight,
@@ -23,6 +22,8 @@ import AppointmentSection from '../components/Appointment/Appointment';
 import PackageCard from '../components/HealthPackages/PackageCard';
 import { MotionConfig } from 'framer-motion';
 import BookPackageModal from '../components/HealthPackages/BookPackageModal';
+import SectionHeader from '../components/ui/SectionHeader';
+import CheckListItem from '../components/ui/CheckListItem';
 import { formatINR, packageWhatsAppMessage, whatsappHref, telHref } from '../components/HealthPackages/bookingUtils';
 
 export default function PackageDetailPage() {
@@ -57,7 +58,7 @@ export default function PackageDetailPage() {
     '@type': 'Product',
     name: pkg.name,
     description: `${pkg.name} with ${pkg.totalTests} tests at DEETYA Multispeciality Clinic. Includes ${pkg.testGroups.map((g) => g.name).join(', ')}.`,
-    url: `https://deetyaclinic.com/#/packages/${pkg.slug}`,
+    url: `https://deetyahealthcare.com/#/packages/${pkg.slug}`,
     brand: { '@type': 'Brand', name: 'DEETYA Multispeciality Clinic' },
     offers: {
       '@type': 'Offer',
@@ -71,8 +72,6 @@ export default function PackageDetailPage() {
     { label: 'Doctor Consultation', on: pkg.doctorConsultation, icon: <FaStethoscope className="w-3.5 h-3.5" /> },
     { label: 'ECG', on: pkg.ecg, icon: <FiHeart className="w-3.5 h-3.5" /> },
     { label: 'ECHO', on: pkg.echo, icon: <FiHeart className="w-3.5 h-3.5" /> },
-    { label: 'TMT', on: pkg.tmt, icon: <FiHeart className="w-3.5 h-3.5" /> },
-    { label: 'Ultrasound', on: pkg.ultrasound, icon: <FaFlask className="w-3.5 h-3.5" /> },
     { label: 'Chest X-Ray', on: pkg.xray, icon: <FiFileText className="w-3.5 h-3.5" /> },
     { label: 'Vitamin Tests', on: pkg.vitaminTests, icon: <FiHome className="w-3.5 h-3.5" /> },
     { label: 'Kidney Tests', on: pkg.kidneyTests, icon: <FaFlask className="w-3.5 h-3.5" /> },
@@ -85,7 +84,8 @@ export default function PackageDetailPage() {
       <SEO
         title={pkg.seoTitle}
         description={pkg.seoDescription}
-        canonical={`https://deetyaclinic.com/#/packages/${pkg.slug}`}
+        canonical={`https://deetyahealthcare.com/#/packages/${pkg.slug}`}
+        ogImage={pkg.image ? `https://deetyahealthcare.com${pkg.image}` : undefined}
         jsonLd={packageJsonLd}
       />
 
@@ -126,6 +126,23 @@ export default function PackageDetailPage() {
                   </div>
                 </div>
               </div>
+
+              {/* Package banner image — responsive srcSet serves a smaller
+                  file on mobile/tablet (matches the hero-slide pattern) */}
+              {pkg.image && (
+                <div className="relative rounded-2xl overflow-hidden shadow-lg ring-1 ring-gray-100 mb-6">
+                  <img
+                    src={pkg.image}
+                    srcSet={`${pkg.image.replace(/\.webp$/, '-480.webp')} 480w, ${pkg.image.replace(/\.webp$/, '-768.webp')} 768w, ${pkg.image.replace(/\.webp$/, '-1200.webp')} 1200w, ${pkg.image} 1600w`}
+                    sizes="(min-width: 1280px) 720px, (min-width: 640px) 60vw, 100vw"
+                    alt={`${pkg.name} — health checkup package at DEETYA Multispeciality Clinic`}
+                    className="w-full aspect-[16/9] object-cover"
+                    loading="eager"
+                    fetchPriority="high"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary-950/25 via-transparent to-transparent pointer-events-none" />
+                </div>
+              )}
 
               {/* Pricing */}
               <div className="bg-gradient-to-r from-primary-50 to-white rounded-2xl p-6 mb-6 border border-primary-100">
@@ -182,12 +199,9 @@ export default function PackageDetailPage() {
                   <h3 className="text-base font-bold text-primary-950 mb-3">Who Should Take This Package</h3>
                   <ul className="space-y-2">
                     {pkg.whoShouldTake.map((item, i) => (
-                      <li key={i} className="flex items-start gap-2.5 text-sm text-gray-600">
-                        <span className="mt-0.5 w-5 h-5 rounded-full bg-primary-100 text-primary-700 flex items-center justify-center shrink-0">
-                          <FiCheck className="w-3 h-3" />
-                        </span>
+                      <CheckListItem key={i} tone="primary" className="gap-2.5 text-sm text-gray-600">
                         {item}
-                      </li>
+                      </CheckListItem>
                     ))}
                   </ul>
                 </div>
@@ -195,12 +209,9 @@ export default function PackageDetailPage() {
                   <h3 className="text-base font-bold text-primary-950 mb-3">Preparation Instructions</h3>
                   <ul className="space-y-2">
                     {pkg.preparation.map((item, i) => (
-                      <li key={i} className="flex items-start gap-2.5 text-sm text-gray-600">
-                        <span className="mt-0.5 w-5 h-5 rounded-full bg-warm-100 text-warm-700 flex items-center justify-center shrink-0">
-                          <FiCheck className="w-3 h-3" />
-                        </span>
+                      <CheckListItem key={i} tone="warm" className="gap-2.5 text-sm text-gray-600">
                         {item}
-                      </li>
+                      </CheckListItem>
                     ))}
                   </ul>
                 </div>
@@ -210,12 +221,10 @@ export default function PackageDetailPage() {
               <div className="mb-8">
                 <h2 className="text-xl font-bold text-primary-950 mb-4">Included In This Package</h2>
                 <div className="flex flex-wrap gap-2">
-                  {facilityChips.map((f) => (
+                  {facilityChips.filter((f) => f.on).map((f) => (
                     <span
                       key={f.label}
-                      className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-[11px] font-semibold border ${
-                        f.on ? 'bg-accent-50 text-accent-700 border-accent-200' : 'bg-gray-50 text-gray-400 border-gray-100 line-through decoration-gray-300'
-                      }`}
+                      className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-[11px] font-semibold border bg-accent-50 text-accent-700 border-accent-200"
                     >
                       {f.icon}
                       {f.label}
@@ -230,10 +239,7 @@ export default function PackageDetailPage() {
                 <div className="rounded-2xl border border-gray-100 overflow-hidden divide-y divide-gray-100">
                   {pkg.testGroups.map((group, gi) => (
                     <div key={gi} className="px-4 py-3 bg-white hover:bg-primary-50/40 transition-colors">
-                      <div className="flex items-start gap-2.5">
-                        <span className="mt-0.5 w-5 h-5 rounded-full bg-accent-100 text-accent-700 flex items-center justify-center shrink-0">
-                          <FiCheck className="w-3 h-3" />
-                        </span>
+                      <CheckListItem className="gap-2.5">
                         <div>
                           <p className="text-sm font-semibold text-primary-950">{group.name}</p>
                           {group.tests && (
@@ -246,7 +252,7 @@ export default function PackageDetailPage() {
                             </div>
                           )}
                         </div>
-                      </div>
+                      </CheckListItem>
                     </div>
                   ))}
                 </div>
@@ -359,13 +365,14 @@ export default function PackageDetailPage() {
       {/* ───── RELATED PACKAGES ───── */}
       <section className="py-16 lg:py-20 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-bold text-primary-950 mb-3">
-              Other{' '}
-              <span className="bg-gradient-to-r from-primary-600 to-accent-500 bg-clip-text text-transparent">Packages</span>
-            </h2>
-            <p className="text-gray-600 text-xs xs:text-sm sm:text-base">Explore our other health checkup packages</p>
-          </div>
+          <SectionHeader
+            size="lg"
+            contain={false}
+            className="mb-12"
+            title="Other "
+            gradient="Packages"
+            subtitle="Explore our other health checkup packages"
+          />
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 xs:gap-6">
             {relatedPackages.map((p, i) => (

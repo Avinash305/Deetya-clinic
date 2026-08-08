@@ -2,7 +2,12 @@ import { FiArrowRight, FiGrid, FiHome, FiPhone } from 'react-icons/fi';
 import { FaFlask, FaTruck } from 'react-icons/fa';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { healthPackagesData } from '../../data/healthPackagesData';
-import { clinicInfo, whyChoosePackagesData } from '../../data/siteData';
+import { whyChoosePackagesData } from '../../data/siteData';
+import Button from '../ui/Button';
+import FeatureBadge from '../ui/FeatureBadge';
+import FloatingBadge from '../ui/FloatingBadge';
+import SectionBackground from '../ui/SectionBackground';
+import { telHref } from '../../utils/links';
 
 export default function HealthPackagesHero() {
   const { ref, isVisible } = useScrollAnimation(0.05);
@@ -23,11 +28,13 @@ export default function HealthPackagesHero() {
   return (
     <section ref={ref} className="relative overflow-hidden bg-gradient-to-br from-primary-50 via-white to-accent-50/50">
       {/* decorative background */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-24 -right-20 w-96 h-96 rounded-full bg-primary-100/60 blur-3xl" />
-        <div className="absolute -bottom-24 -left-20 w-80 h-80 rounded-full bg-accent-100/50 blur-3xl" />
-        <div className="absolute top-1/2 left-1/3 w-64 h-64 rounded-full bg-warm-100/40 blur-3xl" />
-      </div>
+      <SectionBackground
+        blobs={[
+          '-top-24 -right-20 w-96 h-96 bg-primary-100/60 blur-3xl',
+          '-bottom-24 -left-20 w-80 h-80 bg-accent-100/50 blur-3xl',
+          'top-1/2 left-1/3 w-64 h-64 bg-warm-100/40 blur-3xl',
+        ]}
+      />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 xs:py-16 lg:py-20">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
@@ -52,21 +59,15 @@ export default function HealthPackagesHero() {
 
             {/* CTAs */}
             <div className="mt-7 flex flex-wrap items-center justify-center lg:justify-start gap-3">
-              <button
-                onClick={scrollToPackages}
-                className="group inline-flex items-center justify-center gap-2 px-5 xs:px-7 py-3 xs:py-3.5 bg-gradient-to-r from-primary-600 to-primary-700 text-white font-bold rounded-xl shadow-lg shadow-primary-600/25 hover:shadow-primary-600/40 hover:-translate-y-0.5 transition-all text-xs xs:text-sm"
-              >
+              <Button variant="gradient-xl" onClick={scrollToPackages}>
                 <FiGrid className="w-4 h-4" />
                 View All Packages
                 <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </button>
-              <a
-                href={`tel:${clinicInfo.phone.replace(/\s/g, '')}`}
-                className="inline-flex items-center justify-center gap-2 px-5 xs:px-7 py-3 xs:py-3.5 border-2 border-primary-200 text-primary-700 font-bold rounded-xl hover:bg-primary-50 hover:border-primary-300 transition-all text-xs xs:text-sm"
-              >
+              </Button>
+              <Button variant="outline-xl" href={telHref()}>
                 <FiPhone className="w-4 h-4" />
                 Book Home Collection
-              </a>
+              </Button>
             </div>
 
             {/* mini stats */}
@@ -108,26 +109,22 @@ export default function HealthPackagesHero() {
               </div>
 
               {/* floating badge: home collection */}
-              <div className="absolute -bottom-4 -left-2 xs:-left-4 bg-white rounded-2xl shadow-xl shadow-primary-900/10 border border-gray-100 px-3 xs:px-4 py-2.5 xs:py-3 flex items-center gap-2.5">
-                <div className="w-9 h-9 xs:w-10 xs:h-10 rounded-xl bg-gradient-to-br from-accent-500 to-accent-700 text-white flex items-center justify-center shadow-md">
-                  <FiHome className="w-4 xs:w-5 h-4 xs:h-5" />
-                </div>
-                <div>
-                  <p className="text-[10px] xs:text-xs font-bold text-primary-950 leading-tight">Free Home Sample Collection</p>
-                  <p className="text-[9px] xs:text-[10px] text-gray-500">Across Bangalore, 6 AM – 10 PM</p>
-                </div>
-              </div>
+              <FloatingBadge
+                position="bottom-left"
+                iconBg="from-accent-500 to-accent-700"
+                icon={<FiHome className="w-4 xs:w-5 h-4 xs:h-5" />}
+                title="Free Home Sample Collection"
+                subtitle="Across Bangalore, 6 AM – 10 PM"
+              />
 
               {/* floating badge: reports */}
-              <div className="absolute -top-4 -right-2 xs:-right-4 bg-white rounded-2xl shadow-xl shadow-primary-900/10 border border-gray-100 px-3 xs:px-4 py-2.5 xs:py-3 flex items-center gap-2.5">
-                <div className="w-9 h-9 xs:w-10 xs:h-10 rounded-xl bg-gradient-to-br from-primary-500 to-primary-700 text-white flex items-center justify-center shadow-md">
-                  <FaFlask className="w-4 xs:w-5 h-4 xs:h-5" />
-                </div>
-                <div>
-                  <p className="text-[10px] xs:text-xs font-bold text-primary-950 leading-tight">NABL-Accredited Lab</p>
-                  <p className="text-[9px] xs:text-[10px] text-gray-500">Same-day reports in 6–12 hrs</p>
-                </div>
-              </div>
+              <FloatingBadge
+                position="top-right"
+                iconBg="from-primary-500 to-primary-700"
+                icon={<FaFlask className="w-4 xs:w-5 h-4 xs:h-5" />}
+                title="NABL-Accredited Lab"
+                subtitle="Same-day reports in 6–12 hrs"
+              />
             </div>
           </div>
         </div>
@@ -140,20 +137,7 @@ export default function HealthPackagesHero() {
           style={{ animationDelay: '0.2s' }}
         >
           {whyChoosePackagesData.map((item, i) => (
-            <div
-              key={i}
-              className="flex items-center gap-3 rounded-2xl bg-white border border-gray-100 p-3.5 xs:p-4 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all"
-            >
-              <div
-                className={`w-11 h-11 shrink-0 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center text-white shadow-md`}
-              >
-                {item.icon}
-              </div>
-              <div>
-                <p className="text-sm font-bold text-primary-950">{item.title}</p>
-                <p className="text-[11px] xs:text-xs text-gray-500">{item.subtitle}</p>
-              </div>
-            </div>
+            <FeatureBadge key={i} icon={item.icon} title={item.title} subtitle={item.subtitle} color={item.color} />
           ))}
         </div>
       </div>

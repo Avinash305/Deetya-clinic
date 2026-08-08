@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 import { FiPhone, FiAward, FiCalendar, FiArrowUpRight } from 'react-icons/fi';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { doctorsData } from '../../data/doctorsData';
+import SectionHeader from '../ui/SectionHeader';
+import Button from '../ui/Button';
 
 interface DoctorsProps {
   limit?: number;
@@ -17,17 +19,15 @@ export default function Doctors({ limit, showHeader = true, showViewAll = false 
     <section id="doctors" ref={ref} className="py-16 xs:py-20 lg:py-28 bg-gradient-to-b from-white to-primary-50/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {showHeader && (
-          <div className={`text-center max-w-2xl mx-auto mb-16 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-accent-50 border border-accent-200 rounded-full mb-4">
-              <span className="w-2 h-2 bg-accent-500 rounded-full" />
-              <span className="text-xs sm:text-sm font-semibold text-accent-700">Our Doctors</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-950 mb-4">
-              Meet Our{' '}
-              <span className="bg-gradient-to-r from-primary-600 to-accent-500 bg-clip-text text-transparent">Expert Team</span>
-            </h2>
-            <p className="text-gray-600 text-sm xs:text-base sm:text-lg">Our team of highly qualified and experienced specialists are dedicated to providing the best care for you and your family.</p>
-          </div>
+          <SectionHeader
+            badge="Our Doctors"
+            badgeTone="accent"
+            title="Meet Our "
+            gradient="Expert Team"
+            subtitle="Our team of highly qualified and experienced specialists are dedicated to providing the best care for you and your family."
+            titleClassName="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-950 mb-4"
+            className={`mb-16 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}
+          />
         )}          <div className={`grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-3 xs:gap-6`}>
           {displayed.map((doc, i) => (
             <div
@@ -73,10 +73,10 @@ export default function Doctors({ limit, showHeader = true, showViewAll = false 
 
         {showViewAll && (
           <div className={`text-center mt-12 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
-            <Link to="/about" className="group inline-flex items-center justify-center gap-2 px-5 xs:px-8 py-3 xs:py-3.5 bg-gradient-to-r from-primary-600 to-primary-700 text-white font-semibold rounded-lg xs:rounded-xl shadow-lg shadow-primary-600/25 hover:shadow-primary-600/40 hover:-translate-y-0.5 transition-all text-xs xs:text-sm">
+            <Button to="/about">
               View All Doctors
               <FiArrowUpRight className="w-3.5 xs:w-4 h-3.5 xs:h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0" />
-            </Link>
+            </Button>
           </div>
         )}
       </div>

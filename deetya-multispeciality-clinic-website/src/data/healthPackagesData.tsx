@@ -87,8 +87,6 @@ export interface HealthPackage {
   doctorConsultation: boolean;
   ecg: boolean;
   echo: boolean;
-  tmt: boolean;
-  ultrasound: boolean;
   xray: boolean;
   vitaminTests: boolean;
   kidneyTests: boolean;
@@ -107,6 +105,9 @@ export interface HealthPackage {
   isNew?: boolean;
   seoTitle: string;
   seoDescription: string;
+  /** Treatment banner photo (downloaded & cropped to 1600×900 by
+      scripts/download-package-photos.mjs — re-run that script after adding or
+      renaming packages). */
   image?: string;
 
   /* ── Visual identity ── */
@@ -120,10 +121,7 @@ function countTests(groups: PackageTestGroup[]): number {
   return groups.reduce((sum, g) => sum + (g.tests && g.tests.length ? g.tests.length : 1), 0);
 }
 
-/* The 21 packages exactly as listed in the brochure (prices in ₹).
-   Note: the Cardiac Risk Package lists "ECHO/TMT" in its tests but sells TMT
-   separately as an add-on (₹1,600) — the PDF itself is ambiguous here, so the
-   base package is marked ECHO-only with TMT available as an add-on. */
+/* The 21 packages exactly as listed in the brochure (prices in ₹). */
 const rawPackages: HealthPackage[] = [
   {
     name: 'Master Health Package',
@@ -133,9 +131,9 @@ const rawPackages: HealthPackage[] = [
     originalPrice: 5770,
     offerPrice: 2599,
     shortDescription:
-      'Complete full-body screening — CBC, sugar & HbA1c, lipid, liver & kidney, thyroid, chest X-ray, ECG, ultrasound & physician consultation.',
+      'Complete full-body screening — CBC, sugar & HbA1c, lipid, liver & kidney, thyroid, chest X-ray, ECG & physician consultation.',
     description:
-      'The Master Health Package is our most popular comprehensive health screening, designed to give you a complete picture of your overall health in a single visit. It covers your blood counts, sugar control (including HbA1c), cholesterol, liver and kidney function, thyroid health, urine analysis, chest X-ray, ECG and a whole-abdomen ultrasound — followed by a detailed physician consultation to explain your results. Ideal as an annual full-body checkup for every adult.',
+      'The Master Health Package is our most popular comprehensive health screening, designed to give you a complete picture of your overall health in a single visit. It covers your blood counts, sugar control (including HbA1c), cholesterol, liver and kidney function, thyroid health, urine analysis, chest X-ray and ECG — followed by a detailed physician consultation to explain your results. Ideal as an annual full-body checkup for every adult.',
     testGroups: [
       {
         name: 'Complete Blood Count with ESR',
@@ -180,7 +178,7 @@ const rawPackages: HealthPackage[] = [
       { name: 'Complete Urine Analysis' },
       { name: 'Chest X-Ray' },
       { name: 'ECG' },
-      { name: 'Ultrasound Abdomen & Pelvis' },
+
       { name: 'Vitals' },
       { name: 'Physician Consultation' },
     ],
@@ -203,8 +201,8 @@ const rawPackages: HealthPackage[] = [
     doctorConsultation: true,
     ecg: true,
     echo: false,
-    tmt: false,
-    ultrasound: true,
+
+
     xray: true,
     vitaminTests: false,
     kidneyTests: true,
@@ -217,7 +215,8 @@ const rawPackages: HealthPackage[] = [
     popular: true,
     seoTitle: 'Master Health Package – Full Body Checkup at ₹2,599',
     seoDescription:
-      'Master Health Package at DEETYA Multispeciality Clinic: CBC, blood sugar & HbA1c, lipid profile, liver & kidney function, TSH, ECG, chest X-ray, ultrasound & physician consultation at ₹2,599 (was ₹5,770).',
+      'Master Health Package at DEETYA Multispeciality Clinic: CBC, blood sugar & HbA1c, lipid profile, liver & kidney function, TSH, ECG, chest X-ray & physician consultation at ₹2,599 (was ₹5,770).',
+    image: '/images/packages/master-health-package.webp',
     icon: <FaFlask className="w-7 h-7" />,
     gradient: 'from-primary-500 to-primary-700',
     badgeClass: 'bg-primary-600',
@@ -230,9 +229,9 @@ const rawPackages: HealthPackage[] = [
     originalPrice: 8790,
     offerPrice: 3699,
     shortDescription:
-      'Executive-grade screening with CBC, sugar, lipid, liver & kidney tests, uric acid, calcium, thyroid, ECG, ECHO/TMT, ultrasound, X-ray & Pap/PSA.',
+      'Executive-grade screening with CBC, sugar, lipid, liver & kidney tests, uric acid, calcium, thyroid, ECG, ECHO, X-ray & Pap/PSA.',
     description:
-      'The Executive Health Package is built for busy professionals who need a thorough, time-efficient health assessment. It covers the complete blood picture, sugar and cholesterol profile, liver and kidney function, uric acid, calcium, thyroid, urine analysis, chest X-ray, ECG, ECHO/TMT and ultrasound of the abdomen and pelvis. It also includes a Pap smear for women or PSA for men, making it a complete preventive health checkup with physician consultation.',
+      'The Executive Health Package is built for busy professionals who need a thorough, time-efficient health assessment. It covers the complete blood picture, sugar and cholesterol profile, liver and kidney function, uric acid, calcium, thyroid, urine analysis, chest X-ray, ECG and ECHO. It also includes a Pap smear for women or PSA for men, making it a complete preventive health checkup with physician consultation.',
     testGroups: [
       {
         name: 'Complete Blood Count with ESR',
@@ -280,8 +279,8 @@ const rawPackages: HealthPackage[] = [
       { name: 'Pap Smear (Women) / PSA (Men)' },
       { name: 'Chest X-Ray' },
       { name: 'ECG' },
-      { name: 'ECHO/TMT' },
-      { name: 'Ultrasound Abdomen & Pelvis' },
+      { name: 'ECHO' },
+
       { name: 'Vitals' },
       { name: 'Physician Consultation' },
     ],
@@ -304,8 +303,8 @@ const rawPackages: HealthPackage[] = [
     doctorConsultation: true,
     ecg: true,
     echo: true,
-    tmt: true,
-    ultrasound: true,
+
+
     xray: true,
     vitaminTests: false,
     kidneyTests: true,
@@ -319,7 +318,8 @@ const rawPackages: HealthPackage[] = [
     popular: true,
     seoTitle: 'Executive Health Package – Full Body Checkup at ₹3,699',
     seoDescription:
-      'Executive Health Package at DEETYA Multispeciality Clinic: CBC, sugar & HbA1c, lipid, liver & kidney, uric acid, calcium, thyroid, ECG, ECHO/TMT, ultrasound, chest X-ray & Pap/PSA at ₹3,699 (was ₹8,790).',
+      'Executive Health Package at DEETYA Multispeciality Clinic: CBC, sugar & HbA1c, lipid, liver & kidney, uric acid, calcium, thyroid, ECG, ECHO, chest X-ray & Pap/PSA at ₹3,699 (was ₹8,790).',
+    image: '/images/packages/executive-health-package.webp',
     icon: <FaBriefcaseMedical className="w-7 h-7" />,
     gradient: 'from-accent-500 to-accent-700',
     badgeClass: 'bg-accent-600',
@@ -332,9 +332,9 @@ const rawPackages: HealthPackage[] = [
     originalPrice: 13250,
     offerPrice: 5999,
     shortDescription:
-      'Our most premium screening — CBC, sugar & HbA1c, lipid, liver, renal function, vitamins D & B12, thyroid, ECG, ECHO/TMT, ultrasound, X-ray & Pap/PSA.',
+      'Our most premium screening — CBC, sugar & HbA1c, lipid, liver, renal function, vitamins D & B12, thyroid, ECG, ECHO, X-ray & Pap/PSA.',
     description:
-      'The Super Executive Health Package is our most comprehensive preventive screening, leaving no major organ system unchecked. In addition to the full blood count, sugar and HbA1c, lipid and liver profiles, it includes a complete renal function test, Vitamin D and Vitamin B12 levels, full thyroid function (T3, T4, TSH), urine analysis, chest X-ray, ECG, ECHO/TMT and ultrasound of the abdomen and pelvis. Pap smear (women) or PSA (men) and a physician consultation complete this flagship package.',
+      'The Super Executive Health Package is our most comprehensive preventive screening, leaving no major organ system unchecked. In addition to the full blood count, sugar and HbA1c, lipid and liver profiles, it includes a complete renal function test, Vitamin D and Vitamin B12 levels, full thyroid function (T3, T4, TSH), urine analysis, chest X-ray, ECG and ECHO. Pap smear (women) or PSA (men) and a physician consultation complete this flagship package.',
     testGroups: [
       {
         name: 'Complete Blood Count with ESR',
@@ -384,8 +384,8 @@ const rawPackages: HealthPackage[] = [
       { name: 'Pap Smear (Women) / PSA (Men)' },
       { name: 'Chest X-Ray' },
       { name: 'ECG' },
-      { name: 'ECHO/TMT' },
-      { name: 'Ultrasound Abdomen & Pelvis' },
+      { name: 'ECHO' },
+
       { name: 'Vitals' },
       { name: 'Physician Consultation' },
     ],
@@ -408,8 +408,8 @@ const rawPackages: HealthPackage[] = [
     doctorConsultation: true,
     ecg: true,
     echo: true,
-    tmt: true,
-    ultrasound: true,
+
+
     xray: true,
     vitaminTests: true,
     kidneyTests: true,
@@ -426,7 +426,8 @@ const rawPackages: HealthPackage[] = [
     popular: true,
     seoTitle: 'Super Executive Health Package – Premium Checkup at ₹5,999',
     seoDescription:
-      'Super Executive Health Package at DEETYA Multispeciality Clinic: CBC, HbA1c, lipid, liver, renal function, vitamins D & B12, thyroid, ECG, ECHO/TMT, ultrasound, X-ray & Pap/PSA at ₹5,999 (was ₹13,250).',
+      'Super Executive Health Package at DEETYA Multispeciality Clinic: CBC, HbA1c, lipid, liver, renal function, vitamins D & B12, thyroid, ECG, ECHO, X-ray & Pap/PSA at ₹5,999 (was ₹13,250).',
+    image: '/images/packages/super-executive-health-package.webp',
     icon: <FaCrown className="w-7 h-7" />,
     gradient: 'from-warm-500 to-warm-700',
     badgeClass: 'bg-warm-600',
@@ -439,9 +440,9 @@ const rawPackages: HealthPackage[] = [
     originalPrice: 10470,
     offerPrice: 4299,
     shortDescription:
-      'Comprehensive geriatric screening — CBC, sugar & HbA1c, lipid, liver, kidney, thyroid, vitamin D, stool & urine exam, ECG, ECHO, X-ray, ultrasound & consultation.',
+      'Comprehensive geriatric screening — CBC, sugar & HbA1c, lipid, liver, kidney, thyroid, vitamin D, stool & urine exam, ECG, ECHO, X-ray & consultation.',
     description:
-      'The Senior Citizen Package is specially designed for the health needs of people above 60 years. Beyond the core CBC, sugar (with HbA1c), lipid and liver profiles, it adds kidney function, thyroid, Vitamin D, complete stool and urine examinations, ECG, ECHO, chest X-ray and ultrasound of the abdomen and pelvis — with a detailed physician consultation to review the findings and plan follow-up care.',
+      'The Senior Citizen Package is specially designed for the health needs of people above 60 years. Beyond the core CBC, sugar (with HbA1c), lipid and liver profiles, it adds kidney function, thyroid, Vitamin D, complete stool and urine examinations, ECG, ECHO and chest X-ray — with a detailed physician consultation to review the findings and plan follow-up care.',
     testGroups: [
       {
         name: 'Complete Blood Count with ESR',
@@ -490,7 +491,7 @@ const rawPackages: HealthPackage[] = [
       { name: 'ECG' },
       { name: 'ECHO' },
       { name: 'Chest X-Ray' },
-      { name: 'Ultrasound Abdomen & Pelvis' },
+
       { name: 'Physician Consultation' },
     ],
     preparation: [
@@ -512,8 +513,8 @@ const rawPackages: HealthPackage[] = [
     doctorConsultation: true,
     ecg: true,
     echo: true,
-    tmt: false,
-    ultrasound: true,
+
+
     xray: true,
     vitaminTests: true,
     kidneyTests: true,
@@ -526,7 +527,8 @@ const rawPackages: HealthPackage[] = [
     popular: true,
     seoTitle: 'Senior Citizen Health Package at ₹4,299',
     seoDescription:
-      'Senior Citizen Package at DEETYA Multispeciality Clinic: CBC, HbA1c, lipid, liver & kidney, thyroid, vitamin D, stool & urine exam, ECG, ECHO, chest X-ray, ultrasound & consultation at ₹4,299 (was ₹10,470).',
+      'Senior Citizen Package at DEETYA Multispeciality Clinic: CBC, HbA1c, lipid, liver & kidney, thyroid, vitamin D, stool & urine exam, ECG, ECHO, chest X-ray & consultation at ₹4,299 (was ₹10,470).',
+    image: '/images/packages/senior-citizen-package.webp',
     icon: <FaUserFriends className="w-7 h-7" />,
     gradient: 'from-purple-500 to-purple-700',
     badgeClass: 'bg-purple-600',
@@ -539,9 +541,9 @@ const rawPackages: HealthPackage[] = [
     originalPrice: 11265,
     offerPrice: 4999,
     shortDescription:
-      'Complete women’s health screening — CBC, sugar, lipid, liver, calcium, thyroid, vitamin D, Pap smear, mammography, ultrasound, ECG, ECHO, X-ray & consultation.',
+      'Complete women’s health screening — CBC, sugar, lipid, liver, calcium, thyroid, vitamin D, Pap smear, mammography, ECG, ECHO, X-ray & consultation.',
     description:
-      'The Well Women Package is a dedicated screening program for women’s health at every stage of life. It combines the essential blood work — CBC, blood sugar, lipid and liver profiles, calcium, uric acid, thyroid and Vitamin D — with women-specific screening including a Pap smear, mammography/sonomammography and pelvic ultrasound, supported by ECG, ECHO, chest X-ray, vitals and physician consultation.',
+      'The Well Women Package is a dedicated screening program for women’s health at every stage of life. It combines the essential blood work — CBC, blood sugar, lipid and liver profiles, calcium, uric acid, thyroid and Vitamin D — with women-specific screening including a Pap smear and mammography/sonomammography, supported by ECG, ECHO, chest X-ray, vitals and physician consultation.',
     testGroups: [
       {
         name: 'Complete Blood Count with ESR',
@@ -586,7 +588,7 @@ const rawPackages: HealthPackage[] = [
       { name: 'Pap Smear' },
       { name: 'Complete Urine Examination' },
       { name: 'Mammography / Sonomammography' },
-      { name: 'Ultrasound Abdomen & Pelvis' },
+
       { name: 'Chest X-Ray' },
       { name: 'ECG' },
       { name: 'ECHO' },
@@ -612,8 +614,8 @@ const rawPackages: HealthPackage[] = [
     doctorConsultation: true,
     ecg: true,
     echo: true,
-    tmt: false,
-    ultrasound: true,
+
+
     xray: true,
     vitaminTests: true,
     kidneyTests: false,
@@ -627,7 +629,8 @@ const rawPackages: HealthPackage[] = [
     popular: true,
     seoTitle: 'Well Women Package – Women’s Health Checkup at ₹4,999',
     seoDescription:
-      'Well Women Package at DEETYA Multispeciality Clinic: CBC, sugar, lipid, liver, calcium, thyroid, vitamin D, Pap smear, mammography, ultrasound, ECG, ECHO, X-ray & consultation at ₹4,999 (was ₹11,265).',
+      'Well Women Package at DEETYA Multispeciality Clinic: CBC, sugar, lipid, liver, calcium, thyroid, vitamin D, Pap smear, mammography, ECG, ECHO, X-ray & consultation at ₹4,999 (was ₹11,265).',
+    image: '/images/gynecology-1.webp',
     icon: <FaVenus className="w-7 h-7" />,
     gradient: 'from-pink-500 to-rose-600',
     badgeClass: 'bg-pink-600',
@@ -640,9 +643,9 @@ const rawPackages: HealthPackage[] = [
     originalPrice: 9130,
     offerPrice: 4999,
     shortDescription:
-      'Diabetes-focused checkup — CBC, fasting/PP sugar, HbA1c, lipid, liver & kidney profile, GFR, electrolytes, urine microalbumin, ECG, ECHO, ultrasound & X-ray.',
+      'Diabetes-focused checkup — CBC, fasting/PP sugar, HbA1c, lipid, liver & kidney profile, GFR, electrolytes, urine microalbumin, ECG, ECHO & X-ray.',
     description:
-      'The Diabetic Health Package is designed to give diabetics and pre-diabetics a complete annual assessment of their sugar control and its impact on the body. It includes fasting and post-prandial sugar with HbA1c, lipid profile, liver function, kidney function with GFR and electrolytes, urine analysis and microalbumin (early marker of kidney damage), supported by ECG, ECHO, chest X-ray, ultrasound, vitals and physician consultation.',
+      'The Diabetic Health Package is designed to give diabetics and pre-diabetics a complete annual assessment of their sugar control and its impact on the body. It includes fasting and post-prandial sugar with HbA1c, lipid profile, liver function, kidney function with GFR and electrolytes, urine analysis and microalbumin (early marker of kidney damage), supported by ECG, ECHO, chest X-ray, vitals and physician consultation.',
     testGroups: [
       {
         name: 'Complete Blood Count with ESR',
@@ -692,7 +695,7 @@ const rawPackages: HealthPackage[] = [
       { name: 'ECG' },
       { name: 'ECHO' },
       { name: 'Chest X-Ray' },
-      { name: 'Ultrasound Abdomen & Pelvis' },
+
       { name: 'Vitals' },
       { name: 'Physician Consultation' },
     ],
@@ -715,8 +718,8 @@ const rawPackages: HealthPackage[] = [
     doctorConsultation: true,
     ecg: true,
     echo: true,
-    tmt: false,
-    ultrasound: true,
+
+
     xray: true,
     vitaminTests: false,
     kidneyTests: true,
@@ -729,7 +732,8 @@ const rawPackages: HealthPackage[] = [
     popular: true,
     seoTitle: 'Diabetic Health Package – Diabetes Checkup at ₹4,999',
     seoDescription:
-      'Diabetic Health Package at DEETYA Multispeciality Clinic: CBC, fasting/PP sugar, HbA1c, lipid, liver & kidney profile, GFR, electrolytes, microalbumin, ECG, ECHO, ultrasound & X-ray at ₹4,999 (was ₹9,130).',
+      'Diabetic Health Package at DEETYA Multispeciality Clinic: CBC, fasting/PP sugar, HbA1c, lipid, liver & kidney profile, GFR, electrolytes, microalbumin, ECG, ECHO & X-ray at ₹4,999 (was ₹9,130).',
+    image: '/images/packages/diabetic-health-package.webp',
     icon: <FaSyringe className="w-7 h-7" />,
     gradient: 'from-indigo-500 to-indigo-700',
     badgeClass: 'bg-indigo-600',
@@ -742,9 +746,9 @@ const rawPackages: HealthPackage[] = [
     originalPrice: 6090,
     offerPrice: 4399,
     shortDescription:
-      'Heart-risk assessment — CBC, sugar, full lipid profile, LDH, homocysteine, creatinine, ECG, ECHO/TMT, chest X-ray & cardiologist consultation.',
+      'Heart-risk assessment — CBC, sugar, full lipid profile, LDH, homocysteine, creatinine, ECG, ECHO, chest X-ray & cardiologist consultation.',
     description:
-      'The Cardiac Risk Package focuses on your heart and vascular health. It measures your complete lipid profile along with key cardiac markers — LDH and homocysteine — supported by CBC, blood sugar, kidney markers, ECG, ECHO/TMT, chest X-ray, vitals and a cardiologist consultation. Ideal for anyone with risk factors such as hypertension, diabetes, smoking, obesity or a family history of heart disease.',
+      'The Cardiac Risk Package focuses on your heart and vascular health. It measures your complete lipid profile along with key cardiac markers — LDH and homocysteine — supported by CBC, blood sugar, kidney markers, ECG, ECHO, chest X-ray, vitals and a cardiologist consultation. Ideal for anyone with risk factors such as hypertension, diabetes, smoking, obesity or a family history of heart disease.',
     testGroups: [
       {
         name: 'Complete Blood Count with ESR',
@@ -775,7 +779,7 @@ const rawPackages: HealthPackage[] = [
       { name: 'Homocysteine' },
       { name: 'Complete Urine Examination' },
       { name: 'ECG' },
-      { name: 'ECHO/TMT' },
+      { name: 'ECHO' },
       { name: 'Chest X-Ray' },
       { name: 'Vitals' },
       { name: 'Cardiologist Consultation' },
@@ -799,8 +803,8 @@ const rawPackages: HealthPackage[] = [
     doctorConsultation: true,
     ecg: true,
     echo: true,
-    tmt: false,
-    ultrasound: false,
+
+
     xray: true,
     vitaminTests: false,
     kidneyTests: true,
@@ -809,12 +813,12 @@ const rawPackages: HealthPackage[] = [
     cbc: true,
     hba1c: false,
     lipidProfile: true,
-    addOns: [{ name: 'TMT (Treadmill Test)', price: 1600 }],
     featured: false,
     popular: true,
     seoTitle: 'Cardiac Risk Package – Heart Checkup at ₹4,399',
     seoDescription:
-      'Cardiac Risk Package at DEETYA Multispeciality Clinic: CBC, sugar, lipid profile, LDH, homocysteine, ECG, ECHO/TMT, chest X-ray & cardiologist consultation at ₹4,399 (was ₹6,090).',
+      'Cardiac Risk Package at DEETYA Multispeciality Clinic: CBC, sugar, lipid profile, LDH, homocysteine, ECG, ECHO, chest X-ray & cardiologist consultation at ₹4,399 (was ₹6,090).',
+    image: '/images/packages/cardiac-risk-package.webp',
     icon: <FaHeartbeat className="w-7 h-7" />,
     gradient: 'from-rose-500 to-rose-700',
     badgeClass: 'bg-rose-600',
@@ -874,8 +878,8 @@ const rawPackages: HealthPackage[] = [
     doctorConsultation: true,
     ecg: false,
     echo: false,
-    tmt: false,
-    ultrasound: false,
+
+
     xray: true,
     vitaminTests: false,
     kidneyTests: false,
@@ -889,6 +893,7 @@ const rawPackages: HealthPackage[] = [
     seoTitle: 'Pre-Employment Health Package at ₹1,299',
     seoDescription:
       'Pre-Employment Health Package at DEETYA Multispeciality Clinic: CBC, blood group & Rh, random sugar, HIV I & II, urine exam, chest X-ray, vitals & physician clearance at ₹1,299 (was ₹2,390).',
+    image: '/images/packages/pre-employment-health-package.webp',
     icon: <FaIdCardAlt className="w-7 h-7" />,
     gradient: 'from-teal-500 to-teal-700',
     badgeClass: 'bg-teal-600',
@@ -901,14 +906,14 @@ const rawPackages: HealthPackage[] = [
     originalPrice: 6400,
     offerPrice: 2999,
     shortDescription:
-      'Early cancer-risk screening for women — CA 15.3 & CA 125 tumour markers, Pap smear, pelvic ultrasound & mammography/sonomammography.',
+      'Early cancer-risk screening for women — CA 15.3 & CA 125 tumour markers, Pap smear & mammography/sonomammography.',
     description:
-      'The Essential Cancer Screening Package helps detect early signs of breast, cervical and ovarian cancers. It includes the tumour markers CA 15.3 and CA 125, a Pap smear, ultrasound of the abdomen and pelvis, and mammography/sonomammography — a powerful combination for women who want proactive cancer-risk screening.',
+      'The Essential Cancer Screening Package helps detect early signs of breast, cervical and ovarian cancers. It includes the tumour markers CA 15.3 and CA 125, a Pap smear and mammography/sonomammography — a powerful combination for women who want proactive cancer-risk screening.',
     testGroups: [
       { name: 'CA 15.3 (Breast Tumour Marker)' },
       { name: 'CA 125 (Ovarian Tumour Marker)' },
       { name: 'Pap Smear' },
-      { name: 'Ultrasound Abdomen & Pelvis' },
+
       { name: 'Mammography / Sonomammography' },
     ],
     preparation: [
@@ -930,8 +935,8 @@ const rawPackages: HealthPackage[] = [
     doctorConsultation: false,
     ecg: false,
     echo: false,
-    tmt: false,
-    ultrasound: true,
+
+
     xray: false,
     vitaminTests: false,
     kidneyTests: false,
@@ -944,7 +949,8 @@ const rawPackages: HealthPackage[] = [
     popular: true,
     seoTitle: 'Essential Cancer Screening Package at ₹2,999',
     seoDescription:
-      'Essential Cancer Screening Package at DEETYA Multispeciality Clinic: CA 15.3 & CA 125 tumour markers, Pap smear, pelvic ultrasound & mammography/sonomammography at ₹2,999 (was ₹6,400).',
+      'Essential Cancer Screening Package at DEETYA Multispeciality Clinic: CA 15.3 & CA 125 tumour markers, Pap smear & mammography/sonomammography at ₹2,999 (was ₹6,400).',
+    image: '/images/packages/essential-cancer-screening-package.webp',
     icon: <FaRibbon className="w-7 h-7" />,
     gradient: 'from-fuchsia-500 to-purple-700',
     badgeClass: 'bg-fuchsia-600',
@@ -1012,8 +1018,8 @@ const rawPackages: HealthPackage[] = [
     doctorConsultation: true,
     ecg: true,
     echo: true,
-    tmt: false,
-    ultrasound: false,
+
+
     xray: true,
     vitaminTests: false,
     kidneyTests: true,
@@ -1027,6 +1033,7 @@ const rawPackages: HealthPackage[] = [
     seoTitle: 'Pre-Operative Package at ₹2,899',
     seoDescription:
       'Pre-Operative Package at DEETYA Multispeciality Clinic: CBC, sugar, bleeding & clotting time, blood group, HIV, HBsAg, PT/INR, kidney profile, ECG, ECHO, X-ray & consultation at ₹2,899 (was ₹5,575).',
+    image: '/images/packages/pre-operative-package.webp',
     icon: <FaProcedures className="w-7 h-7" />,
     gradient: 'from-sky-500 to-blue-700',
     badgeClass: 'bg-sky-600',
@@ -1072,8 +1079,8 @@ const rawPackages: HealthPackage[] = [
     doctorConsultation: false,
     ecg: false,
     echo: false,
-    tmt: false,
-    ultrasound: false,
+
+
     xray: false,
     vitaminTests: false,
     kidneyTests: true,
@@ -1087,6 +1094,7 @@ const rawPackages: HealthPackage[] = [
     seoTitle: 'Basic Health Profile at ₹880',
     seoDescription:
       'Basic Health Profile at DEETYA Multispeciality Clinic: CBC, fasting sugar, cholesterol, triglycerides, creatinine, TSH, bilirubin, SGOT/SGPT & urine routine at ₹880 (was ₹1,765).',
+    image: '/images/packages/basic-health-profile.webp',
     icon: <FaClipboardCheck className="w-7 h-7" />,
     gradient: 'from-cyan-500 to-sky-600',
     badgeClass: 'bg-cyan-600',
@@ -1131,8 +1139,8 @@ const rawPackages: HealthPackage[] = [
     doctorConsultation: false,
     ecg: false,
     echo: false,
-    tmt: false,
-    ultrasound: false,
+
+
     xray: false,
     vitaminTests: false,
     kidneyTests: true,
@@ -1146,6 +1154,7 @@ const rawPackages: HealthPackage[] = [
     seoTitle: 'Standard Health Profile at ₹1,760',
     seoDescription:
       'Standard Health Profile at DEETYA Multispeciality Clinic: CBC, fasting sugar, TSH, HbA1c, lipid profile, liver function, creatinine, BUN & urine analysis at ₹1,760 (was ₹3,195).',
+    image: '/images/packages/standard-health-profile.webp',
     icon: <FaClipboardList className="w-7 h-7" />,
     gradient: 'from-blue-500 to-indigo-600',
     badgeClass: 'bg-blue-600',
@@ -1191,8 +1200,8 @@ const rawPackages: HealthPackage[] = [
     doctorConsultation: false,
     ecg: false,
     echo: false,
-    tmt: false,
-    ultrasound: false,
+
+
     xray: false,
     vitaminTests: false,
     kidneyTests: true,
@@ -1206,6 +1215,7 @@ const rawPackages: HealthPackage[] = [
     seoTitle: 'Diabetic Profile at ₹1,925',
     seoDescription:
       'Diabetic Profile at DEETYA Multispeciality Clinic: CBC, fasting/PP sugar, HbA1c, lipid profile, creatinine, BUN, electrolytes, urine analysis & microalbumin at ₹1,925 (was ₹3,090).',
+    image: '/images/packages/diabetic-profile.webp',
     icon: <FaTint className="w-7 h-7" />,
     gradient: 'from-violet-500 to-purple-600',
     badgeClass: 'bg-violet-600',
@@ -1248,8 +1258,8 @@ const rawPackages: HealthPackage[] = [
     doctorConsultation: false,
     ecg: false,
     echo: false,
-    tmt: false,
-    ultrasound: false,
+
+
     xray: false,
     vitaminTests: false,
     kidneyTests: false,
@@ -1263,6 +1273,7 @@ const rawPackages: HealthPackage[] = [
     seoTitle: 'Male Fertility Profile at ₹2,750',
     seoDescription:
       'Male Fertility Profile at DEETYA Multispeciality Clinic: semen analysis, total & free testosterone, FSH, LH & antisperm antibody at ₹2,750 (was ₹5,940).',
+    image: '/images/packages/male-fertility-profile.webp',
     icon: <FaMars className="w-7 h-7" />,
     gradient: 'from-blue-600 to-indigo-700',
     badgeClass: 'bg-blue-700',
@@ -1306,8 +1317,8 @@ const rawPackages: HealthPackage[] = [
     doctorConsultation: false,
     ecg: false,
     echo: false,
-    tmt: false,
-    ultrasound: false,
+
+
     xray: false,
     vitaminTests: false,
     kidneyTests: false,
@@ -1321,6 +1332,7 @@ const rawPackages: HealthPackage[] = [
     seoTitle: 'Female Fertility Profile at ₹3,850',
     seoDescription:
       'Female Fertility Profile at DEETYA Multispeciality Clinic: estradiol, progesterone, FSH, LH, thyroid profile, prolactin & total testosterone at ₹3,850 (was ₹6,435).',
+    image: '/images/packages/female-fertility-profile.webp',
     icon: <FaVenusDouble className="w-7 h-7" />,
     gradient: 'from-pink-500 to-rose-600',
     badgeClass: 'bg-pink-600',
@@ -1362,8 +1374,8 @@ const rawPackages: HealthPackage[] = [
     doctorConsultation: false,
     ecg: false,
     echo: false,
-    tmt: false,
-    ultrasound: false,
+
+
     xray: false,
     vitaminTests: false,
     kidneyTests: false,
@@ -1378,6 +1390,7 @@ const rawPackages: HealthPackage[] = [
     seoTitle: 'PCOD Profile at ₹2,500',
     seoDescription:
       'PCOD Profile at DEETYA Multispeciality Clinic: TSH, random sugar, fasting insulin, FSH, LH & prolactin at ₹2,500 (was ₹3,155).',
+    image: '/images/packages/pcod-profile.webp',
     icon: <FaVenusMars className="w-7 h-7" />,
     gradient: 'from-rose-400 to-pink-600',
     badgeClass: 'bg-rose-500',
@@ -1425,8 +1438,8 @@ const rawPackages: HealthPackage[] = [
     doctorConsultation: false,
     ecg: false,
     echo: false,
-    tmt: false,
-    ultrasound: false,
+
+
     xray: false,
     vitaminTests: false,
     kidneyTests: true,
@@ -1441,6 +1454,7 @@ const rawPackages: HealthPackage[] = [
     seoTitle: 'Kidney Profile at ₹1,650',
     seoDescription:
       'Kidney Profile at DEETYA Multispeciality Clinic: CBC, random sugar, urea, creatinine, EGFR, electrolytes, uric acid, phosphorus, calcium & urine microalbumin at ₹1,650 (was ₹2,860).',
+    image: '/images/packages/kidney-profile.webp',
     icon: <FaFillDrip className="w-7 h-7" />,
     gradient: 'from-amber-500 to-orange-600',
     badgeClass: 'bg-amber-600',
@@ -1485,8 +1499,8 @@ const rawPackages: HealthPackage[] = [
     doctorConsultation: false,
     ecg: false,
     echo: false,
-    tmt: false,
-    ultrasound: false,
+
+
     xray: false,
     vitaminTests: false,
     kidneyTests: true,
@@ -1500,6 +1514,7 @@ const rawPackages: HealthPackage[] = [
     seoTitle: 'Hypertension Profile at ₹1,540',
     seoDescription:
       'Hypertension Profile at DEETYA Multispeciality Clinic: fasting/PP sugar, lipid profile, urea, creatinine, uric acid, electrolytes, CBC & urine analysis at ₹1,540 (was ₹2,040).',
+    image: '/images/packages/hypertension-profile.webp',
     icon: <FaTachometerAlt className="w-7 h-7" />,
     gradient: 'from-red-500 to-rose-600',
     badgeClass: 'bg-red-600',
@@ -1539,8 +1554,8 @@ const rawPackages: HealthPackage[] = [
     doctorConsultation: false,
     ecg: false,
     echo: false,
-    tmt: false,
-    ultrasound: false,
+
+
     xray: false,
     vitaminTests: false,
     kidneyTests: false,
@@ -1555,6 +1570,7 @@ const rawPackages: HealthPackage[] = [
     seoTitle: 'Coagulation Screening Profile at ₹1,000',
     seoDescription:
       'Coagulation Screening Profile at DEETYA Multispeciality Clinic: prothrombin time, aPTT, bleeding & clotting time & platelet count at ₹1,000 (was ₹1,345).',
+    image: '/images/packages/coagulation-screening-profile.webp',
     icon: <FaVial className="w-7 h-7" />,
     gradient: 'from-cyan-600 to-teal-600',
     badgeClass: 'bg-cyan-700',
@@ -1594,8 +1610,8 @@ const rawPackages: HealthPackage[] = [
     doctorConsultation: false,
     ecg: false,
     echo: false,
-    tmt: false,
-    ultrasound: false,
+
+
     xray: false,
     vitaminTests: true,
     kidneyTests: false,
@@ -1610,6 +1626,7 @@ const rawPackages: HealthPackage[] = [
     seoTitle: 'Anemia Profile at ₹2,750',
     seoDescription:
       'Anemia Profile at DEETYA Multispeciality Clinic: complete haemogram, iron profile, folic acid & vitamin B12 at ₹2,750 (was ₹3,890).',
+    image: '/images/packages/anemia-profile.webp',
     icon: <FaPills className="w-7 h-7" />,
     gradient: 'from-red-400 to-rose-500',
     badgeClass: 'bg-red-500',
@@ -1651,8 +1668,8 @@ const rawPackages: HealthPackage[] = [
     doctorConsultation: false,
     ecg: false,
     echo: false,
-    tmt: false,
-    ultrasound: false,
+
+
     xray: false,
     vitaminTests: false,
     kidneyTests: false,
@@ -1667,6 +1684,7 @@ const rawPackages: HealthPackage[] = [
     seoTitle: 'Rheumatoid Arthritis Profile at ₹3,630',
     seoDescription:
       'Rheumatoid Arthritis Profile at DEETYA Multispeciality Clinic: CBC with ESR, ASLO, RA factor, CRP, anti-CCP & ANA at ₹3,630 (was ₹5,790).',
+    image: '/images/packages/rheumatoid-arthritis-profile.webp',
     icon: <FaBone className="w-7 h-7" />,
     gradient: 'from-purple-500 to-violet-600',
     badgeClass: 'bg-purple-600',

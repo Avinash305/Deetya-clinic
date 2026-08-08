@@ -1,18 +1,13 @@
 import { useState, useEffect } from 'react';
+import { useScrollProgress } from '../../hooks/useScrollProgress';
 
 export default function ScrollProgressBar() {
-  const [progress, setProgress] = useState(0);
+  const progress = useScrollProgress();
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-      setProgress(Math.min(scrollPercent, 100));
-      setIsVisible(scrollTop > 100);
-    };
-
+    const handleScroll = () => setIsVisible(window.scrollY > 100);
+    handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);

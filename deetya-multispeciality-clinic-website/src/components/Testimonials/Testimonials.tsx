@@ -3,6 +3,7 @@ import { FiChevronLeft, FiChevronRight, FiStar } from 'react-icons/fi';
 import { FaQuoteLeft, FaStar } from 'react-icons/fa';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { testimonialsData } from '../../data/testimonialsData';
+import SectionHeader from '../ui/SectionHeader';
 
 interface TestimonialsProps {
   limit?: number;
@@ -144,17 +145,13 @@ export default function Testimonials({ limit }: TestimonialsProps) {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className={`text-center max-w-2xl mx-auto mb-14 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary-50 border border-primary-200 rounded-full mb-4">
-            <span className="w-2 h-2 bg-primary-500 rounded-full" />
-            <span className="text-xs sm:text-sm font-semibold text-primary-700">Testimonials</span>
-          </div>
-          <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-950 mb-4">
-            What Our Patients{' '}
-            <span className="bg-gradient-to-r from-primary-600 to-accent-500 bg-clip-text text-transparent">Say</span>
-          </h2>
-          <p className="text-gray-600 text-sm xs:text-base sm:text-lg">Real stories from real patients who have experienced the DEETYA difference.</p>
-        </div>
+        <SectionHeader
+          badge="Testimonials"
+          title="What Our Patients "
+          gradient="Say"
+          subtitle="Real stories from real patients who have experienced the DEETYA difference."
+          className={`mb-14 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}
+        />
 
         {/* Carousel */}
         <div className={`${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>

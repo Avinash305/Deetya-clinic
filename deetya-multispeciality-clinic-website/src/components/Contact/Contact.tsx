@@ -2,8 +2,10 @@ import { useState } from 'react';
 import { FiMapPin, FiPhone, FiMail, FiUser, FiMessageSquare } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
-import { contactInfoData, clinicInfo } from '../../data/siteData';
+import { contactInfoData } from '../../data/siteData';
 import { servicesData } from '../../data/servicesData';
+import { mapsHref, whatsappHref } from '../../utils/links';
+import FormField from '../ui/FormField';
 
 export default function Contact() {
   const { ref, isVisible } = useScrollAnimation();
@@ -16,8 +18,7 @@ export default function Contact() {
   const handleWhatsAppSend = (e: React.FormEvent) => {
     e.preventDefault();
     const text = `Hello DEETYA Clinic! 👋\n\n📋 *Appointment Request*\n\n👤 *Name:* ${formData.name}\n📞 *Phone:* ${formData.phone}\n📧 *Email:* ${formData.email}\n🏥 *Department:* ${formData.department}\n💬 *Message:* ${formData.message}`;
-    const encoded = encodeURIComponent(text);
-    window.open(`https://wa.me/${clinicInfo.whatsappNumber}?text=${encoded}`, '_blank');
+    window.open(whatsappHref(text), '_blank');
   };
 
   return (
@@ -35,24 +36,30 @@ export default function Contact() {
               ))}
             </div>
             {/* Map + location QR */}
-            <div className="rounded-lg xs:rounded-xl sm:rounded-2xl overflow-hidden shadow-lg border border-gray-100 bg-gradient-to-br from-primary-50 to-accent-50 flex flex-col sm:flex-row items-stretch relative">
-              <div className="absolute inset-0 opacity-[0.08] pointer-events-none">
-                <div className="w-full h-full" style={{ backgroundImage: 'radial-gradient(circle, rgba(20,39,87,0.1) 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
-              </div>
-              {/* address */}
-              <div className="flex-1 flex items-center justify-center text-center px-3 py-5 sm:py-6 relative z-10 min-w-0">
-                <div>
-                  <div className="w-10 xs:w-12 h-10 xs:h-12 mx-auto mb-2 xs:mb-3 bg-gradient-to-br from-primary-500 to-primary-700 rounded-full flex items-center justify-center animate-bounce">
-                    <FiMapPin className="w-5 xs:w-6 h-5 xs:h-6 text-white" />
-                  </div>
-                  <p className="font-bold text-primary-900 text-[11px] xs:text-xs sm:text-sm px-2">{clinicInfo.shortAddress}</p>
-                  <a href={clinicInfo.mapsUrl} target="_blank" rel="noopener noreferrer" className="text-[11px] xs:text-xs text-primary-600 hover:text-primary-700 font-medium mt-1 inline-block">Open in Google Maps →</a>
-                </div>
-              </div>
+            <div className="relative rounded-lg xs:rounded-xl sm:rounded-2xl overflow-hidden shadow-lg border border-gray-100">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3889.6040318221335!2d77.55916757454507!3d12.868832317124165!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae41af60d85895%3A0x5ff086dda4e75561!2sDeetya%20multi-speciality%20clinic%20and%20diagnostics!5e0!3m2!1sen!2sin!4v1786190969048!5m2!1sen!2sin"
+                title="DEETYA Multispeciality Clinic location on Google Maps"
+                className="w-full h-[260px] xs:h-[300px] sm:h-[340px] block"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="strict-origin-when-cross-origin"
+              />
+              {/* Open in Google Maps overlay */}
+              <a
+                href={mapsHref()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute left-3 bottom-3 z-10 inline-flex items-center gap-1.5 px-3 py-2 bg-white/95 backdrop-blur-sm rounded-lg shadow-lg ring-1 ring-gray-100 text-primary-700 font-semibold text-[10px] xs:text-xs hover:bg-white hover:shadow-xl transition-all"
+              >
+                <FiMapPin className="w-3.5 h-3.5" />
+                Open in Google Maps →
+              </a>
               {/* location QR code */}
-              <div className="relative z-10 flex items-center justify-center px-4 pb-4 sm:pb-0 sm:pr-4 sm:py-3">
+              <div className="absolute right-3 bottom-3 z-10">
                 <a
-                  href={clinicInfo.mapsUrl}
+                  href={mapsHref()}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group bg-white rounded-xl xs:rounded-2xl shadow-lg ring-1 ring-gray-100 p-1.5 xs:p-2 flex flex-col items-center gap-1 hover:shadow-xl hover:-translate-y-0.5 transition-all"
@@ -61,10 +68,10 @@ export default function Contact() {
                   <img
                     src="/images/location.webp"
                     alt="QR code — scan to open DEETYA Clinic location in Google Maps"
-                    className="w-20 xs:w-24 sm:w-28 h-auto rounded-md"
+                    className="w-14 xs:w-16 sm:w-20 h-auto rounded-md"
                     loading="lazy"
                   />
-                  <span className="text-[8px] xs:text-[9px] text-gray-400 font-bold uppercase tracking-wider">Scan to navigate</span>
+                  <span className="text-[7px] xs:text-[8px] text-gray-400 font-bold uppercase tracking-wider">Scan to navigate</span>
                 </a>
               </div>
             </div>
@@ -85,42 +92,62 @@ export default function Contact() {
 
             <form onSubmit={handleWhatsAppSend} className="space-y-3 xs:space-y-4">
               <div className="grid grid-cols-1 xs:grid-cols-2 gap-3 xs:gap-4">
-                <div>
-                  <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 xs:mb-1.5">Full Name</label>
-                  <div className="relative">
-                    <FiUser className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 xs:w-4 xs:h-4 text-gray-400" />
-                    <input type="text" name="name" required value={formData.name} onChange={handleChange} placeholder="Your name" className="w-full pl-9 xs:pl-10 pr-3 xs:pr-4 py-2.5 xs:py-3 border border-gray-200 rounded-lg xs:rounded-xl text-xs xs:text-sm focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-400 transition-all" />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 xs:mb-1.5">Phone</label>
-                  <div className="relative">
-                    <FiPhone className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 xs:w-4 xs:h-4 text-gray-400" />
-                    <input type="tel" name="phone" required value={formData.phone} onChange={handleChange} placeholder="+91 XXXXX XXXXX" className="w-full pl-9 xs:pl-10 pr-3 xs:pr-4 py-2.5 xs:py-3 border border-gray-200 rounded-lg xs:rounded-xl text-xs xs:text-sm focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-400 transition-all" />
-                  </div>
-                </div>
+                <FormField
+                  variant="green"
+                  label="Full Name"
+                  name="name"
+                  required
+                  value={formData.name}
+                  onChange={handleChange}
+                  placeholder="Your name"
+                  icon={<FiUser className="w-3.5 h-3.5 xs:w-4 xs:h-4" />}
+                />
+                <FormField
+                  variant="green"
+                  type="tel"
+                  label="Phone"
+                  name="phone"
+                  required
+                  value={formData.phone}
+                  onChange={handleChange}
+                  placeholder="+91 XXXXX XXXXX"
+                  icon={<FiPhone className="w-3.5 h-3.5 xs:w-4 xs:h-4" />}
+                />
               </div>
-              <div>
-                <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 xs:mb-1.5">Email</label>
-                <div className="relative">
-                  <FiMail className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 xs:w-4 xs:h-4 text-gray-400" />
-                  <input type="email" name="email" required value={formData.email} onChange={handleChange} placeholder="your@email.com" className="w-full pl-9 xs:pl-10 pr-3 xs:pr-4 py-2.5 xs:py-3 border border-gray-200 rounded-lg xs:rounded-xl text-xs xs:text-sm focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-400 transition-all" />
-                </div>
-              </div>
-              <div>
-                <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 xs:mb-1.5">Department</label>
-                <select name="department" required value={formData.department} onChange={handleChange} className="w-full px-3 xs:px-4 py-2.5 xs:py-3 border border-gray-200 rounded-lg xs:rounded-xl text-xs xs:text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-400 transition-all bg-white">
-                  <option value="">Select Department</option>
-                  {servicesData.map((s, i) => (<option key={i}>{s.title}</option>))}
-                </select>
-              </div>
-              <div>
-                <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 xs:mb-1.5">Message</label>
-                <div className="relative">
-                  <FiMessageSquare className="absolute left-3 top-3.5 xs:left-3.5 xs:top-3.5 w-3.5 h-3.5 xs:w-4 xs:h-4 text-gray-400" />
-                  <textarea name="message" rows={3} required value={formData.message} onChange={handleChange} placeholder="Describe your concern or preferred date/time..." className="w-full pl-9 xs:pl-10 pr-3 xs:pr-4 py-2.5 xs:py-3 border border-gray-200 rounded-lg xs:rounded-xl text-xs xs:text-sm focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-400 transition-all resize-none" />
-                </div>
-              </div>
+              <FormField
+                variant="green"
+                type="email"
+                label="Email"
+                name="email"
+                required
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="your@email.com"
+                icon={<FiMail className="w-3.5 h-3.5 xs:w-4 xs:h-4" />}
+              />
+              <FormField
+                variant="green"
+                type="select"
+                label="Department"
+                name="department"
+                required
+                value={formData.department}
+                onChange={handleChange}
+                options={[{ value: '', label: 'Select Department' }, ...servicesData.map((s) => ({ value: s.title, label: s.title }))]}
+              />
+              <FormField
+                variant="green"
+                type="textarea"
+                label="Message"
+                name="message"
+                required
+                rows={3}
+                value={formData.message}
+                onChange={handleChange}
+                placeholder="Describe your concern or preferred date/time..."
+                inputClassName="resize-none"
+                icon={<FiMessageSquare className="w-3.5 h-3.5 xs:w-4 xs:h-4" />}
+              />
 
               <button type="submit" className="group w-full flex items-center justify-center gap-2 xs:gap-3 px-4 xs:px-6 py-3 xs:py-4 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg xs:rounded-xl shadow-lg shadow-green-500/25 hover:shadow-green-500/40 hover:-translate-y-0.5 transition-all text-xs xs:text-sm">
                 <FaWhatsapp className="w-4 h-4 xs:w-5 xs:h-5 shrink-0" />

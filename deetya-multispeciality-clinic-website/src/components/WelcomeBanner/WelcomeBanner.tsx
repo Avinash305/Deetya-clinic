@@ -2,6 +2,7 @@ import { FiPhone, FiMapPin, FiClock } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { clinicInfo } from '../../data/siteData';
+import { mapsHref, telHref } from '../../utils/links';
 
 export default function WelcomeBanner() {
   const { ref, isVisible } = useScrollAnimation();
@@ -14,7 +15,7 @@ export default function WelcomeBanner() {
       <div className={`relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
         <div className="grid xs:grid-cols-2 lg:grid-cols-4 gap-3 xs:gap-4 lg:gap-4">
           {/* Phone */}
-          <a href={`tel:${clinicInfo.phone.replace(/\s/g, '')}`} className="group flex items-center gap-3 xs:gap-4 p-3 xs:p-4 rounded-xl xs:rounded-2xl bg-white/8 border border-white/10 hover:bg-white/15 transition-all">
+          <a href={telHref()} className="group flex items-center gap-3 xs:gap-4 p-3 xs:p-4 rounded-xl xs:rounded-2xl bg-white/8 border border-white/10 hover:bg-white/15 transition-all">
             <div className="w-10 h-10 xs:w-12 xs:h-12 bg-white/15 rounded-lg xs:rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
               <FiPhone className="w-4 h-4 xs:w-5 xs:h-5" />
             </div>
@@ -36,15 +37,20 @@ export default function WelcomeBanner() {
           </a>
 
           {/* Location */}
-          <div className="flex items-center gap-3 xs:gap-4 p-3 xs:p-4 rounded-xl xs:rounded-2xl bg-white/8 border border-white/10">
-            <div className="w-10 h-10 xs:w-12 xs:h-12 bg-white/15 rounded-lg xs:rounded-xl flex items-center justify-center shrink-0">
+          <a
+            href={mapsHref()}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center gap-3 xs:gap-4 p-3 xs:p-4 rounded-xl xs:rounded-2xl bg-white/8 border border-white/10 hover:bg-white/15 transition-all"
+          >
+            <div className="w-10 h-10 xs:w-12 xs:h-12 bg-white/15 rounded-lg xs:rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
               <FiMapPin className="w-4 h-4 xs:w-5 xs:h-5" />
             </div>
             <div className="min-w-0">
               <p className="text-[10px] xs:text-xs text-white/50 font-medium mb-0.5">Visit Us</p>
-              <p className="font-bold text-xs xs:text-sm truncate">{clinicInfo.shortAddress}</p>
+              <p className="font-bold text-xs xs:text-sm truncate group-hover:text-accent-200 transition-colors">{clinicInfo.shortAddress}</p>
             </div>
-          </div>
+          </a>
 
           {/* Hours */}
           <div className="flex items-center gap-3 xs:gap-4 p-3 xs:p-4 rounded-xl xs:rounded-2xl bg-white/8 border border-white/10">
@@ -53,7 +59,8 @@ export default function WelcomeBanner() {
             </div>
             <div className="min-w-0">
               <p className="text-[10px] xs:text-xs text-white/50 font-medium mb-0.5">Working Hours</p>
-              <p className="font-bold text-xs xs:text-sm">Mon-Sat 7AM-11PM</p>
+              <p className="font-bold text-xs xs:text-sm truncate">Mon-Sat 7AM-11PM</p>
+              <p className="font-bold text-xs xs:text-sm text-accent-300 truncate">Sun 7:30AM-1:30PM</p>
             </div>
           </div>
         </div>

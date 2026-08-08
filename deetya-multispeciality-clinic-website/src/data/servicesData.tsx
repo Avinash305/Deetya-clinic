@@ -106,11 +106,11 @@ export const servicesData: ServiceDetail[] = [
     longDesc: 'Our In-Patient Department (IPD) at DEETYA Multispeciality Clinic offers comfortable and hygienic facilities for patients who require observation, treatment, or recovery under medical supervision. We provide private and shared rooms with attentive nursing care.\n\nOur IPD is equipped for patients needing short-term hospitalization for conditions requiring IV fluids, post-procedure observation, or recovery from acute illness. The facility maintains strict cleanliness and infection control standards. Our nursing staff and on-call doctors ensure patients receive continuous monitoring and timely medical attention throughout their stay.',
     highlights: ['Comfortable patient rooms', '24/7 nursing care', 'IV fluid & injection administration', 'Post-procedure monitoring', 'Clean & hygienic environment', 'On-call doctor availability'],
     detailImages: [
-      '/images/ipd-1.webp',
+      '/images/PD-(In-Patient-Department).webp',
       '/images/ipd-2.webp',
     ],
     gradient: 'from-teal-500 to-teal-700',
-    image: '/images/ipd-1.webp',
+    image: '/images/PD-(In-Patient-Department).webp',
   },
   {
     icon: <FaCapsules />,
@@ -120,10 +120,10 @@ export const servicesData: ServiceDetail[] = [
     longDesc: 'Our in-house Pharmacy at DEETYA Multispeciality Clinic ensures patients get genuine, quality-assured medicines at fair prices without having to visit an external chemist. Having a pharmacy within the clinic saves patients time and ensures they receive exactly the medications prescribed by our doctors.\n\nWe stock a comprehensive range of prescription medications, over-the-counter drugs, health supplements, and first-aid supplies. Our pharmacists provide medication counseling, helping patients understand dosage, timing, and potential side effects of their prescriptions.',
     highlights: ['Genuine quality-assured medicines', 'Prescription & OTC medications', 'Health supplements', 'First-aid supplies', 'Medication counseling', 'Convenient in-house access'],
     detailImages: [
-      '/images/pharmacy-1.webp',
-      '/images/laboratory-1.webp',
+      '/images/pharmacy.webp',
+      '/images/pharmacy-2.webp',
     ],
     gradient: 'from-emerald-500 to-emerald-700',
-    image: '/images/pharmacy-1.webp',
+    image: '/images/pharmacy.webp',
   },
 ];

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { FiPlus } from 'react-icons/fi';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { faqData } from '../../data/siteData';
+import SectionHeader from '../ui/SectionHeader';
 
 function AccordionItem({ faq, index }: { faq: typeof faqData[0]; index: number }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -51,13 +52,15 @@ export default function FAQ() {
   return (
     <section ref={ref} className="py-20 lg:py-28 bg-white">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={`text-center mb-16 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-warm-50 border border-warm-200 rounded-full mb-4">
-            <span className="w-2 h-2 bg-warm-500 rounded-full" /><span className="text-xs sm:text-sm font-semibold text-warm-700">FAQ</span>
-          </div>
-          <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-950 mb-4">Frequently Asked{' '}<span className="bg-gradient-to-r from-primary-600 to-accent-500 bg-clip-text text-transparent">Questions</span></h2>
-          <p className="text-gray-600 text-sm xs:text-base sm:text-lg max-w-xl mx-auto">Find answers to common questions about our services, appointments, and facilities.</p>
-        </div>
+        <SectionHeader
+          badge="FAQ"
+          badgeTone="warm"
+          title="Frequently Asked "
+          gradient="Questions"
+          subtitle="Find answers to common questions about our services, appointments, and facilities."
+          subtitleClassName="text-gray-600 text-sm xs:text-base sm:text-lg max-w-xl mx-auto"
+          className={`mb-16 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}
+        />
         <div className="space-y-3">
           {faqData.map((faq, i) => (<AccordionItem key={i} faq={faq} index={i} />))}
         </div>

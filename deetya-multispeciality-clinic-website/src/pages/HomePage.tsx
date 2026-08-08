@@ -17,6 +17,7 @@ const Services = lazy(() => import('../components/Services/Services'));
 const WhyChoosePackages = lazy(() => import('../components/WhyChoosePackages/WhyChoosePackages'));
 const HealthPackages = lazy(() => import('../components/HealthPackages/HealthPackages'));
 const WhyChooseUs = lazy(() => import('../components/WhyChooseUs/WhyChooseUs'));
+const DentalCare = lazy(() => import('../components/DentalCare/DentalCare'));
 const Doctors = lazy(() => import('../components/Doctors/Doctors'));
 const Facilities = lazy(() => import('../components/Facilities/Facilities'));
 const AppointmentSection = lazy(() => import('../components/Appointment/Appointment'));
@@ -31,7 +32,7 @@ export default function HomePage() {
       <SEO
         title={clinicInfo.fullName}
         description="DEETYA Multispeciality Clinic - Premium healthcare since 2026 with expert doctors (General Physician, Gynecologist, Orthopedic, Pediatrics, ENT), in-house Laboratory, IPD, OPD & Pharmacy. Located in JP Nagar 9th Phase, Bangalore."
-        canonical="https://deetyaclinic.com/"
+        canonical="https://deetyahealthcare.com/"
         keywords="multispeciality clinic JP Nagar, best clinic Bangalore, general physician JP Nagar, gynecologist JP Nagar, orthopedic JP Nagar"
       />
       {/* Scroll Progress Indicator — shows reading progress at top */}
@@ -74,6 +75,11 @@ export default function HomePage() {
       {/* 7 — Why Choose Us */}
       <LazyLoad>
         <WhyChooseUs />
+      </LazyLoad>
+
+      {/* 7.5 — DEETYA Dental Care (Coming Soon) */}
+      <LazyLoad>
+        <DentalCare />
       </LazyLoad>
 
       {/* 8 — Our Doctors preview */}

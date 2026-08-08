@@ -15,10 +15,10 @@ export const clinicInfo = {
   phone: '+91 80504 54140',
   phoneAlt: '+91 82964 12626',
   emergency: '+91 80504 54140 / +91 82964 12626',
-  email: 'deetya.clinic@gmail.com',
-  emailAlt: 'deetya.clinic@gmail.com',
-  address: 'Navya Disha #22 & #23, 60 Feet Main Road, Avalahali - BDA Layout Road',
-  city: 'Srinivas Reddy Layout, Avalahali, Anjanapura Post, JP Nagar 9th Phase, Bangalore-560108',
+  email: 'deetyamultispecialityclinic26@gmail.com',
+  emailAlt: 'deetyamultispecialityclinic26@gmail.com',
+  address: '#23 60 Feet Main Road, Avalahali - BDA Layout Road, Srinivas Reddy Layout',
+  city: 'Avalahalli, Anjanapura Post, JP Nagar 9th Phase, Bangalore - 560108',
   shortAddress: 'JP Nagar 9th Phase, Bangalore',
   whatsappNumber: '918050454140',
   whatsappDefault: 'Hi DEETYA Clinic! I would like to book an appointment. Please share available slots.',
@@ -28,7 +28,10 @@ export const clinicInfo = {
     emergency: '24/7 Available',
   },
   established: 2026,
-  mapsUrl: 'https://www.google.com/maps/place/JP+Nagar+9th+Phase,+Bangalore',
+  // Google Maps pin for "Deetya multi-speciality clinic and diagnostics"
+  lat: 12.8688323,
+  lng: 77.5591676,
+  googlePlaceId: '0x3bae41af60d85895:0x5ff086dda4e75561',
 };
 
 // ─────────────────────────────────────────
@@ -79,6 +82,7 @@ export const heroSlides = [
   {
     image: '/images/hero-slide-1.webp',
     width: 1584,
+    fullImage: false,
     badge: 'In-House Pharmacy & Lab',
     heading: 'Complete',
     headingGradient: 'Healthcare',
@@ -89,6 +93,7 @@ export const heroSlides = [
   {
     image: '/images/hero-slide-2.webp',
     width: 1408,
+    fullImage: false,
     badge: '5+ Expert Specialists',
     heading: 'Trusted',
     headingGradient: 'Medical',
@@ -99,12 +104,24 @@ export const heroSlides = [
   {
     image: '/images/hero-slide-3.webp',
     width: 1408,
+    fullImage: false,
     badge: 'Located in JP Nagar 9th Phase',
     heading: 'Your',
     headingGradient: 'Family',
     headingSuffix: 'Health Partner',
     description: 'Providing compassionate, personalized healthcare in Avalahali, JP Nagar 9th Phase, Bangalore. We are committed to your well-being with quality medical services.',
     pills: ['Affordable Care', 'Experienced Doctors', 'Patient-First Approach'],
+  },
+  {
+    image: '/images/hero-slide-4.webp',
+    width: 1600,
+    fullImage: true,
+    badge: 'DEETYA Dental Care',
+    heading: 'Dental Care',
+    headingGradient: 'Opening Soon',
+    headingSuffix: '',
+    description: '',
+    pills: [],
   },
 ];
 
@@ -199,7 +216,7 @@ export const facilitiesData = [
 export const faqData = [
   { q: "What are the clinic's working hours?", a: 'We are open Monday to Saturday from 7:00 AM to 11:00 PM, and Sundays from 7:30 AM to 1:30 PM. Please call to confirm doctor availability for specific specialties.' },
   { q: 'Do you accept health insurance?', a: 'Yes, we accept all major health insurance providers and offer cashless claim processing. Please bring your insurance card during your visit for verification.' },
-  { q: 'How can I book an appointment?', a: 'You can book an appointment by calling us at +91 80504 54140 / +91 82964 12626, sending a WhatsApp message, or visiting our clinic directly at Navya Disha, 60 Feet Main Road, Avalahali. Walk-in consultations are also welcome.' },
+  { q: 'How can I book an appointment?', a: 'You can book an appointment by calling us at +91 80504 54140 / +91 82964 12626, sending a WhatsApp message, or visiting our clinic directly at #23 60 Feet Main Road, Avalahali - BDA Layout Road, Srinivas Reddy Layout, Avalahalli, Anjanapura Post, JP Nagar 9th Phase, Bangalore - 560108. Walk-in consultations are also welcome.' },
   { q: 'What specialties are available at DEETYA Clinic?', a: 'We have specialists in General Medicine (Dr. Deepak L), Gynecology (Dr. Uthra R), Orthopedics (Dr. Karthik M S), Pediatrics (Dr. Manvanthar M), and ENT (Dr. Shweta Gadge). We also have in-house Laboratory, IPD, OPD, and Pharmacy facilities.' },
   { q: 'Is parking available at the clinic?', a: 'Yes, parking is available for patients and visitors. The clinic is located on the 60 Feet Main Road in Avalahali, making it easily accessible.' },
   { q: 'What laboratory tests are available?', a: 'Our in-house laboratory offers a wide range of tests including CBC, blood sugar, lipid profile, liver & kidney function tests, thyroid profile, urine analysis, and more. Reports are available quickly.' },
@@ -235,9 +252,9 @@ export const whyChoosePackagesData = [
 // CONTACT INFO
 // ─────────────────────────────────────────
 export const contactInfoData = [
-  { icon: <FiMapPin className="w-5 h-5" />, title: 'Our Address', lines: ['DEETYA Multispeciality Clinic', 'Navya Disha #22 & #23, 60 Feet Main Road', 'Avalahali - BDA Layout Road, Srinivas Reddy Layout', 'JP Nagar 9th Phase, Bangalore-560108'], color: 'from-primary-500 to-primary-700' },
+  { icon: <FiMapPin className="w-5 h-5" />, title: 'Our Address', lines: ['DEETYA Multispeciality Clinic', '#23 60 Feet Main Road', 'Avalahali - BDA Layout Road, Srinivas Reddy Layout', 'Avalahalli, Anjanapura Post', 'JP Nagar 9th Phase, Bangalore - 560108'], color: 'from-primary-500 to-primary-700' },
   { icon: <FiPhone className="w-5 h-5" />, title: 'Phone Number', lines: ['+91 80504 54140', '+91 82964 12626', 'Dr. Harshitha: +91 99865 66909', 'Dr. Uthra: +91 94884 74175'], color: 'from-accent-500 to-accent-700' },
-  { icon: <FiMail className="w-5 h-5" />, title: 'Email Address', lines: ['deetya.clinic@gmail.com'], color: 'from-warm-500 to-warm-700' },
+  { icon: <FiMail className="w-5 h-5" />, title: 'Email Address', lines: ['deetyamultispecialityclinic26@gmail.com'], color: 'from-warm-500 to-warm-700' },
   { icon: <FiClock className="w-5 h-5" />, title: 'Working Hours', lines: ['Mon – Sat: 7:00 AM – 11:00 PM', 'Sunday: 7:30 AM – 1:30 PM'], color: 'from-purple-500 to-purple-700' },
 ];
 

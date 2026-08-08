@@ -1,16 +1,12 @@
-import { clinicInfo } from '../../data/siteData';
 import type { HealthPackageEntry } from '../../data/healthPackagesData';
+
+// Shared link builders live in src/utils/links.ts — re-exported here so
+// existing call sites (PackageDetailPage) keep working unchanged.
+export { telHref, whatsappHref } from '../../utils/links';
 
 /** Format a rupee amount in Indian digit grouping, e.g. ₹1,29,999 */
 export const formatINR = (amount: number): string =>
   `₹${amount.toLocaleString('en-IN')}`;
-
-/** tel: link for the clinic's main line */
-export const telHref = (): string => `tel:${clinicInfo.phone.replace(/\s/g, '')}`;
-
-/** WhatsApp deep link with a pre-filled message */
-export const whatsappHref = (message: string): string =>
-  `https://wa.me/${clinicInfo.whatsappNumber}?text=${encodeURIComponent(message)}`;
 
 /** Pre-filled WhatsApp message for a specific package */
 export const packageWhatsAppMessage = (pkg: HealthPackageEntry): string =>

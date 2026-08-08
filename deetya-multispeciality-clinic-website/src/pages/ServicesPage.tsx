@@ -10,7 +10,7 @@ export default function ServicesPage() {
       <SEO
         title="Our Services"
         description="Comprehensive medical services at DEETYA Multispeciality Clinic: General Medicine, Gynecology, Orthopedics, Pediatrics, ENT, Laboratory, IPD, and Pharmacy. Expert care in JP Nagar, Bangalore."
-        canonical="https://deetyaclinic.com/#/services"
+        canonical="https://deetyahealthcare.com/#/services"
       />
       <PageBanner
         title="Our Services"

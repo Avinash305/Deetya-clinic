@@ -10,8 +10,8 @@ export default function ContactPage() {
     <>
       <SEO
         title="Contact Us"
-        description="Get in touch with DEETYA Multispeciality Clinic in JP Nagar, Bangalore. Call +91 80504 54140, email deetya.clinic@gmail.com, or visit Navya Disha, 60 Feet Main Road, Avalahalli."
-        canonical="https://deetyaclinic.com/#/contact"
+        description="Get in touch with DEETYA Multispeciality Clinic in JP Nagar, Bangalore. Call +91 80504 54140, email deetyamultispecialityclinic26@gmail.com, or visit #23 60 Feet Main Road, Avalahali - BDA Layout Road, Srinivas Reddy Layout, Avalahalli, Anjanapura Post, JP Nagar 9th Phase, Bangalore - 560108."
+        canonical="https://deetyahealthcare.com/#/contact"
       />
       <PageBanner
         title="Contact Us"

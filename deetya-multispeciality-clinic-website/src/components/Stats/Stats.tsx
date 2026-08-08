@@ -1,6 +1,7 @@
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { useCountUp } from '../../hooks/useCountUp';
 import { statsData } from '../../data/siteData';
+import SectionBackground from '../ui/SectionBackground';
 
 function StatCard({ stat, isVisible, index }: { stat: typeof statsData[0]; isVisible: boolean; index: number }) {
   const count = useCountUp(stat.value, 2500, isVisible);
@@ -57,17 +58,14 @@ export default function Stats() {
 
   return (
     <section ref={ref} className="py-8 xs:py-10 lg:py-14 bg-gradient-to-b from-white to-primary-50/30 relative overflow-hidden">
-      {/* Background decorations */}
-      <div className="absolute top-0 right-0 w-72 h-72 bg-primary-100/30 rounded-full blur-3xl -translate-y-1/3 translate-x-1/4 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-72 h-72 bg-accent-100/20 rounded-full blur-3xl translate-y-1/3 -translate-x-1/4 pointer-events-none" />
-
-      {/* Subtle pattern overlay */}
-      <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
-        <div
-          className="w-full h-full"
-          style={{ backgroundImage: 'radial-gradient(circle, rgba(20,39,87,1) 1px, transparent 1px)', backgroundSize: '32px 32px' }}
-        />
-      </div>
+      {/* Background decorations + dot grid */}
+      <SectionBackground
+        blobs={[
+          'top-0 right-0 w-72 h-72 bg-primary-100/30 -translate-y-1/3 translate-x-1/4 blur-3xl',
+          'bottom-0 left-0 w-72 h-72 bg-accent-100/20 translate-y-1/3 -translate-x-1/4 blur-3xl',
+        ]}
+        dotGrid={{ color: 'rgba(20,39,87,1)', size: 32, opacity: 0.02 }}
+      />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`relative ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>

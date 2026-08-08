@@ -1,8 +1,11 @@
-import { Link } from 'react-router-dom';
 import { FiArrowRight, FiCheckCircle, FiHeart, FiCalendar } from 'react-icons/fi';
 import { FaTruck, FaFlask, FaStar } from 'react-icons/fa';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { whyChoosePackagesData } from '../../data/siteData';
+import Button from '../ui/Button';
+import FeatureBadge from '../ui/FeatureBadge';
+import FloatingBadge from '../ui/FloatingBadge';
+import SectionBackground from '../ui/SectionBackground';
 
 const checklist = [
   { text: 'NABL-accredited in-house laboratory', icon: <FaFlask className="w-3.5 h-3.5" /> },
@@ -19,10 +22,12 @@ export default function WhyChoosePackages() {
       className="relative overflow-hidden bg-gradient-to-br from-primary-50/60 via-white to-accent-50/40 py-10 xs:py-14 lg:py-20"
     >
       {/* decorative background */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-20 -right-20 w-80 h-80 rounded-full bg-primary-100/50 blur-3xl" />
-        <div className="absolute -bottom-24 -left-16 w-72 h-72 rounded-full bg-accent-100/40 blur-3xl" />
-      </div>
+      <SectionBackground
+        blobs={[
+          '-top-20 -right-20 w-80 h-80 bg-primary-100/50 blur-3xl',
+          '-bottom-24 -left-16 w-72 h-72 bg-accent-100/40 blur-3xl',
+        ]}
+      />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div
@@ -62,20 +67,14 @@ export default function WhyChoosePackages() {
 
             {/* CTAs */}
             <div className="mt-7 flex flex-wrap items-center justify-center lg:justify-start gap-3">
-              <Link
-                to="/health-packages"
-                className="group inline-flex items-center justify-center gap-2 px-5 xs:px-7 py-3 xs:py-3.5 bg-gradient-to-r from-primary-600 to-primary-700 text-white font-bold rounded-xl shadow-lg shadow-primary-600/25 hover:shadow-primary-600/40 hover:-translate-y-0.5 transition-all text-xs xs:text-sm"
-              >
+              <Button variant="gradient-xl" to="/health-packages">
                 <FiCalendar className="w-4 h-4" />
                 Explore Packages
                 <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-              <Link
-                to="/contact"
-                className="inline-flex items-center justify-center gap-2 px-5 xs:px-7 py-3 xs:py-3.5 border-2 border-primary-200 text-primary-700 font-bold rounded-xl hover:bg-primary-50 hover:border-primary-300 transition-all text-xs xs:text-sm"
-              >
+              </Button>
+              <Button variant="outline-xl" to="/contact">
                 Book Appointment
-              </Link>
+              </Button>
             </div>
           </div>
 
@@ -100,26 +99,22 @@ export default function WhyChoosePackages() {
               </div>
 
               {/* floating badge: rating */}
-              <div className="absolute -top-4 -right-2 xs:-right-4 bg-white rounded-2xl shadow-xl shadow-primary-900/10 border border-gray-100 px-3 xs:px-4 py-2.5 xs:py-3 flex items-center gap-2.5">
-                <div className="w-9 h-9 xs:w-10 xs:h-10 rounded-xl bg-gradient-to-br from-warm-500 to-warm-600 text-white flex items-center justify-center shadow-md">
-                  <FaStar className="w-4 xs:w-5 h-4 xs:h-5" />
-                </div>
-                <div>
-                  <p className="text-[10px] xs:text-xs font-bold text-primary-950 leading-tight">500+ Happy Patients</p>
-                  <p className="text-[9px] xs:text-[10px] text-gray-500">Trusted checkups in JP Nagar</p>
-                </div>
-              </div>
+              <FloatingBadge
+                position="top-right"
+                iconBg="from-warm-500 to-warm-600"
+                icon={<FaStar className="w-4 xs:w-5 h-4 xs:h-5" />}
+                title="500+ Happy Patients"
+                subtitle="Trusted checkups in JP Nagar"
+              />
 
               {/* floating badge: home collection */}
-              <div className="absolute -bottom-4 -left-2 xs:-left-4 bg-white rounded-2xl shadow-xl shadow-primary-900/10 border border-gray-100 px-3 xs:px-4 py-2.5 xs:py-3 flex items-center gap-2.5">
-                <div className="w-9 h-9 xs:w-10 xs:h-10 rounded-xl bg-gradient-to-br from-accent-500 to-accent-700 text-white flex items-center justify-center shadow-md">
-                  <FaTruck className="w-4 xs:w-5 h-4 xs:h-5" />
-                </div>
-                <div>
-                  <p className="text-[10px] xs:text-xs font-bold text-primary-950 leading-tight">Free Home Sample Collection</p>
-                  <p className="text-[9px] xs:text-[10px] text-gray-500">Across Bangalore, 6 AM – 10 PM</p>
-                </div>
-              </div>
+              <FloatingBadge
+                position="bottom-left"
+                iconBg="from-accent-500 to-accent-700"
+                icon={<FaTruck className="w-4 xs:w-5 h-4 xs:h-5" />}
+                title="Free Home Sample Collection"
+                subtitle="Across Bangalore, 6 AM – 10 PM"
+              />
             </div>
           </div>
         </div>
@@ -132,20 +127,7 @@ export default function WhyChoosePackages() {
           style={{ animationDelay: '0.2s' }}
         >
           {whyChoosePackagesData.map((item, i) => (
-            <div
-              key={i}
-              className="flex items-center gap-3 rounded-2xl bg-white border border-gray-100 p-3.5 xs:p-4 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all"
-            >
-              <div
-                className={`w-11 h-11 shrink-0 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center text-white shadow-md`}
-              >
-                {item.icon}
-              </div>
-              <div>
-                <p className="text-sm font-bold text-primary-950">{item.title}</p>
-                <p className="text-[11px] xs:text-xs text-gray-500">{item.subtitle}</p>
-              </div>
-            </div>
+            <FeatureBadge key={i} icon={item.icon} title={item.title} subtitle={item.subtitle} color={item.color} />
           ))}
         </div>
       </div>

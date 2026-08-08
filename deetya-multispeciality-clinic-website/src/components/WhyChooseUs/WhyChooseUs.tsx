@@ -1,5 +1,7 @@
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { whyChooseUsData } from '../../data/siteData';
+import SectionHeader from '../ui/SectionHeader';
+import SectionBackground from '../ui/SectionBackground';
 
 const decorativeNumbers = ['01', '02', '03', '04', '05', '06'];
 
@@ -8,30 +10,25 @@ export default function WhyChooseUs() {
 
   return (
     <section ref={ref} className="py-16 xs:py-20 lg:py-28 bg-gradient-to-b from-primary-50/50 to-white relative overflow-hidden">
-      {/* Background decorations */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-primary-100/30 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-80 h-80 bg-accent-100/20 rounded-full blur-3xl translate-x-1/3 translate-y-1/3 pointer-events-none" />
-
-      {/* Decorative grid pattern */}
-      <div className="absolute inset-0 opacity-[0.015] pointer-events-none">
-        <div
-          className="w-full h-full"
-          style={{ backgroundImage: 'radial-gradient(circle, rgba(20,39,87,1) 1px, transparent 1px)', backgroundSize: '40px 40px' }}
-        />
-      </div>
+      {/* Background decorations + dot grid */}
+      <SectionBackground
+        blobs={[
+          'top-0 left-0 w-96 h-96 bg-primary-100/30 -translate-x-1/2 -translate-y-1/2 blur-3xl',
+          'bottom-0 right-0 w-80 h-80 bg-accent-100/20 translate-x-1/3 translate-y-1/3 blur-3xl',
+        ]}
+        dotGrid={{ color: 'rgba(20,39,87,1)', size: 40, opacity: 0.015 }}
+      />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={`text-center max-w-2xl mx-auto mb-16 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-accent-50 border border-accent-200 rounded-full mb-4">
-            <span className="w-2 h-2 bg-accent-500 rounded-full" />
-            <span className="text-xs sm:text-sm font-semibold text-accent-700">Why Choose Us</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-950 mb-4">
-            What Makes Us{' '}
-            <span className="bg-gradient-to-r from-primary-600 to-accent-500 bg-clip-text text-transparent">Different</span>
-          </h2>
-          <p className="text-gray-600 text-sm xs:text-base sm:text-lg">We go beyond treatment to provide a healthcare experience that is trustworthy, transparent, and truly patient-centered.</p>
-        </div>
+        <SectionHeader
+          badge="Why Choose Us"
+          badgeTone="accent"
+          title="What Makes Us "
+          gradient="Different"
+          subtitle="We go beyond treatment to provide a healthcare experience that is trustworthy, transparent, and truly patient-centered."
+          titleClassName="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-950 mb-4"
+          className={`mb-16 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}
+        />
 
         <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-3 xs:gap-5 sm:gap-6">
           {whyChooseUsData.map((r, i) => (

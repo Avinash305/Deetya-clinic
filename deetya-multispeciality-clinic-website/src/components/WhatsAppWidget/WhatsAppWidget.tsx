@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { FaWhatsapp } from 'react-icons/fa';
 import { FiX, FiSend, FiMessageCircle } from 'react-icons/fi';
 import { clinicInfo } from '../../data/siteData';
+import { whatsappHref } from '../../utils/links';
 
 export default function WhatsAppWidget() {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,8 +23,7 @@ export default function WhatsAppWidget() {
 
   const handleSend = () => {
     if (!message.trim()) return;
-    const encoded = encodeURIComponent(message.trim());
-    window.open(`https://wa.me/${clinicInfo.whatsappNumber}?text=${encoded}`, '_blank');
+    window.open(whatsappHref(message.trim()), '_blank');
     setIsOpen(false);
   };
 
@@ -95,6 +95,7 @@ export default function WhatsAppWidget() {
               <div className="flex-1 relative">
                 <textarea
                   ref={inputRef}
+                  name="whatsapp-message"
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   onKeyDown={handleKeyDown}

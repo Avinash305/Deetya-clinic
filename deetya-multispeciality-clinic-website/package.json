@@ -5,8 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "node scripts/generate-sitemap.mjs",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "sitemap": "node scripts/generate-sitemap.mjs"
   },
   "dependencies": {
     "@fontsource/inter": "^5.3.0",

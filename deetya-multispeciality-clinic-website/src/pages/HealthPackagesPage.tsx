@@ -10,7 +10,7 @@ export default function HealthPackagesPage() {
       <SEO
         title="Health Packages"
         description="Explore comprehensive health checkup packages & diagnostic profiles at DEETYA Multispeciality Clinic: full body checkups, women's health, senior citizen, diabetic, cardiac & cancer screening with home sample collection and same-day reports in JP Nagar, Bangalore."
-        canonical="https://deetyaclinic.com/#/health-packages"
+        canonical="https://deetyahealthcare.com/#/health-packages"
       />
       <HealthPackagesHero />
       <HealthPackages />

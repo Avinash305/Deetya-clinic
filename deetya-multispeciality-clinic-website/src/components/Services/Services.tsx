@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 import { FiArrowUpRight } from 'react-icons/fi';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { servicesData } from '../../data/servicesData';
+import SectionHeader from '../ui/SectionHeader';
+import Button from '../ui/Button';
 
 interface ServicesProps {
   limit?: number;
@@ -18,17 +20,15 @@ export default function Services({ limit, showHeader = true, showViewAll = false
     <section id="services" ref={ref} className="py-16 xs:py-20 lg:py-28 bg-gradient-to-b from-white to-primary-50/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {showHeader && (
-          <div className={`text-center max-w-2xl mx-auto mb-16 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary-50 border border-primary-200 rounded-full mb-4">
-              <span className="w-2 h-2 bg-primary-500 rounded-full" />
-              <span className="text-xs sm:text-sm font-semibold text-primary-700">Our Services</span>
-            </div>
-            <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-950 mb-4">
-              Comprehensive{' '}
-              <span className="text-gradient">Medical Services</span>
-            </h2>
-            <p className="text-gray-600 text-xs xs:text-sm sm:text-base lg:text-lg">From routine checkups to specialized treatments, we offer a wide spectrum of healthcare services under one roof.</p>
-          </div>
+          <SectionHeader
+            badge="Our Services"
+            title="Comprehensive "
+            gradient="Medical Services"
+            gradientClassName="text-gradient"
+            subtitle="From routine checkups to specialized treatments, we offer a wide spectrum of healthcare services under one roof."
+            subtitleClassName="text-gray-600 text-xs xs:text-sm sm:text-base lg:text-lg"
+            className={`mb-16 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}
+          />
         )}
 
         {showImages ? (
@@ -103,10 +103,10 @@ export default function Services({ limit, showHeader = true, showViewAll = false
 
         {showViewAll && (
           <div className={`text-center mt-12 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
-            <Link to="/services" className="group inline-flex items-center justify-center gap-2 px-5 xs:px-8 py-3 xs:py-3.5 bg-gradient-to-r from-primary-600 to-primary-700 text-white font-semibold rounded-lg xs:rounded-xl shadow-lg shadow-primary-600/25 hover:shadow-primary-600/40 hover:-translate-y-0.5 transition-all text-xs xs:text-sm">
+            <Button to="/services">
               View All Services
               <FiArrowUpRight className="w-3.5 xs:w-4 h-3.5 xs:h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0" />
-            </Link>
+            </Button>
           </div>
         )}
       </div>

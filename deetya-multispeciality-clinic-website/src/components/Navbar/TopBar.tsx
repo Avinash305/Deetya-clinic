@@ -1,5 +1,6 @@
 import { FiPhone, FiMail, FiClock, FiMapPin } from 'react-icons/fi';
 import { clinicInfo, socialLinks } from '../../data/siteData';
+import { telHref, mailHref } from '../../utils/links';
 
 export default function TopBar({ hidden }: { hidden: boolean }) {
   return (
@@ -11,7 +12,7 @@ export default function TopBar({ hidden }: { hidden: boolean }) {
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-8 sm:h-10">
           {/* Left: Phone always */}
-          <a href={`tel:${clinicInfo.phone.replace(/\s/g, '')}`} className="flex items-center gap-1.5 hover:text-accent-300 transition-colors shrink-0">
+          <a href={telHref()} className="flex items-center gap-1.5 hover:text-accent-300 transition-colors shrink-0">
             <FiPhone className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
             <span className="text-[11px] sm:text-sm font-medium whitespace-nowrap">{clinicInfo.phone}</span>
           </a>
@@ -23,7 +24,7 @@ export default function TopBar({ hidden }: { hidden: boolean }) {
               <span className="text-[11px] sm:text-sm whitespace-nowrap">Mon-Sat 7AM-11PM</span>
             </div>
             {/* Desktop extras — shown progressively so tablets never overflow */}
-            <a href={`mailto:${clinicInfo.email}`} className="hidden sm:flex items-center gap-1.5 hover:text-accent-300 transition-colors">
+            <a href={mailHref()} className="hidden sm:flex items-center gap-1.5 hover:text-accent-300 transition-colors">
               <FiMail className="w-3.5 h-3.5" />
               <span className="text-[11px] md:text-sm">{clinicInfo.email}</span>
             </a>

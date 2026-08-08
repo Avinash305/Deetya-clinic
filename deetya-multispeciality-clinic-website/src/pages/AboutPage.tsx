@@ -1,13 +1,17 @@
-import { Link } from 'react-router-dom';
 import Stats from '../components/Stats/Stats';
 import Doctors from '../components/Doctors/Doctors';
 import Testimonials from '../components/Testimonials/Testimonials';
 import CTABanner from '../components/CTABanner/CTABanner';
 import SEO from '../components/SEO/SEO';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
-import { FiArrowRight, FiTarget, FiEye, FiCheck, FiHeart, FiShield, FiStar, FiActivity } from 'react-icons/fi';
+import { FiArrowRight, FiTarget, FiEye, FiHeart, FiShield, FiStar, FiActivity } from 'react-icons/fi';
 import { FaMedal, FaUserMd, FaHandHoldingMedical, FaAward } from 'react-icons/fa';
 import { coreValues, timelineData, clinicInfo, aboutFeatures } from '../data/siteData';
+import SectionHeader from '../components/ui/SectionHeader';
+import Button from '../components/ui/Button';
+import CheckListItem from '../components/ui/CheckListItem';
+import SectionBackground from '../components/ui/SectionBackground';
+import FloatingBadge from '../components/ui/FloatingBadge';
 
 const aboutImages = {
   story: '/images/about-story.webp',
@@ -21,7 +25,7 @@ export default function AboutPage() {
       <SEO
         title="About Us"
         description="Learn about DEETYA Multispeciality Clinic in JP Nagar, Bangalore. Our story of providing compassionate, affordable healthcare since 2026 with 5+ expert doctors and in-house facilities."
-        canonical="https://deetyaclinic.com/#/about"
+        canonical="https://deetyahealthcare.com/#/about"
       />
       <AboutContent />
     </>
@@ -47,35 +51,30 @@ function AboutContent() {
                 <img src={aboutImages.story} alt="Doctor consulting patient" className="w-full aspect-[3/2] object-cover object-[center_30%]" loading="lazy" />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary-900/30 to-transparent" />
               </div>
-              {/* Floating badge — reduced size */}
-              <div className="absolute -bottom-4 -right-2 xs:-bottom-5 xs:-right-3 sm:-right-6 bg-white rounded-xl xs:rounded-2xl shadow-lg xs:shadow-xl p-2.5 xs:p-3 sm:p-4 border border-gray-100 z-10">
-                <div className="flex items-center gap-2 xs:gap-2.5 sm:gap-3">
-                  <div className="w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 bg-gradient-to-br from-warm-500 to-warm-600 rounded-lg xs:rounded-xl flex items-center justify-center shadow-md xs:shadow-lg shadow-warm-500/30">
-                    <FaMedal className="w-4 h-4 xs:w-4.5 xs:h-4.5 sm:w-5 sm:h-5 text-white" />
-                  </div>
-                  <div>
-                  <p className="text-lg xs:text-xl sm:text-2xl font-bold text-primary-950">500+</p>
-                  <p className="text-[10px] xs:text-[11px] sm:text-xs text-gray-500 font-medium leading-tight">Happy Patients</p>
-                  </div>
-                </div>
-              </div>
+              {/* Floating badge */}
+              <FloatingBadge
+                size="lg"
+                position="bottom-right"
+                iconBg="from-warm-500 to-warm-600"
+                icon={<FaMedal className="w-4 h-4 xs:w-4.5 xs:h-4.5 sm:w-5 sm:h-5 text-white" />}
+                title="500+"
+                subtitle="Happy Patients"
+                iconClassName="shadow-md xs:shadow-lg shadow-warm-500/30"
+                titleClassName="text-lg xs:text-xl sm:text-2xl"
+                subtitleClassName="font-medium"
+              />
               {/* Decorative border */}
               <div className="absolute -top-3 -left-3 xs:-top-4 xs:-left-4 w-full h-full border-2 border-primary-200/50 rounded-2xl xs:rounded-3xl -z-10" />
             </div>
 
             {/* Content */}
             <div className={`${storyVis ? 'animate-fade-in-right' : 'opacity-0'}`}>
-              <div className="inline-flex items-center gap-2 px-3 xs:px-4 py-1.5 bg-primary-50 border border-primary-200 rounded-full mb-4 xs:mb-5">
-                <span className="w-2 h-2 bg-primary-500 rounded-full" />
-                <span className="text-xs xs:text-sm font-semibold text-primary-700">Our Story</span>
-              </div>
-
-              <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-950 mb-4 xs:mb-6 leading-tight">
-                A Legacy of{' '}
-                <span className="bg-gradient-to-r from-primary-600 to-accent-500 bg-clip-text text-transparent">
-                  Healing & Care
-                </span>
-              </h2>
+              <SectionHeader
+                badge="Our Story"
+                align="left"
+                title="A Legacy of "
+                gradient="Healing & Care"
+              />
 
               <p className="text-sm xs:text-base sm:text-lg text-gray-600 leading-relaxed mb-4 xs:mb-5">
                 Founded in {clinicInfo.established}, {clinicInfo.fullName} began with a powerful
@@ -106,13 +105,10 @@ function AboutContent() {
                 ))}
               </div>
 
-              <Link
-                to="/services"
-                className="group inline-flex items-center justify-center gap-2 px-5 xs:px-6 py-3 bg-primary-700 text-white font-semibold rounded-lg xs:rounded-xl hover:bg-primary-800 shadow-lg shadow-primary-700/25 transition-all hover:-translate-y-0.5 text-xs xs:text-sm"
-              >
+              <Button to="/services" variant="solid">
                 Explore Our Services
                 <FiArrowRight className="w-3.5 xs:w-4 h-3.5 xs:h-4 group-hover:translate-x-1 transition-transform shrink-0" />
-              </Link>
+              </Button>
             </div>
           </div>
         </div>
@@ -127,17 +123,14 @@ function AboutContent() {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             {/* Content first on desktop */}
             <div className={`order-2 lg:order-1 ${missionVis ? 'animate-fade-in-left' : 'opacity-0'}`}>
-              <div className="inline-flex items-center gap-2 px-3 xs:px-4 py-1.5 bg-accent-50 border border-accent-200 rounded-full mb-4 xs:mb-5">
-                <span className="w-2 h-2 bg-accent-500 rounded-full" />
-                <span className="text-xs xs:text-sm font-semibold text-accent-700">Mission & Vision</span>
-              </div>
-
-              <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-950 mb-4 xs:mb-6 leading-tight">
-                Guided by{' '}
-                <span className="bg-gradient-to-r from-accent-600 to-primary-500 bg-clip-text text-transparent">
-                  Purpose
-                </span>
-              </h2>
+              <SectionHeader
+                badge="Mission & Vision"
+                badgeTone="accent"
+                align="left"
+                title="Guided by "
+                gradient="Purpose"
+                gradientClassName="bg-gradient-to-r from-accent-600 to-primary-500 bg-clip-text text-transparent"
+              />
 
               <p className="text-sm xs:text-base sm:text-lg text-gray-600 leading-relaxed mb-6 xs:mb-8">
                 Every decision we make and every treatment we offer is driven by our unwavering
@@ -172,12 +165,9 @@ function AboutContent() {
               {/* Feature list */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 {aboutFeatures.map((f, i) => (
-                  <div key={i} className="flex items-start gap-2.5">
-                    <div className="mt-0.5 w-5 h-5 rounded-full bg-accent-100 flex items-center justify-center shrink-0">
-                      <FiCheck className="w-3 h-3 text-accent-600" />
-                    </div>
+                  <CheckListItem key={i} className="gap-2.5">
                     <span className="text-xs xs:text-sm text-gray-600">{f}</span>
-                  </div>
+                  </CheckListItem>
                 ))}
               </div>
             </div>
@@ -188,18 +178,15 @@ function AboutContent() {
                 <div className="rounded-2xl xs:rounded-3xl overflow-hidden shadow-2xl shadow-primary-900/10">
                   <img src={aboutImages.mission} alt="Doctor and patient consultation" className="w-full aspect-[3/2] object-cover object-[center_30%]" loading="lazy" />
                 </div>
-                {/* Floating badge — reduced */}
-                <div className="absolute -bottom-3 -left-2 xs:-bottom-4 xs:-left-3 sm:-left-6 bg-white rounded-xl xs:rounded-2xl shadow-lg xs:shadow-xl p-2.5 xs:p-3 sm:p-4 border border-gray-100 z-10">
-                  <div className="flex items-center gap-2 xs:gap-2.5 sm:gap-3">
-                    <div className="w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 bg-gradient-to-br from-accent-500 to-accent-600 rounded-lg xs:rounded-xl flex items-center justify-center">
-                      <FaHandHoldingMedical className="w-4 h-4 xs:w-4.5 xs:h-4.5 sm:w-5 sm:h-5 text-white" />
-                    </div>
-                    <div>
-                      <p className="text-base xs:text-lg sm:text-lg font-bold text-primary-950">98%</p>
-                      <p className="text-[10px] xs:text-[11px] sm:text-xs text-gray-500 leading-tight">Satisfaction Rate</p>
-                    </div>
-                  </div>
-                </div>
+                {/* Floating badge */}
+                <FloatingBadge
+                  size="lg"
+                  position="bottom-left"
+                  iconBg="from-accent-500 to-accent-600"
+                  icon={<FaHandHoldingMedical className="w-4 h-4 xs:w-4.5 xs:h-4.5 sm:w-5 sm:h-5 text-white" />}
+                  title="98%"
+                  subtitle="Satisfaction Rate"
+                />
                 <div className="absolute -top-2 -right-2 xs:-top-3 xs:-right-3 w-full h-full border-2 border-accent-200/50 rounded-2xl xs:rounded-3xl -z-10" />
               </div>
             </div>
@@ -210,21 +197,14 @@ function AboutContent() {
       {/* ───── CORE VALUES ───── */}
       <section ref={valRef} className="py-16 xs:py-20 lg:py-28 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className={`text-center max-w-2xl mx-auto mb-14 ${valVis ? 'animate-fade-in-up' : 'opacity-0'}`}>
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-warm-50 border border-warm-200 rounded-full mb-4">
-              <span className="w-2 h-2 bg-warm-500 rounded-full" />
-              <span className="text-xs sm:text-sm font-semibold text-warm-700">Core Values</span>
-            </div>
-            <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-950 mb-4">
-              What We{' '}
-              <span className="bg-gradient-to-r from-primary-600 to-accent-500 bg-clip-text text-transparent">
-                Stand For
-              </span>
-            </h2>
-            <p className="text-sm xs:text-base sm:text-lg text-gray-600">
-              The principles that guide every treatment, every consultation, and every interaction at DEETYA.
-            </p>
-          </div>
+          <SectionHeader
+            badge="Core Values"
+            badgeTone="warm"
+            title="What We "
+            gradient="Stand For"
+            subtitle="The principles that guide every treatment, every consultation, and every interaction at DEETYA."
+            className={`mb-14 ${valVis ? 'animate-fade-in-up' : 'opacity-0'}`}
+          />
           <div className={`grid xs:grid-cols-2 lg:grid-cols-4 gap-3 xs:gap-4 sm:gap-5 ${valVis ? 'animate-fade-in-up' : 'opacity-0'}`}>
             {coreValues.map((v, i) => (
               <div
@@ -247,21 +227,26 @@ function AboutContent() {
 
       {/* ───── WHY DEETYA — Key Differentiators ───── */}
       <section ref={whyRef} className="py-16 xs:py-20 lg:py-28 bg-gradient-to-br from-primary-900 via-primary-950 to-primary-900 text-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-primary-700/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-80 h-80 bg-accent-500/10 rounded-full blur-3xl" />
+        <SectionBackground
+          blobs={[
+            'top-0 right-0 w-96 h-96 bg-primary-700/20 blur-3xl',
+            'bottom-0 left-0 w-80 h-80 bg-accent-500/10 blur-3xl',
+          ]}
+        />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className={`text-center max-w-2xl mx-auto mb-14 ${whyVis ? 'animate-fade-in-up' : 'opacity-0'}`}>
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 border border-white/20 rounded-full mb-4">
-              <span className="w-2 h-2 bg-accent-400 rounded-full" />
-              <span className="text-xs sm:text-sm font-semibold text-accent-300">Why Choose DEETYA</span>
-            </div>
-            <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
-              The DEETYA{' '}
-              <span className="bg-gradient-to-r from-accent-300 to-accent-500 bg-clip-text text-transparent">Advantage</span>
-            </h2>
-            <p className="text-sm xs:text-base sm:text-lg text-primary-200">What sets us apart in the healthcare landscape.</p>
-          </div>
+          <SectionHeader
+            badge="Why Choose DEETYA"
+            badgeTone="dark"
+            tone="dark"
+            badgeClassName="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 border border-white/20 rounded-full mb-4"
+            dotClassName="w-2 h-2 bg-accent-400 rounded-full"
+            title="The DEETYA "
+            gradient="Advantage"
+            subtitle="What sets us apart in the healthcare landscape."
+            subtitleClassName="text-sm xs:text-base sm:text-lg text-primary-200"
+            className={`mb-14 ${whyVis ? 'animate-fade-in-up' : 'opacity-0'}`}
+          />
 
           <div className={`grid xs:grid-cols-2 lg:grid-cols-3 gap-3 xs:gap-4 sm:gap-5 ${whyVis ? 'animate-fade-in-up' : 'opacity-0'}`}>
             {[
@@ -302,17 +287,17 @@ function AboutContent() {
       {/* ───── JOURNEY TIMELINE ───── */}
       <section ref={timeRef} className="py-20 lg:py-28 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className={`text-center mb-12 xs:mb-14 sm:mb-16 ${timeVis ? 'animate-fade-in-up' : 'opacity-0'}`}>
-            <div className="inline-flex items-center gap-2 px-3 xs:px-4 py-1.5 bg-primary-50 border border-primary-200 rounded-full mb-4">
-              <span className="w-2 h-2 bg-primary-500 rounded-full" />
-              <span className="text-xs sm:text-sm font-semibold text-primary-700">Our Journey</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-950 mb-4">
-              Milestones of{' '}
-              <span className="bg-gradient-to-r from-primary-600 to-accent-500 bg-clip-text text-transparent">Excellence</span>
-            </h2>
-            <p className="text-gray-600 text-sm xs:text-base sm:text-lg max-w-xl mx-auto">From a single room clinic to a multi-department healthcare hub — our story in milestones.</p>
-          </div>
+          <SectionHeader
+            badge="Our Journey"
+            badgeClassName="inline-flex items-center gap-2 px-3 xs:px-4 py-1.5 bg-primary-50 border border-primary-200 rounded-full mb-4"
+            contain={false}
+            title="Milestones of "
+            gradient="Excellence"
+            subtitle="From a single room clinic to a multi-department healthcare hub — our story in milestones."
+            subtitleClassName="text-gray-600 text-sm xs:text-base sm:text-lg max-w-xl mx-auto"
+            titleClassName="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-950 mb-4"
+            className={`mb-12 xs:mb-14 sm:mb-16 ${timeVis ? 'animate-fade-in-up' : 'opacity-0'}`}
+          />
 
           <div className={`relative ${timeVis ? 'animate-fade-in-up' : 'opacity-0'}`}>
             {/* Mobile left line */}

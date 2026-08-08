@@ -156,59 +156,75 @@ export default function Hero() {
           </div>
         ))}
 
-        {/* Gradient overlays */}
-        <div className="absolute inset-0 bg-gradient-to-r from-primary-950/90 via-primary-950/65 to-primary-950/35" />
-        <div className="absolute inset-0 bg-gradient-to-t from-primary-950/80 via-primary-950/20 to-transparent" />
-        <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-primary-950/50 to-transparent pointer-events-none" />
+        {/* Gradient overlays — full-image slides (e.g. brand graphics that
+            carry their own text) get much lighter overlays so the artwork
+            stays crisp; text slides keep the dark left/right gradient for
+            readability. */}
+        {slide.fullImage ? (
+          <>
+            <div className="absolute inset-0 bg-gradient-to-t from-primary-950/70 via-transparent to-transparent" />
+            <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-primary-950/60 to-transparent pointer-events-none" />
+          </>
+        ) : (
+          <>
+            <div className="absolute inset-0 bg-gradient-to-r from-primary-950/90 via-primary-950/65 to-primary-950/35" />
+            <div className="absolute inset-0 bg-gradient-to-t from-primary-950/80 via-primary-950/20 to-transparent" />
+            <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-primary-950/50 to-transparent pointer-events-none" />
+          </>
+        )}
 
         {/* Decorative animated shapes */}
         <DecorativeShapes />
 
-        {/* Content */}
-        <div className="absolute inset-0 z-10 flex items-center pt-10 sm:pt-0 pb-14 xs:pb-16 sm:pb-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-            <div className="max-w-xl xs:max-w-2xl lg:max-w-3xl" key={current}>
-              <div className="animate-fade-in-left">
-                {/* Badge */}
-                <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-white/10 border border-white/20 rounded-full mb-3 sm:mb-5 backdrop-blur-sm hover:bg-white/15 transition-all duration-300 group">
-                  <span className="relative flex h-2 w-2 sm:h-2.5 sm:w-2.5">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-400 opacity-75" />
-                    <span className="relative inline-flex rounded-full h-2 w-2 sm:h-2.5 sm:w-2.5 bg-accent-400" />
-                  </span>
-                  <span className="text-[10px] xs:text-xs sm:text-sm font-semibold text-white/90 group-hover:text-white transition-colors">{slide.badge}</span>
+        {/* Content — skipped for full-image slides that carry their own text */}
+        {slide.fullImage ? (
+          <h1 className="sr-only">{slide.heading} {slide.headingGradient} {slide.headingSuffix}</h1>
+        ) : (
+          <div className="absolute inset-0 z-10 flex items-center pt-10 sm:pt-0 pb-14 xs:pb-16 sm:pb-20">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+              <div className="max-w-xl xs:max-w-2xl lg:max-w-3xl" key={current}>
+                <div className="animate-fade-in-left">
+                  {/* Badge */}
+                  <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-white/10 border border-white/20 rounded-full mb-3 sm:mb-5 backdrop-blur-sm hover:bg-white/15 transition-all duration-300 group">
+                    <span className="relative flex h-2 w-2 sm:h-2.5 sm:w-2.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-400 opacity-75" />
+                      <span className="relative inline-flex rounded-full h-2 w-2 sm:h-2.5 sm:w-2.5 bg-accent-400" />
+                    </span>
+                    <span className="text-[10px] xs:text-xs sm:text-sm font-semibold text-white/90 group-hover:text-white transition-colors">{slide.badge}</span>
+                  </div>
+
+                  {/* Heading */}
+                  <h1 className="text-xl xs:text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-[1.1] mb-2 xs:mb-3 sm:mb-5" style={{ textWrap: 'balance' }}>
+                    {slide.heading}{' '}
+                    <span className="bg-gradient-to-r from-accent-300 via-accent-400 to-primary-300 bg-clip-text text-transparent animate-gradient-shift">{slide.headingGradient}</span>
+                    <br className="hidden sm:block" />
+                    <span className="text-white/90"> {slide.headingSuffix}</span>
+                  </h1>
+
+                  {/* Description */}
+                  <p className="text-[11px] xs:text-sm sm:text-lg md:text-xl text-white/60 mb-2 xs:mb-4 sm:mb-7 max-w-prose sm:max-w-xl leading-relaxed">
+                    {slide.description}
+                  </p>
+
+                  {/* Pills */}
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2.5 mb-3 sm:mb-8">
+                    {slide.pills.map((item) => (
+                      <div
+                        key={item}
+                        className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1 sm:py-1.5 bg-white/10 border border-white/15 rounded-full backdrop-blur-sm hover:bg-white/15 hover:border-accent-400/40 transition-all duration-300"
+                      >
+                        <FiCheck className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 text-accent-400 shrink-0" />
+                        <span className="text-[10px] xs:text-xs sm:text-sm text-white/80 font-medium">{item}</span>
+                      </div>
+                    ))}
+                  </div>
+
+
                 </div>
-
-                {/* Heading */}
-                <h1 className="text-xl xs:text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-[1.1] mb-2 xs:mb-3 sm:mb-5" style={{ textWrap: 'balance' }}>
-                  {slide.heading}{' '}
-                  <span className="bg-gradient-to-r from-accent-300 via-accent-400 to-primary-300 bg-clip-text text-transparent animate-gradient-shift">{slide.headingGradient}</span>
-                  <br className="hidden sm:block" />
-                  <span className="text-white/90"> {slide.headingSuffix}</span>
-                </h1>
-
-                {/* Description */}
-                <p className="text-[11px] xs:text-sm sm:text-lg md:text-xl text-white/60 mb-2 xs:mb-4 sm:mb-7 max-w-prose sm:max-w-xl leading-relaxed">
-                  {slide.description}
-                </p>
-
-                {/* Pills */}
-                <div className="flex flex-wrap gap-1.5 sm:gap-2.5 mb-3 sm:mb-8">
-                  {slide.pills.map((item) => (
-                    <div
-                      key={item}
-                      className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1 sm:py-1.5 bg-white/10 border border-white/15 rounded-full backdrop-blur-sm hover:bg-white/15 hover:border-accent-400/40 transition-all duration-300"
-                    >
-                      <FiCheck className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 text-accent-400 shrink-0" />
-                      <span className="text-[10px] xs:text-xs sm:text-sm text-white/80 font-medium">{item}</span>
-                    </div>
-                  ))}
-                </div>
-
-
               </div>
             </div>
           </div>
-        </div>
+        )}
 
         {/* Progressive slide indicator — horizontal row of lines at the
             bottom. The active line is larger and fills from 0% to 100% over

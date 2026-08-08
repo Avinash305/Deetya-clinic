@@ -1,7 +1,6 @@
-import { useEffect } from 'react';
-import { motion } from 'framer-motion';
 import { FiX, FiCheck, FiMinus, FiTrash2, FiCalendar } from 'react-icons/fi';
 import type { HealthPackageEntry } from '../../data/healthPackagesData';
+import Modal from '../ui/Modal';
 import { formatINR } from './bookingUtils';
 
 interface CompareModalProps {
@@ -44,8 +43,6 @@ const buildRows = (onBook: (pkg: HealthPackageEntry) => void): { label: string; 
   { label: 'Vitamin Tests', value: (p) => boolCell(p.vitaminTests) },
   { label: 'ECG', value: (p) => boolCell(p.ecg) },
   { label: 'ECHO', value: (p) => boolCell(p.echo) },
-  { label: 'TMT', value: (p) => boolCell(p.tmt) },
-  { label: 'Ultrasound', value: (p) => boolCell(p.ultrasound) },
   { label: 'Chest X-Ray', value: (p) => boolCell(p.xray) },
   { label: 'Home Collection', value: (p) => boolCell(p.homeCollection) },
   { label: 'Recommended Age', value: (p) => <span className="text-xs font-medium text-gray-600">{p.recommendedAge}</span> },
@@ -68,40 +65,13 @@ const buildRows = (onBook: (pkg: HealthPackageEntry) => void): { label: string; 
 export default function CompareModal({ pkgs, onClose, onRemove, onClear, onBook }: CompareModalProps) {
   const rows = buildRows(onBook);
 
-  useEffect(() => {
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.body.style.overflow = prev;
-    };
-  }, []);
-
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose();
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [onClose]);
-
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.2 }}
-      className="fixed inset-0 z-[85] flex items-end sm:items-center justify-center p-0 sm:p-6"
-      role="dialog"
-      aria-modal="true"
-      aria-label="Compare packages"
+    <Modal
+      onClose={onClose}
+      ariaLabel="Compare packages"
+      size="lg"
+      panelClassName="flex flex-col max-h-[92vh]"
     >
-      <div className="absolute inset-0 bg-primary-950/60 backdrop-blur-sm" onClick={onClose} />
-
-      <motion.div
-        initial={{ opacity: 0, y: 40, scale: 0.98 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        exit={{ opacity: 0, y: 30, scale: 0.98 }}
-        transition={{ type: 'spring', damping: 26, stiffness: 300 }}
-        className="relative w-full sm:max-w-4xl bg-white rounded-t-3xl sm:rounded-3xl overflow-hidden shadow-2xl flex flex-col max-h-[92vh]"
-      >
         {/* header */}
         <div className="shrink-0 bg-gradient-to-r from-primary-600 to-primary-800 px-5 sm:px-7 py-4 flex items-center justify-between">
           <div>
@@ -172,7 +142,6 @@ export default function CompareModal({ pkgs, onClose, onRemove, onClear, onBook 
         <p className="shrink-0 text-center text-[11px] text-gray-400 py-2.5 border-t border-gray-100 bg-gray-50/60">
           Prices are per package at DEETYA Multispeciality Clinic • Add-ons and home collection available on request
         </p>
-      </motion.div>
-    </motion.div>
+    </Modal>
   );
 }

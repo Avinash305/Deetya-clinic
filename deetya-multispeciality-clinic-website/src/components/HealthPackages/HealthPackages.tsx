@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion, MotionConfig } from 'framer-motion';
 import { FiSearch, FiX, FiChevronDown, FiGrid, FiSliders, FiArrowUpRight } from 'react-icons/fi';
 import {
@@ -15,6 +15,8 @@ import PackageCard from './PackageCard';
 import BookPackageModal from './BookPackageModal';
 import CompareModal from './CompareModal';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
+import Button from '../ui/Button';
+import SectionBackground from '../ui/SectionBackground';
 
 const MAX_COMPARE = 3;
 const CATEGORY_ICONS: Record<string, string> = {
@@ -112,11 +114,13 @@ export default function HealthPackages({ showViewAll = false, limit }: HealthPac
     <MotionConfig reducedMotion="user">
     <section id="health-packages" ref={sectionRef} className="relative py-16 lg:py-24 bg-gradient-to-b from-gray-50 via-white to-gray-50 overflow-hidden">
       {/* decorative background */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[700px] h-[300px] bg-gradient-to-r from-primary-100/60 via-accent-100/40 to-warm-100/50 blur-3xl rounded-full" />
-        <div className="absolute bottom-10 -left-24 w-72 h-72 rounded-full bg-primary-50 blur-3xl" />
-        <div className="absolute top-1/3 -right-24 w-72 h-72 rounded-full bg-accent-50 blur-3xl" />
-      </div>
+      <SectionBackground
+        blobs={[
+          'top-10 left-1/2 -translate-x-1/2 w-[700px] h-[300px] bg-gradient-to-r from-primary-100/60 via-accent-100/40 to-warm-100/50 blur-3xl',
+          'bottom-10 -left-24 w-72 h-72 bg-primary-50 blur-3xl',
+          'top-1/3 -right-24 w-72 h-72 bg-accent-50 blur-3xl',
+        ]}
+      />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* ── Section header ── */}
@@ -141,12 +145,15 @@ export default function HealthPackages({ showViewAll = false, limit }: HealthPac
         {/* ── Sticky search / filter / sort bar ── */}
         <div className="sticky top-14 sm:top-16 lg:top-20 z-40 -mx-1 px-1 py-2">
           <div className="glass-card rounded-2xl shadow-lg shadow-primary-900/5 px-3 sm:px-4 py-3">
-            {/* Row 1: search + sort + compare */}
-            <div className="flex items-center gap-2">
+            {/* Row 1: search + sort + compare.
+                Mobile/tablet: search gets the full first row so it stays usable;
+                sort + compare share a second row. md+: single compact row. */}
+            <div className="flex flex-col md:flex-row md:items-center gap-2">
               <div className="relative flex-1">
                 <FiSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                 <input
                   type="text"
+                  name="package-search"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder="Search packages, tests…"
@@ -164,39 +171,43 @@ export default function HealthPackages({ showViewAll = false, limit }: HealthPac
                 )}
               </div>
 
-              {/* sort */}
-              <div className="relative shrink-0">
-                <select
-                  value={sort}
-                  onChange={(e) => setSort(e.target.value as SortValue)}
-                  className="appearance-none pl-3.5 pr-8 py-2.5 rounded-xl border border-gray-200 bg-white text-xs sm:text-sm font-semibold text-primary-950 focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-400 transition-all cursor-pointer"
-                  aria-label="Sort packages"
-                >
-                  {sortOptions.map((o) => (
-                    <option key={o.value} value={o.value}>{o.label}</option>
-                  ))}
-                </select>
-                <FiChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
-              </div>
+              {/* sort + compare — own row on mobile/tablet */}
+              <div className="flex items-center gap-2 md:shrink-0">
+                {/* sort */}
+                <div className="relative flex-1 min-w-0 md:flex-none">
+                  <select
+                    name="package-sort"
+                    value={sort}
+                    onChange={(e) => setSort(e.target.value as SortValue)}
+                    className="w-full md:w-auto appearance-none pl-3.5 pr-8 py-2.5 rounded-xl border border-gray-200 bg-white text-xs sm:text-sm font-semibold text-primary-950 focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-400 transition-all cursor-pointer truncate"
+                    aria-label="Sort packages"
+                  >
+                    {sortOptions.map((o) => (
+                      <option key={o.value} value={o.value}>{o.label}</option>
+                    ))}
+                  </select>
+                  <FiChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+                </div>
 
-              {/* compare trigger */}
-              <button
-                onClick={() => compareIds.length > 0 && setCompareOpen(true)}
-                disabled={compareIds.length === 0}
-                className={`shrink-0 inline-flex items-center gap-1.5 px-3 sm:px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold border transition-all ${
-                  compareIds.length > 0
-                    ? 'bg-primary-600 border-primary-600 text-white shadow-lg shadow-primary-600/25 hover:bg-primary-700'
-                    : 'bg-white border-gray-200 text-gray-400 cursor-not-allowed'
-                }`}
-              >
-                <FiSliders className="w-4 h-4" />
-                <span className="hidden xs:inline">Compare</span>
-                {compareIds.length > 0 && (
-                  <span className="w-5 h-5 rounded-full bg-white/20 text-[11px] flex items-center justify-center">
-                    {compareIds.length}
-                  </span>
-                )}
-              </button>
+                {/* compare trigger */}
+                <button
+                  onClick={() => compareIds.length > 0 && setCompareOpen(true)}
+                  disabled={compareIds.length === 0}
+                  className={`shrink-0 inline-flex items-center gap-1.5 px-3 sm:px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold border transition-all ${
+                    compareIds.length > 0
+                      ? 'bg-primary-600 border-primary-600 text-white shadow-lg shadow-primary-600/25 hover:bg-primary-700'
+                      : 'bg-white border-gray-200 text-gray-400 cursor-not-allowed'
+                  }`}
+                >
+                  <FiSliders className="w-4 h-4" />
+                  <span className="hidden xs:inline">Compare</span>
+                  {compareIds.length > 0 && (
+                    <span className="w-5 h-5 rounded-full bg-white/20 text-[11px] flex items-center justify-center">
+                      {compareIds.length}
+                    </span>
+                  )}
+                </button>
+              </div>
             </div>
 
             {/* Row 2: category chips */}
@@ -288,13 +299,10 @@ export default function HealthPackages({ showViewAll = false, limit }: HealthPac
         {/* view all link (embedded sections) */}
         {showViewAll && (
           <div className="text-center mt-12">
-            <Link
-              to="/health-packages"
-              className="group inline-flex items-center justify-center gap-2 px-5 xs:px-8 py-3 xs:py-3.5 bg-gradient-to-r from-primary-600 to-primary-700 text-white font-semibold rounded-lg xs:rounded-xl shadow-lg shadow-primary-600/25 hover:shadow-primary-600/40 hover:-translate-y-0.5 transition-all text-xs xs:text-sm"
-            >
+            <Button to="/health-packages">
               View All Health Packages
               <FiArrowUpRight className="w-3.5 xs:w-4 h-3.5 xs:h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0" />
-            </Link>
+            </Button>
           </div>
         )}
 
@@ -405,15 +413,21 @@ function SkeletonGrid() {
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 xs:gap-6">
       {Array.from({ length: 6 }).map((_, i) => (
         <div key={i} className="rounded-2xl bg-white border border-gray-100 overflow-hidden shadow-sm">
-          <div className="h-24 bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 animate-shimmer" />
+          <div className="h-1.5 bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 animate-shimmer" />
           <div className="p-5 space-y-3">
-            <div className="flex gap-2">
-              <div className="h-4 w-20 rounded-full bg-gray-100 animate-shimmer" />
-              <div className="h-4 w-16 rounded-full bg-gray-100 animate-shimmer" />
+            <div className="flex items-start justify-between gap-3">
+              <div className="flex-1 space-y-2">
+                <div className="h-4 w-20 rounded-full bg-gray-100 animate-shimmer" />
+                <div className="h-4 w-3/4 rounded-lg bg-gray-100 animate-shimmer" />
+              </div>
+              <div className="h-6 w-20 rounded-full bg-gray-100 animate-shimmer" />
             </div>
-            <div className="h-4 w-3/4 rounded-lg bg-gray-100 animate-shimmer" />
             <div className="h-3 w-full rounded bg-gray-100 animate-shimmer" />
             <div className="h-3 w-2/3 rounded bg-gray-100 animate-shimmer" />
+            <div className="flex gap-4 pt-3 border-t border-dashed border-gray-100">
+              <div className="h-3 w-16 rounded bg-gray-100 animate-shimmer" />
+              <div className="h-3 w-20 rounded bg-gray-100 animate-shimmer" />
+            </div>
             <div className="h-16 rounded-xl bg-gray-100 animate-shimmer" />
             <div className="grid grid-cols-2 gap-2">
               <div className="h-9 rounded-xl bg-gray-100 animate-shimmer" />

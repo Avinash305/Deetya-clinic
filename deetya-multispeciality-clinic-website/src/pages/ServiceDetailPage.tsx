@@ -1,11 +1,14 @@
 import { useParams, Link, Navigate } from 'react-router-dom';
-import { FiArrowLeft, FiCheck, FiPhone, FiCalendar, FiArrowRight } from 'react-icons/fi';
+import { FiArrowLeft, FiPhone, FiCalendar, FiArrowRight } from 'react-icons/fi';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import SEO from '../components/SEO/SEO';
 import { servicesData } from '../data/servicesData';
 import { clinicInfo } from '../data/siteData';
 import CTABanner from '../components/CTABanner/CTABanner';
 import AppointmentSection from '../components/Appointment/Appointment';
+import SectionHeader from '../components/ui/SectionHeader';
+import CheckListItem from '../components/ui/CheckListItem';
+import { telHref } from '../utils/links';
 
 export default function ServiceDetailPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -28,7 +31,7 @@ export default function ServiceDetailPage() {
     '@type': 'MedicalProcedure',
     name: service.title,
     description: service.desc,
-    url: `https://deetyaclinic.com/#/services/${service.slug}`,
+    url: `https://deetyahealthcare.com/#/services/${service.slug}`,
     relevantSpecialty: service.title,
     provider: {
       '@type': 'MedicalBusiness',
@@ -41,7 +44,7 @@ export default function ServiceDetailPage() {
       <SEO
         title={`${service.title} - Treatment`}
         description={`${service.title} at DEETYA Multispeciality Clinic. ${service.desc}. Expert care in JP Nagar, Bangalore. Call +91-8050454140.`}
-        canonical={`https://deetyaclinic.com/#/services/${service.slug}`}
+        canonical={`https://deetyahealthcare.com/#/services/${service.slug}`}
         jsonLd={serviceJsonLd}
       />
       {/* ───── MAIN CONTENT ───── */}
@@ -112,12 +115,9 @@ export default function ServiceDetailPage() {
                   </h4>
                   <ul className="space-y-3">
                     {service.highlights.map((h, i) => (
-                      <li key={i} className="flex items-start gap-3">
-                        <div className="mt-0.5 w-5 h-5 rounded-full bg-accent-100 flex items-center justify-center shrink-0">
-                          <FiCheck className="w-3 h-3 text-accent-600" />
-                        </div>
+                      <CheckListItem key={i} className="gap-3">
                         <span className="text-xs xs:text-sm text-gray-600">{h}</span>
-                      </li>
+                      </CheckListItem>
                     ))}
                   </ul>
 
@@ -139,7 +139,7 @@ export default function ServiceDetailPage() {
                   </h4>
                   <div className="space-y-3 text-xs xs:text-sm">
                     <a
-                      href={`tel:${clinicInfo.phone.replace(/\s/g, '')}`}
+                      href={telHref()}
                       className="flex items-center gap-3 text-gray-600 hover:text-primary-600 transition-colors"
                     >
                       <FiPhone className="w-4 h-4 text-primary-500" />
@@ -160,15 +160,14 @@ export default function ServiceDetailPage() {
       {/* ───── RELATED SERVICES ───── */}
       <section className="py-16 lg:py-20 bg-gradient-to-b from-primary-50/50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-bold text-primary-950 mb-3">
-              Other{' '}
-              <span className="bg-gradient-to-r from-primary-600 to-accent-500 bg-clip-text text-transparent">
-                Services
-              </span>
-            </h2>
-            <p className="text-gray-600 text-xs xs:text-sm sm:text-base">Explore our other medical specialties</p>
-          </div>
+          <SectionHeader
+            size="lg"
+            contain={false}
+            className="mb-12"
+            title="Other "
+            gradient="Services"
+            subtitle="Explore our other medical specialties"
+          />
 
           <div className="grid xs:grid-cols-2 lg:grid-cols-3 gap-5">
             {relatedServices.map((s, i) => (

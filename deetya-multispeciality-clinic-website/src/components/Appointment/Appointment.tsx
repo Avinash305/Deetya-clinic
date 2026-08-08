@@ -2,6 +2,8 @@ import { FiPhone, FiArrowRight, FiCalendar, FiClock } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { appointmentSteps, clinicInfo } from '../../data/siteData';
+import SectionHeader from '../ui/SectionHeader';
+import { telHref, whatsappHref } from '../../utils/links';
 
 export default function AppointmentSection() {
   const { ref, isVisible } = useScrollAnimation();
@@ -16,17 +18,18 @@ export default function AppointmentSection() {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           {/* Left — Steps */}
           <div className={`order-2 lg:order-1 ${isVisible ? 'animate-fade-in-left' : 'opacity-0'}`}>
-            <div className="inline-flex items-center gap-2 px-3 xs:px-4 py-1.5 bg-warm-50 border border-warm-200 rounded-full mb-3 xs:mb-4">
-              <span className="w-2 h-2 bg-warm-500 rounded-full" />
-              <span className="text-xs xs:text-sm font-semibold text-warm-700">How It Works</span>
-            </div>
-            <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-950 mb-3 xs:mb-4">
-              Easy Appointment{' '}
-              <span className="text-gradient">Process</span>
-            </h2>
-            <p className="text-sm xs:text-base sm:text-lg text-gray-600 mb-6 xs:mb-8 sm:mb-10">
-              Booking an appointment at DEETYA is simple and hassle-free. Follow these four easy steps.
-            </p>
+            <SectionHeader
+              badge="How It Works"
+              badgeTone="warm"
+              align="left"
+              badgeClassName="inline-flex items-center gap-2 px-3 xs:px-4 py-1.5 bg-warm-50 border border-warm-200 rounded-full mb-3 xs:mb-4"
+              title="Easy Appointment "
+              gradient="Process"
+              gradientClassName="text-gradient"
+              titleClassName="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-950 mb-3 xs:mb-4"
+              subtitle="Booking an appointment at DEETYA is simple and hassle-free. Follow these four easy steps."
+              subtitleClassName="text-sm xs:text-base sm:text-lg text-gray-600 mb-6 xs:mb-8 sm:mb-10"
+            />
 
             <div className="space-y-5 xs:space-y-6 sm:space-y-7">
               {appointmentSteps.map((s, i) => (
@@ -74,7 +77,7 @@ export default function AppointmentSection() {
                 {/* Quick contact buttons */}
                 <div className="space-y-3 xs:space-y-3.5 mb-6 xs:mb-7">
                   <a
-                    href={`tel:${clinicInfo.phone.replace(/\s/g, '')}`}
+                    href={telHref()}
                     className="flex items-center justify-center gap-2 xs:gap-3 w-full px-4 xs:px-6 py-3 xs:py-3.5 min-h-[44px] bg-white/10 border border-white/20 backdrop-blur-sm text-white font-semibold rounded-lg xs:rounded-xl hover:bg-white/20 transition-all text-[11px] xs:text-sm group"
                   >
                     <FiPhone className="w-3.5 xs:w-4 h-3.5 xs:h-4 shrink-0" />
@@ -82,7 +85,7 @@ export default function AppointmentSection() {
                     <FiArrowRight className="w-3.5 xs:w-4 h-3.5 xs:h-4 group-hover:translate-x-1 transition-transform ml-auto shrink-0" />
                   </a>
                   <a
-                    href={`https://wa.me/${clinicInfo.whatsappNumber}?text=${encodeURIComponent(clinicInfo.whatsappDefault)}`}
+                    href={whatsappHref(clinicInfo.whatsappDefault)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2 xs:gap-3 w-full px-4 xs:px-6 py-3 xs:py-3.5 min-h-[44px] bg-accent-500 text-white font-semibold rounded-lg xs:rounded-xl hover:bg-accent-600 transition-all text-[11px] xs:text-sm group"

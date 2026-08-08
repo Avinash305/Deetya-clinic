@@ -1,5 +1,5 @@
 interface SectionDividerProps {
-  variant?: 'wave' | 'curve' | 'angle' | 'circle';
+  variant?: 'wave' | 'curve';
   color?: 'primary' | 'accent' | 'light';
   flipped?: boolean;
 }
@@ -34,23 +34,9 @@ export default function SectionDivider({ variant = 'wave', color = 'light', flip
     </svg>
   );
 
-  const renderAngle = () => (
-    <svg className={`w-full h-[30px] xs:h-[40px] sm:h-[60px] ${c.fill} ${flipped ? 'rotate-180 scale-x-[-1]' : ''}`} viewBox="0 0 1440 60" preserveAspectRatio="none">
-      <path d="M1440 60H0L1440 0V60Z" />
-    </svg>
-  );
-
-  const renderCircle = () => (
-    <div className={`relative w-full h-[30px] xs:h-[40px] sm:h-[60px] overflow-hidden ${c.bg}`}>
-      <div className={`absolute -bottom-full left-1/2 -translate-x-1/2 w-[200%] h-[200%] ${color === 'light' ? 'bg-white' : c.bg} rounded-[50%]`} />
-    </div>
-  );
-
   switch (variant) {
     case 'wave': return renderWave();
     case 'curve': return renderCurve();
-    case 'angle': return renderAngle();
-    case 'circle': return renderCircle();
     default: return renderWave();
   }
 }
