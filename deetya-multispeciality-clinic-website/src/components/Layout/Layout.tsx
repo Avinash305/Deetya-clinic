@@ -49,7 +49,7 @@ export default function Layout() {
       <Navbar topBarHidden={topBarHidden} />
       <main
         key={pageKey}
-        className={`animate-fade-in transition-all duration-300 ${
+        className={`animate-fade-in transition-all duration-300 min-h-[65vh] ${
           topBarHidden
             ? 'pt-14 sm:pt-16 lg:pt-20'
             : 'pt-[88px] sm:pt-[104px] lg:pt-[120px]'

@@ -9,6 +9,8 @@ interface ModalProps {
   size?: 'sm' | 'lg';
   /** Extra classes for the panel (e.g. the tall compare table). */
   panelClassName?: string;
+  /** Center the dialog vertically on ALL screens (default: bottom sheet on mobile). */
+  centered?: boolean;
   children: ReactNode;
 }
 
@@ -17,7 +19,7 @@ interface ModalProps {
  * backdrop and the slide-up animated panel. Headers/close buttons are provided
  * by the caller via children.
  */
-export default function Modal({ onClose, ariaLabel, size = 'sm', panelClassName = '', children }: ModalProps) {
+export default function Modal({ onClose, ariaLabel, size = 'sm', panelClassName = '', centered = false, children }: ModalProps) {
   // Lock body scroll while open (restores the previous value on unmount).
   useEffect(() => {
     const prev = document.body.style.overflow;
@@ -40,7 +42,9 @@ export default function Modal({ onClose, ariaLabel, size = 'sm', panelClassName 
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.2 }}
-      className="fixed inset-0 z-[85] flex items-end sm:items-center justify-center p-0 sm:p-6"
+      className={`fixed inset-0 z-[85] flex justify-center p-0 sm:p-6 ${
+        centered ? 'items-center' : 'items-end sm:items-center'
+      }`}
       role="dialog"
       aria-modal="true"
       aria-label={ariaLabel}

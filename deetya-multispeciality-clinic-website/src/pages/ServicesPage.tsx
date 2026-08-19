@@ -1,4 +1,5 @@
 import PageBanner from '../components/PageBanner/PageBanner';
+import NewServiceCategories from '../components/NewServiceCategories/NewServiceCategories';
 import Services from '../components/Services/Services';
 import AppointmentSection from '../components/Appointment/Appointment';
 import SEO from '../components/SEO/SEO';
@@ -18,6 +19,8 @@ export default function ServicesPage() {
         breadcrumbs={[{ label: 'Services' }]}
         bgImage={pageBannerImages.services}
       />
+      {/* NEW quick / home-care service categories — sits above the existing Services section */}
+      <NewServiceCategories />
       <Services showImages />
       <AppointmentSection />
     </>

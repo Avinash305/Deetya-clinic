@@ -8,7 +8,6 @@ import WelcomeBanner from '../components/WelcomeBanner/WelcomeBanner';
 import About from '../components/About/About';
 import LazyLoad from '../components/LazyLoad/LazyLoad';
 import SEO from '../components/SEO/SEO';
-import { clinicInfo } from '../data/siteData';
 
 // Below-the-fold sections are code-split: their JS chunk only downloads when
 // the visitor scrolls near them, keeping first load fast. The shell above
@@ -30,7 +29,7 @@ export default function HomePage() {
   return (
     <>
       <SEO
-        title={clinicInfo.fullName}
+        title="DEETYA Multispeciality Clinic"
         description="DEETYA Multispeciality Clinic - Premium healthcare since 2026 with expert doctors (General Physician, Gynecologist, Orthopedic, Pediatrics, ENT), in-house Laboratory, IPD, OPD & Pharmacy. Located in JP Nagar 9th Phase, Bangalore."
         canonical="https://deetyahealthcare.com/"
         keywords="multispeciality clinic JP Nagar, best clinic Bangalore, general physician JP Nagar, gynecologist JP Nagar, orthopedic JP Nagar"

@@ -35,7 +35,7 @@ export default function Navbar({ topBarHidden }: { topBarHidden: boolean }) {
             className="flex items-center gap-1.5 sm:gap-2 lg:gap-3 group shrink-0"
           >
             <div className="h-8 sm:h-10 lg:h-12 rounded-lg sm:rounded-xl overflow-hidden group-hover:scale-105 transition-all duration-300 shrink-0 flex items-center bg-white shadow-md ring-1 ring-gray-100">
-              <img src="/images/logo.webp" alt="Deetya Clinic" className="h-full w-auto object-contain px-1 sm:px-1.5 lg:px-2" />
+              <img src="/images/logo.webp" alt="Deetya Clinic" width={475} height={237} className="h-full w-auto object-contain px-1 sm:px-1.5 lg:px-2" />
             </div>
             <div className="flex flex-col leading-tight">
               <span className="text-xs sm:text-sm lg:text-xl font-extrabold tracking-tight text-primary-950">

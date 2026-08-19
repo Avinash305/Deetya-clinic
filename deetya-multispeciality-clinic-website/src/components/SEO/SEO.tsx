@@ -19,7 +19,9 @@ export default function SEO({
   keywords,
   jsonLd,
 }: SEOProps) {
-  const fullTitle = `${title} | DEETYA Multispeciality Clinic`;
+  const siteName = 'DEETYA Multispeciality Clinic';
+  // Avoid duplicating the site name when the page title already contains it
+  const fullTitle = title.includes(siteName) ? title : `${title} | ${siteName}`;
 
   useEffect(() => {
     // Update document title

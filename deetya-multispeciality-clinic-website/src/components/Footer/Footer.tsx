@@ -32,7 +32,7 @@ export default function Footer() {
           <div className="xs:col-span-2 lg:col-span-1">
             <Link to="/" className="flex items-center gap-2.5 mb-4 sm:mb-5 group">
               <div className="w-10 sm:w-12 h-9 sm:h-11 rounded-lg sm:rounded-xl overflow-hidden group-hover:scale-105 transition-transform shadow-lg shadow-primary-600/20 shrink-0 bg-primary-800 flex items-center justify-center p-0.5 sm:p-1">
-                <img src="/images/logo.webp" alt="Deetya Clinic" className="w-full h-full object-contain" />
+                <img src="/images/logo.webp" alt="Deetya Clinic" width={475} height={237} className="w-full h-full object-contain" />
               </div>
               <div>
                 <p className="font-bold text-base sm:text-lg leading-tight">{clinicInfo.name}</p>

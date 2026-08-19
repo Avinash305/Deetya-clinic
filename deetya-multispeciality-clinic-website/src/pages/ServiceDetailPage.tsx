@@ -181,7 +181,9 @@ export default function ServiceDetailPage() {
                   <img
                     src={s.image}
                     alt={s.title}
-                    className="w-full h-auto group-hover:scale-105 transition-transform duration-700 ease-out"
+                    width={1000}
+                    height={667}
+                    className="w-full aspect-[3/2] object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent pointer-events-none" />

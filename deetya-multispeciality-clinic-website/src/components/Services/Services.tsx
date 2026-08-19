@@ -42,12 +42,15 @@ export default function Services({ limit, showHeader = true, showViewAll = false
                 }`}
                 style={{ animationDelay: `${i * 0.08}s` }}
               >
-                {/* Service Image — displayed in full (natural aspect ratio) */}
+                {/* Service Image — 3:2 box reserves layout space (all service
+                    images are 1000×667) so lazy-loading doesn't shift the page */}
                 <div className="relative overflow-hidden">
                   <img
                     src={s.image}
                     alt={s.title}
-                    className="w-full h-auto group-hover:scale-105 transition-transform duration-700 ease-out"
+                    width={1000}
+                    height={667}
+                    className="w-full aspect-[3/2] object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent pointer-events-none" />

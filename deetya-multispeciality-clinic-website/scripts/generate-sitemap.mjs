@@ -18,6 +18,7 @@ const slugsFrom = (file, re) => {
 const serviceSlugs = slugsFrom("src/data/servicesData.tsx", /slug: '([^']+)'/g);
 const packageSlugs = slugsFrom("src/data/healthPackagesData.tsx", /slug: '([^']+)'/g);
 const doctorSlugs = slugsFrom("src/data/doctorsData.tsx", /slug: '([^']+)'/g);
+const categorySlugs = slugsFrom("src/data/newServiceCategoriesData.ts", /slug: '([^']+)'/g);
 
 const core = [
   { loc: "/", freq: "weekly", pri: "1.0" },
@@ -43,9 +44,12 @@ const lines = [
   "",
   "  <!-- Doctor detail pages -->",
   ...doctorSlugs.map((d) => url(`/#/doctors/${d}`, "monthly", "0.7")),
+  "",
+  "  <!-- Home-care service category pages -->",
+  ...categorySlugs.map((c) => url(`/#/services/category/${c}`, "weekly", "0.7")),
   "</urlset>",
   "",
 ];
 
 writeFileSync(path.resolve("public/sitemap.xml"), lines.join("\n"));
-console.log(`sitemap.xml written: ${core.length + serviceSlugs.length + packageSlugs.length + doctorSlugs.length} URLs`);
+console.log(`sitemap.xml written: ${core.length + serviceSlugs.length + packageSlugs.length + doctorSlugs.length + categorySlugs.length} URLs`);
