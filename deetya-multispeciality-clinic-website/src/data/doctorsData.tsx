@@ -74,7 +74,7 @@ export const doctorsData: DoctorDetail[] = [
     slug: 'dr-uthra',
     specialization: 'Consultant Obstetrician & Gynaecologist',
     experience: '6+ Years',
-    phone: '+91 9488474175',
+    phone: '+91 8050454140', // clinic main line (personal mobile removed)
     color: 'from-pink-500 to-pink-700',
     bgColor: 'from-pink-50 to-pink-100',
     image: '/images/doctor-uttra.webp',

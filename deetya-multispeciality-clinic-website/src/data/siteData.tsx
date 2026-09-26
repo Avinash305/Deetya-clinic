@@ -253,7 +253,7 @@ export const whyChoosePackagesData = [
 // ─────────────────────────────────────────
 export const contactInfoData = [
   { icon: <FiMapPin className="w-5 h-5" />, title: 'Our Address', lines: ['DEETYA Multispeciality Clinic', '#23 60 Feet Main Road', 'Avalahali - BDA Layout Road, Srinivas Reddy Layout', 'Avalahalli, Anjanapura Post', 'JP Nagar 9th Phase, Bangalore - 560108'], color: 'from-primary-500 to-primary-700' },
-  { icon: <FiPhone className="w-5 h-5" />, title: 'Phone Number', lines: ['+91 80504 54140', '+91 82964 12626', 'Dr. Harshitha: +91 99865 66909', 'Dr. Uthra: +91 94884 74175'], color: 'from-accent-500 to-accent-700' },
+  { icon: <FiPhone className="w-5 h-5" />, title: 'Phone Number', lines: ['+91 80504 54140', '+91 82964 12626'], color: 'from-accent-500 to-accent-700' },
   { icon: <FiMail className="w-5 h-5" />, title: 'Email Address', lines: ['deetyamultispecialityclinic26@gmail.com'], color: 'from-warm-500 to-warm-700' },
   { icon: <FiClock className="w-5 h-5" />, title: 'Working Hours', lines: ['Mon – Sat: 7:00 AM – 11:00 PM', 'Sunday: 7:30 AM – 1:30 PM'], color: 'from-purple-500 to-purple-700' },
 ];

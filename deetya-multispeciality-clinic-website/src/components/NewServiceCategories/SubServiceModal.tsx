@@ -2,7 +2,7 @@ import { FiX, FiPhone, FiZap, FiClock } from 'react-icons/fi';
 import Modal from '../ui/Modal';
 import CheckListItem from '../ui/CheckListItem';
 import type { ServiceSubItem } from '../../data/newServiceCategoriesData';
-import { telHref } from '../../utils/links';
+import { telHref, telClick } from '../../utils/links';
 import { formatINR } from '../HealthPackages/bookingUtils';
 
 interface SubServiceModalProps {
@@ -91,7 +91,10 @@ export default function SubServiceModal({ item, categoryName, onClose }: SubServ
         {hasPrice ? (
           <a
             href={telHref()}
-            onClick={onClose}
+            onClick={() => {
+              telClick();
+              onClose();
+            }}
             className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 bg-gradient-to-r from-primary-600 to-primary-700 text-white text-[13px] xs:text-sm font-semibold rounded-xl hover:from-primary-700 hover:to-primary-800 shadow-lg shadow-primary-600/25 transition-all"
           >
             <FiPhone className="w-4 h-4 shrink-0" />
@@ -100,7 +103,10 @@ export default function SubServiceModal({ item, categoryName, onClose }: SubServ
         ) : (
           <a
             href={telHref()}
-            onClick={onClose}
+            onClick={() => {
+              telClick();
+              onClose();
+            }}
             className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 bg-gradient-to-r from-primary-600 to-primary-700 text-white text-sm font-semibold rounded-xl hover:from-primary-700 hover:to-primary-800 shadow-lg shadow-primary-600/25 transition-all"
           >
             <FiPhone className="w-4 h-4" />

@@ -9,7 +9,7 @@ import CTABanner from '../components/CTABanner/CTABanner';
 import SubServiceModal from '../components/NewServiceCategories/SubServiceModal';
 import { newServiceCategories } from '../data/newServiceCategoriesData';
 import type { ServiceSubItem } from '../data/newServiceCategoriesData';
-import { telHref } from '../utils/links';
+import { telHref, telClick } from '../utils/links';
 import { formatINR } from '../components/HealthPackages/bookingUtils';
 
 const discountPercent = (item: ServiceSubItem): number =>
@@ -22,6 +22,9 @@ export default function ServiceCategoryDetailPage() {
   const category = newServiceCategories.find((c) => c.slug === slug);
   const { ref: listRef, isVisible: listVis } = useScrollAnimation();
   const [selected, setSelected] = useState<ServiceSubItem | null>(null);
+
+  // Book Now strips: native dialer on mobile, WhatsApp fallback on desktop.
+  const handleTelClick = () => telClick();
 
   if (!category) {
     return <Navigate to="/services" replace />;
@@ -157,10 +160,11 @@ export default function ServiceCategoryDetailPage() {
                     </div>
                   </div>
 
-                  {/* Booking strip — calls the clinic directly */}
+                  {/* Booking strip — calls the clinic directly (WhatsApp fallback on desktop) */}
                   {hasPrice ? (
                     <a
                       href={telHref()}
+                      onClick={handleTelClick}
                       className="flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-0.5 sm:gap-x-1.5 sm:gap-y-0.5 py-2.5 px-3 bg-warm-50 text-gray-600 text-[11px] sm:text-xs font-medium hover:bg-warm-100 transition-colors text-center leading-tight"
                     >
                       <span className="inline-flex items-center gap-1">
@@ -172,6 +176,7 @@ export default function ServiceCategoryDetailPage() {
                   ) : (
                     <a
                       href={telHref()}
+                      onClick={handleTelClick}
                       className="flex items-center justify-center gap-1.5 py-2.5 px-3 bg-warm-50 text-gray-600 text-[11px] sm:text-xs font-medium hover:bg-warm-100 transition-colors"
                     >
                       <FiPhone className="w-3.5 h-3.5 text-primary-500 shrink-0" aria-hidden="true" />
